@@ -4,12 +4,12 @@
 // Update these with your actual Payhip and Fourthwall links
 const STORE_LINKS = {
     // Digital Books (Payhip)
-    'Raising Privacy-Smart Kids': 'https://payhip.com/dadcybertips/raising-privacy-smart-kids',
-    'Password Security Master Guide': 'https://payhip.com/dadcybertips/password-guide',
-    'Home Network Security': 'https://payhip.com/dadcybertips/home-network',
-    'Social Media Safety Bundle': 'https://payhip.com/dadcybertips/social-media-bundle',
-    'Scam Recognition Handbook': 'https://payhip.com/dadcybertips/scam-handbook',
-    'Identity Theft Prevention': 'https://payhip.com/dadcybertips/identity-theft',
+    'Raising Privacy-Smart Kids': 'https://dadcybertips.com/b/raisingprivacysmartkids',
+    'Raising Privacy Conscious Parents': 'https://dadcybertips.com/b/raisingprivacyconsciousparents',
+    'Taking Back Control - a digital privacy book': 'https://dadcybertips.com/b/takingbackcontrol',
+    'The Essential Privacy Guide - 5 Principles Everyone Should Know': 'https://dadcybertips.com/b/essentialprivacyyguide',
+    'Your Digital Footprint': 'https://dadcybertips.com/b/yourdigitalfootprint',
+    'The AI SAcam Playbook': 'https://dadcybertips.com/b/theaiscamplaybook',
     
     // Courses (Payhip)
     'Cybersecurity Masterclass': 'https://payhip.com/dadcybertips/masterclass',
@@ -25,8 +25,8 @@ const STORE_LINKS = {
 
 // Free Resource Downloads
 const FREE_RESOURCES = {
-    'password-checklist': {
-        title: 'Password Security Checklist',
+    'Gmail Privacy Guide': {
+        title: 'Gmail Privacy Guide',
         url: '#' // Replace with actual PDF URL
     },
     'family-safety-plan': {
