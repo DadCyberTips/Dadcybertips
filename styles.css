@@ -333,7 +333,6 @@ body::before {
     margin-bottom: 1rem;
     display: block;
     animation: float 3s ease-in-out infinite;
-
 }
 
 @keyframes float {
@@ -751,7 +750,71 @@ body::before {
     }
 }
 
-/* Animations - Retro */
+/* Product Image Container - Retro */
+.product-image-container {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.08) 0%, rgba(189, 0, 255, 0.08) 100%);
+    border: 2px solid var(--neon-cyan);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* Free Resources Grid - Retro */
+.free-resources-grid-books {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.free-resource-card {
+    background: linear-gradient(135deg, rgba(45, 33, 69, 0.8) 0%, rgba(26, 31, 58, 0.8) 100%);
+    border: 2px solid var(--neon-lime);
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.2);
+    transition: all 0.3s ease;
+    border-radius: var(--radius-lg);
+}
+
+.free-resource-card:hover {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 25px var(--neon-cyan);
+    transform: translateY(-3px);
+}
+
+.resource-cover {
+    width: 100%;
+    height: 160px;
+    background: linear-gradient(135deg, rgba(189, 0, 255, 0.15) 0%, rgba(0, 240, 255, 0.15) 100%);
+    border: 2px dashed var(--neon-lime);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.resource-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
 @keyframes slideUp {
     from {
         opacity: 0;

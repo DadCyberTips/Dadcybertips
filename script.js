@@ -4,12 +4,12 @@
 // Update these with your actual Payhip and Fourthwall links
 const STORE_LINKS = {
     // Digital Books (Payhip)
-    'Raising Privacy-Smart Kids': 'https://dadcybertips.com/b/raisingprivacysmartkids',
-    'Raising Privacy Conscious Parents': 'https://dadcybertips.com/b/raisingprivacyconsciousparents',
-    'Taking Back Control - a digital privacy book': 'https://dadcybertips.com/b/takingbackcontrol',
-    'The Essential Privacy Guide - 5 Principles Everyone Should Know': 'https://dadcybertips.com/b/essentialprivacyyguide',
-    'Your Digital Footprint': 'https://dadcybertips.com/b/yourdigitalfootprint',
-    'The AI SAcam Playbook': 'https://dadcybertips.com/b/theaiscamplaybook',
+    'Raising Privacy-Smart Kids': 'https://payhip.com/dadcybertips/raising-privacy-smart-kids',
+    'Password Security Master Guide': 'https://payhip.com/dadcybertips/password-guide',
+    'Home Network Security': 'https://payhip.com/dadcybertips/home-network',
+    'Social Media Safety Bundle': 'https://payhip.com/dadcybertips/social-media-bundle',
+    'Scam Recognition Handbook': 'https://payhip.com/dadcybertips/scam-handbook',
+    'Identity Theft Prevention': 'https://payhip.com/dadcybertips/identity-theft',
     
     // Courses (Payhip)
     'Cybersecurity Masterclass': 'https://payhip.com/dadcybertips/masterclass',
@@ -25,8 +25,8 @@ const STORE_LINKS = {
 
 // Free Resource Downloads
 const FREE_RESOURCES = {
-    'Gmail Privacy Guide': {
-        title: 'Gmail Privacy Guide',
+    'password-checklist': {
+        title: 'Password Security Checklist',
         url: '#' // Replace with actual PDF URL
     },
     'family-safety-plan': {
@@ -305,9 +305,181 @@ window.addEventListener('load', function() {
 });
 
 /**
- * Export configuration for easy updates
+ * Quiz Functionality
  */
-window.DadCyberTipsConfig = {
+const quizQuestions = [
+    {
+        question: "Do you use the same password for multiple accounts?",
+        answers: ["Yes, always", "Sometimes", "Never - unique passwords for each"],
+        scores: [0, 50, 100]
+    },
+    {
+        question: "How often do you update your home WiFi password?",
+        answers: ["Never changed the default", "Once a year or less", "Every 3-6 months"],
+        scores: [10, 40, 100]
+    },
+    {
+        question: "Do you use two-factor authentication (2FA)?",
+        answers: ["What's that?", "On some accounts", "On all important accounts"],
+        scores: [0, 60, 100]
+    },
+    {
+        question: "How do you handle phishing emails?",
+        answers: ["Click links to verify", "Usually ignore them", "Report and delete immediately"],
+        scores: [0, 40, 100]
+    },
+    {
+        question: "Do you monitor your children's online activity?",
+        answers: ["Not really", "Sometimes check", "Active parental controls + regular checks"],
+        scores: [20, 60, 100]
+    }
+];
+
+let quizScore = 0;
+
+function startQuiz() {
+    document.getElementById('quiz-intro').style.display = 'none';
+    document.getElementById('quiz-questions').style.display = 'block';
+    renderQuestions();
+}
+
+function renderQuestions() {
+    const container = document.getElementById('question-container');
+    container.innerHTML = '';
+    
+    quizQuestions.forEach((q, index) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.style.cssText = 'margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 2px solid var(--neon-purple);';
+        
+        let html = `<h4 style="color: var(--neon-pink); margin-bottom: 1rem; font-size: 14px; text-transform: uppercase;">${index + 1}. ${q.question}</h4>`;
+        
+        q.answers.forEach((answer, ansIndex) => {
+            html += `
+                <div style="margin-bottom: 0.75rem;">
+                    <input type="radio" name="q${index}" value="${ansIndex}" id="q${index}_${ansIndex}" required>
+                    <label for="q${index}_${ansIndex}" style="color: var(--neon-cyan); font-size: 13px; cursor: pointer; margin-left: 0.5rem;">${answer}</label>
+                </div>
+            `;
+        });
+        
+        questionDiv.innerHTML = html;
+        container.appendChild(questionDiv);
+    });
+}
+
+function handleQuizSubmit(event) {
+    event.preventDefault();
+    
+    quizScore = 0;
+    quizQuestions.forEach((q, index) => {
+        const selected = document.querySelector(`input[name="q${index}"]:checked`);
+        if (selected) {
+            quizScore += q.scores[parseInt(selected.value)];
+        }
+    });
+    
+    quizScore = Math.round(quizScore / quizQuestions.length);
+    
+    document.getElementById('quiz-questions').style.display = 'none';
+    document.getElementById('quiz-results').style.display = 'block';
+    
+    displayResults();
+}
+
+function displayResults() {
+    let scoreText = '';
+    let recommendation = '';
+    
+    if (quizScore >= 85) {
+        scoreText = `🛡️ SECURITY EXPERT (${quizScore}%) - You're doing an EXCELLENT job protecting your family!`;
+        recommendation = 'Keep up the amazing work! Stay updated with our latest security tips and share your knowledge with others. Consider getting our Advanced Protection Bundle for even more security insights.';
+    } else if (quizScore >= 70) {
+        scoreText = `🟢 SECURITY CONSCIOUS (${quizScore}%) - You're on the right track!`;
+        recommendation = 'You\'re doing well, but there\'s room for improvement. Focus on implementing 2FA on all accounts and regular security updates. Our Password Security Guide & Home Network Security books will help you level up.';
+    } else if (quizScore >= 50) {
+        scoreText = `🟡 NEEDS ATTENTION (${quizScore}%) - Time to strengthen your defenses!`;
+        recommendation = 'Your family might be at risk. Start with the basics: update your passwords, enable 2FA, and set up parental controls. Get our "Raising Privacy-Smart Kids" and "Password Security Master Guide" to transform your security.';
+    } else {
+        scoreText = `🔴 HIGH RISK (${quizScore}%) - Urgent action needed!`;
+        recommendation = 'Your family is vulnerable to cyber threats. Start immediately with password changes, WiFi security, and parental controls. We recommend getting our complete Cybersecurity Masterclass course for comprehensive protection.';
+    }
+    
+    document.getElementById('score-text').textContent = scoreText;
+    document.getElementById('recommendation').textContent = recommendation;
+}
+
+function resetQuiz() {
+    quizScore = 0;
+    document.getElementById('quiz-results').style.display = 'none';
+    document.getElementById('quiz-intro').style.display = 'block';
+    document.getElementById('quizForm').reset();
+}
+
+/**
+ * Mailing List Functionality
+ */
+function submitMailingList() {
+    const email = document.getElementById('email').value;
+    const name = document.getElementById('name').value;
+    
+    if (!email || !isValidEmail(email) || !name) {
+        showNotification('Please enter a valid name and email address', 'error');
+        return;
+    }
+    
+    // Prepare mailing list data
+    const mailingListData = {
+        name: name,
+        email: email,
+        quizScore: quizScore,
+        timestamp: new Date().toISOString()
+    };
+    
+    // Track the mailing list signup
+    trackEvent('mailing_list_signup', {
+        email: email.replace(/@.+/, '@***'),
+        score: quizScore,
+        timestamp: new Date().toISOString()
+    });
+    
+    // Option 1: Send to your email service (Mailchimp, ConvertKit, etc.)
+    // Example for Mailchimp (requires backend integration):
+    // sendToMailchimp(mailingListData);
+    
+    // Option 2: Store locally in browser (for development)
+    let subscribers = JSON.parse(localStorage.getItem('dadcybertips_subscribers') || '[]');
+    subscribers.push(mailingListData);
+    localStorage.setItem('dadcybertips_subscribers', JSON.stringify(subscribers));
+    
+    // Show success message
+    showNotification(`Welcome to DadCyberTips, ${name}! Check your email for personalized recommendations.`, 'success');
+    
+    // Reset form
+    document.getElementById('email').value = '';
+    document.getElementById('name').value = '';
+}
+
+/**
+ * Send to Mailchimp (requires backend API)
+ * Uncomment and configure when you set up your mail service
+ */
+/*
+async function sendToMailchimp(data) {
+    try {
+        const response = await fetch('YOUR_BACKEND_ENDPOINT/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        
+        if (!response.ok) throw new Error('Subscription failed');
+        return await response.json();
+    } catch (error) {
+        console.error('Mailing list error:', error);
+        showNotification('There was an error. Please try again.', 'error');
+    }
+}
+*/
     updateStoreLink: function(productName, newLink) {
         STORE_LINKS[productName] = newLink;
         console.log(`Updated store link for ${productName}`);
