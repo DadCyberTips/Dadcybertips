@@ -1,0 +1,827 @@
+/* ===== RETRO 90s NEON AESTHETIC ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --neon-cyan: #00F0FF;
+    --neon-pink: #FF006E;
+    --neon-purple: #BD00FF;
+    --neon-lime: #39FF14;
+    --neon-orange: #FF6600;
+    --neon-yellow: #FFFF00;
+    --neon-blue: #0080FF;
+    
+    --bg-dark: #0a0e27;
+    --bg-darker: #050812;
+    --bg-card: #1a1f3a;
+    --bg-accent: #2d2145;
+    
+    --text-bright: #00F0FF;
+    --text-neon-pink: #FF006E;
+    --text-neon-lime: #39FF14;
+    --text-white: #FFFFFF;
+    --text-gray: #888899;
+    
+    --radius: 4px;
+    --radius-lg: 8px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 50%, #1a0a2e 100%);
+    color: var(--text-bright);
+    line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Retro grid background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Navigation Bar - Retro Neon */
+.navbar {
+    background: linear-gradient(90deg, rgba(10, 14, 39, 0.95) 0%, rgba(13, 0, 39, 0.95) 100%);
+    border-bottom: 3px solid var(--neon-cyan);
+    border-top: 3px solid var(--neon-pink);
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3), 0 0 40px rgba(255, 0, 110, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.navbar-brand {
+    font-size: 22px;
+    font-weight: 900;
+    background: linear-gradient(45deg, var(--neon-cyan), var(--neon-pink), var(--neon-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.navbar-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: var(--neon-cyan);
+    font-size: 13px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.navbar-links a::before {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+    box-shadow: 0 0 10px var(--neon-cyan);
+    transition: width 0.3s ease;
+}
+
+.navbar-links a:hover {
+    color: var(--neon-pink);
+    text-shadow: 0 0 10px var(--neon-pink);
+}
+
+.navbar-links a:hover::before {
+    width: 100%;
+}
+
+/* Hero Section - Retro Neon */
+.hero {
+    background: linear-gradient(180deg, 
+        rgba(0, 240, 255, 0.05) 0%, 
+        rgba(255, 0, 110, 0.03) 50%, 
+        rgba(189, 0, 255, 0.02) 100%);
+    border: 2px solid var(--neon-pink);
+    border-left: 2px solid var(--neon-cyan);
+    border-right: 2px solid var(--neon-purple);
+    padding: 5rem 2rem;
+    text-align: center;
+    box-shadow: 
+        inset 0 0 30px rgba(0, 240, 255, 0.1),
+        0 0 40px rgba(255, 0, 110, 0.2),
+        0 0 60px rgba(0, 240, 255, 0.1);
+    position: relative;
+    z-index: 1;
+    margin: 1rem;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: 900;
+    background: linear-gradient(45deg, 
+        var(--neon-cyan), 
+        var(--neon-pink), 
+        var(--neon-purple),
+        var(--neon-lime));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+}
+
+.hero p {
+    font-size: 15px;
+    color: var(--neon-cyan);
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+.hero-cta {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Button Styles - Retro Neon */
+.btn {
+    padding: 0.9rem 2rem;
+    border-radius: var(--radius);
+    border: 3px solid var(--neon-cyan);
+    background: rgba(0, 240, 255, 0.1);
+    color: var(--neon-cyan);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 240, 255, 0.2);
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.btn:hover {
+    border-color: var(--neon-cyan);
+    color: var(--text-white);
+    text-shadow: 0 0 10px var(--neon-cyan);
+    box-shadow: 0 0 20px var(--neon-cyan), inset 0 0 20px rgba(0, 240, 255, 0.2);
+}
+
+.btn:hover::before {
+    left: 0;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+    color: var(--text-white);
+    border: 3px solid var(--neon-pink);
+    font-weight: 900;
+}
+
+.btn-primary:hover {
+    box-shadow: 
+        0 0 20px var(--neon-pink),
+        0 0 40px var(--neon-pink),
+        inset 0 0 20px rgba(255, 0, 110, 0.3);
+    border-color: var(--neon-pink);
+    transform: scale(1.05);
+}
+
+.btn-outline {
+    border: 3px solid var(--neon-lime);
+    background: rgba(57, 255, 20, 0.08);
+    color: var(--neon-lime);
+}
+
+.btn-outline:hover {
+    box-shadow: 0 0 20px var(--neon-lime), inset 0 0 20px rgba(57, 255, 20, 0.15);
+    color: var(--text-white);
+}
+
+.btn-primary:active,
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* Section Styles - Retro */
+.section {
+    padding: 3.5rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.section-title {
+    font-size: 32px;
+    font-weight: 900;
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink), var(--neon-lime));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+}
+
+/* Products Grid - Retro */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.product-card {
+    background: linear-gradient(135deg, rgba(45, 33, 69, 0.8) 0%, rgba(26, 31, 58, 0.8) 100%);
+    border: 3px solid var(--neon-cyan);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+}
+
+.product-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(255, 0, 110, 0.1));
+    border-radius: var(--radius-lg);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.product-card:hover {
+    border-color: var(--neon-pink);
+    box-shadow: 
+        0 0 20px var(--neon-cyan),
+        0 0 40px var(--neon-pink),
+        inset 0 0 20px rgba(255, 0, 110, 0.1);
+    transform: translateY(-4px) scale(1.02);
+}
+
+.product-card:hover::after {
+    opacity: 1;
+}
+
+.product-icon {
+    font-size: 42px;
+    margin-bottom: 1rem;
+    display: block;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--neon-lime), var(--neon-cyan));
+    color: var(--bg-dark);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    font-size: 11px;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 15px var(--neon-lime);
+}
+
+.product-name {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--neon-pink);
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.product-desc {
+    font-size: 12px;
+    color: var(--text-bright);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.product-price {
+    font-size: 20px;
+    font-weight: 900;
+    background: linear-gradient(90deg, var(--neon-lime), var(--neon-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.product-card .btn {
+    width: 100%;
+    margin-top: auto;
+}
+
+/* Featured Section - Retro */
+.featured {
+    background: linear-gradient(135deg, rgba(45, 33, 69, 0.9) 0%, rgba(26, 31, 58, 0.9) 100%);
+    border: 3px solid var(--neon-purple);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 
+        0 0 30px var(--neon-purple),
+        inset 0 0 30px rgba(189, 0, 255, 0.1);
+    position: relative;
+}
+
+.featured::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+    animation: scan 3s linear infinite;
+}
+
+@keyframes scan {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.featured-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.featured-text h3 {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--neon-cyan);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.featured-text p {
+    color: var(--neon-cyan);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    font-size: 13px;
+}
+
+.featured-text ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+    list-style: none;
+}
+
+.featured-text ul li {
+    margin-bottom: 0.5rem;
+    color: var(--neon-lime);
+    font-weight: 600;
+}
+
+.featured-image {
+    background: linear-gradient(135deg, rgba(189, 0, 255, 0.2), rgba(0, 240, 255, 0.2));
+    border: 3px dashed var(--neon-cyan);
+    border-radius: var(--radius-lg);
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+}
+
+/* Free Resources Grid - Retro */
+.free-resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.free-resources-grid .btn {
+    padding: 1.25rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 12px;
+    background: rgba(57, 255, 20, 0.1);
+    border-color: var(--neon-lime);
+    color: var(--neon-lime);
+}
+
+.free-resources-grid .btn:hover {
+    box-shadow: 0 0 20px var(--neon-lime), inset 0 0 20px rgba(57, 255, 20, 0.2);
+}
+
+.free-resources-grid .btn span {
+    font-size: 28px;
+}
+
+/* CTA Section - Retro */
+.cta-section {
+    background: linear-gradient(135deg, 
+        rgba(255, 0, 110, 0.15) 0%, 
+        rgba(189, 0, 255, 0.15) 50%,
+        rgba(0, 240, 255, 0.1) 100%);
+    border: 4px solid;
+    border-image: linear-gradient(90deg, var(--neon-pink), var(--neon-purple), var(--neon-cyan)) 1;
+    color: var(--text-bright);
+    border-radius: var(--radius-lg);
+    padding: 3.5rem 2rem;
+    text-align: center;
+    margin: 3rem auto;
+    max-width: 1200px;
+    box-shadow: 
+        0 0 40px var(--neon-pink),
+        0 0 60px var(--neon-purple),
+        inset 0 0 40px rgba(255, 0, 110, 0.05);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(0, 240, 255, 0.1), 
+        transparent);
+    animation: shimmer 3s infinite;
+    pointer-events: none;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.cta-section h2 {
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    z-index: 2;
+}
+
+.cta-section p {
+    font-size: 15px;
+    margin-bottom: 2rem;
+    color: var(--neon-cyan);
+    font-weight: 500;
+    position: relative;
+    z-index: 2;
+}
+
+.cta-section .btn {
+    margin: 0.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* Footer - Retro Neon */
+.footer {
+    background: linear-gradient(180deg, rgba(10, 14, 39, 0.9) 0%, rgba(5, 8, 18, 0.95) 100%);
+    border-top: 4px solid var(--neon-cyan);
+    border-bottom: 4px solid var(--neon-pink);
+    padding: 3rem 2rem;
+    text-align: center;
+    color: var(--neon-cyan);
+    font-size: 12px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.social-links a {
+    color: var(--neon-cyan);
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.social-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--neon-pink);
+    text-shadow: 0 0 10px var(--neon-pink);
+}
+
+.social-links a:hover::after {
+    transform: scaleX(1);
+}
+
+.footer p {
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+}
+
+/* Responsive Design - Retro */
+@media (max-width: 768px) {
+    body::before {
+        background-size: 40px 40px;
+    }
+    
+    .navbar {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        padding: 1rem;
+    }
+    
+    .navbar-links {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .hero {
+        padding: 3rem 1rem;
+        margin: 0.5rem;
+    }
+    
+    .hero h1 {
+        font-size: 32px;
+        margin-bottom: 1rem;
+    }
+    
+    .hero p {
+        font-size: 13px;
+    }
+    
+    .hero-cta {
+        flex-direction: column;
+    }
+    
+    .hero-cta .btn {
+        width: 90%;
+    }
+    
+    .section {
+        padding: 2rem 1rem;
+    }
+    
+    .section-title {
+        font-size: 24px;
+    }
+    
+    .products-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .featured-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .featured {
+        padding: 1.5rem;
+    }
+    
+    .free-resources-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+    
+    .featured-image {
+        font-size: 64px;
+    }
+    
+    .cta-section {
+        padding: 2rem 1rem;
+        margin: 2rem 0.5rem;
+    }
+    
+    .cta-section h2 {
+        font-size: 24px;
+    }
+    
+    .social-links {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 24px;
+        letter-spacing: 1px;
+    }
+    
+    .navbar {
+        padding: 0.75rem;
+    }
+    
+    .navbar-brand {
+        font-size: 18px;
+    }
+    
+    .navbar-links {
+        font-size: 12px;
+        gap: 0.5rem;
+    }
+    
+    .section-title {
+        font-size: 20px;
+    }
+    
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .free-resources-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .product-card {
+        padding: 1rem;
+    }
+    
+    .btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 12px;
+    }
+}
+
+/* Animations - Retro */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes neonFlicker {
+    0%, 100% {
+        text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+    }
+    50% {
+        text-shadow: 0 0 5px var(--neon-cyan), 0 0 10px var(--neon-cyan);
+    }
+}
+
+@keyframes glow-pulse {
+    0%, 100% {
+        box-shadow: 0 0 20px var(--neon-pink), inset 0 0 10px rgba(255, 0, 110, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 40px var(--neon-pink), inset 0 0 20px rgba(255, 0, 110, 0.3);
+    }
+}
+
+.product-card {
+    animation: slideUp 0.6s ease-out;
+}
+
+.badge {
+    animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* Utility Classes */
+.text-center {
+    text-align: center;
+}
+
+.mt-1 { margin-top: 1rem; }
+.mt-2 { margin-top: 2rem; }
+.mb-1 { margin-bottom: 1rem; }
+.mb-2 { margin-bottom: 2rem; }
+
+.neon-glow {
+    text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+    box-shadow: 0 0 20px var(--neon-cyan);
+}
+
+.shadow-neon {
+    box-shadow: 0 0 20px var(--neon-cyan), 0 0 40px var(--neon-pink);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--neon-cyan), var(--neon-pink));
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--neon-pink), var(--neon-purple));
+    box-shadow: 0 0 10px var(--neon-cyan);
+}

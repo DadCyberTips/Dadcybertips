@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DadCyberTips - Family Cybersecurity Education</title>
+    <meta name="description" content="Learn practical cybersecurity and privacy strategies to protect your family online. Digital books, courses, and free resources from Gavin Marlowe.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-brand">🛡️ DadCyberTips</div>
+        <div class="navbar-links">
+            <a href="#books">Books</a>
+            <a href="#courses">Courses</a>
+            <a href="#merch">Merch</a>
+            <a href="#resources">Free Resources</a>
+            <a href="#about">About</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>🛡️ PROTECT YOUR FAMILY ONLINE 🛡️</h1>
+        <p>> Learn practical cybersecurity & privacy strategies from Gavin Marlowe<br/>
+           > Guides, digital books, and community support<br/>
+           > Keep your loved ones safe in the digital age</p>
+        <div class="hero-cta">
+            <a href="#books" class="btn btn-primary">[ SHOP BOOKS ]</a>
+            <a href="#resources" class="btn">[ FREE RESOURCES ]</a>
+        </div>
+    </section>
+
+    <!-- Digital Books Section -->
+    <section class="section" id="books">
+        <h2 class="section-title">[ DIGITAL BOOKS & GUIDES ]</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-icon">📚</div>
+                <div class="badge">Best Seller</div>
+                <h3 class="product-name">Raising Privacy-Smart Kids</h3>
+                <p class="product-desc">Essential guide for parents on teaching digital privacy and online safety to children of all ages.</p>
+                <div class="product-price">$12.99</div>
+                <button class="btn btn-primary" onclick="handlePurchase('Raising Privacy-Smart Kids')">Buy Now</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-icon">🔐</div>
+                <h3 class="product-name">Password Security Master Guide</h3>
+                <p class="product-desc">Master strong passwords, multi-factor authentication, and digital identity protection strategies.</p>
+                <div class="product-price">$9.99</div>
+                <button class="btn btn-primary" onclick="handlePurchase('Password Security Master Guide')">Buy Now</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-icon">🏠</div>
+                <h3 class="product-name">Home Network Security</h3>
+                <p class="product-desc">Secure your WiFi, IoT devices, and connected home systems from cyber threats.</p>
+                <div class="product-price">$11.99</div>
+                <button class="btn btn-primary" onclick="handlePurchase('Home Network Security')">Buy Now</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-icon">📱</div>
+                <h3 class="product-name">Social Media Safety Bundle</h3>
+                <p class="product-desc">Complete playbook for teens and parents navigating social platforms safely and securely.</p>
+                <div class="product-price">$14.99</div>
+                <button class="btn btn-primary" onclick="handlePurchase('Social Media Safety Bundle')">Buy Now</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-icon">🚨</div>
+                <h3 class="product-name">Scam Recognition Handbook</h3>
+                <p class="product-desc">Learn to spot and avoid common scams, phishing attacks, and online fraud schemes.</p>
+                <div class="product-price">$10.99</div>
+                <button class="btn btn-primary" onclick="handlePurchase('Scam Recognition Handbook')">Buy Now</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-icon">🔑</div>
+                <h3 class="product-name">Identity Theft Prevention</h3>
+                <p class="product-desc">Comprehensive strategies to protect personal information and recover from identity theft.</p>
+                <div class="product-price">$13.99</div>
+                <button class="btn btn-primary" onclick="handlePurchase('Identity Theft Prevention')">Buy Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Course -->
+    <section class="section" id="courses">
+        <div class="featured">
+            <div class="featured-content">
+                <div class="featured-text">
+                    <h3>>>> CYBERSECURITY MASTERCLASS <<<</h3>
+                    <p><strong>8-week online course</strong> covering everything from password management to identity protection. Perfect for families looking to level up their digital security together.</p>
+                    <ul style="color: var(--text-secondary); font-size: 13px; margin: 1rem 0; line-height: 1.8;">
+                        <li>✓ Live interactive Q&A sessions</li>
+                        <li>✓ 24 video lessons + downloadable resources</li>
+                        <li>✓ Certification of completion</li>
+                        <li>✓ Lifetime access to course materials</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="handlePurchase('Cybersecurity Masterclass')">Enroll Now - $49</button>
+                </div>
+                <div class="featured-image">🎓</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Merchandise Section -->
+    <section class="section" id="merch">
+        <h2 class="section-title">[ MERCH & COLLECTIBLES ]</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-icon">👕</div>
+                <h3 class="product-name">Classic T-Shirt</h3>
+                <p class="product-desc">"Less tracking. Fewer scams." premium cotton tee</p>
+                <div class="product-price">$24.99</div>
+                <button class="btn btn-primary" onclick="handlePurchase('Classic T-Shirt')">View</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-icon">🧢</div>
+                <h3 class="product-name">Dad Hat</h3>
+                <p class="product-desc">Embroidered DadCyberTips logo cap</p>
+                <div class="product-price">$19.99</div>
+                <button class="btn btn-primary" onclick="handlePurchase('Dad Hat')">View</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-icon">🎒</div>
+                <h3 class="product-name">Security Sticker Pack</h3>
+                <p class="product-desc">10 cyber-safety themed vinyl stickers</p>
+                <div class="product-price">$4.99</div>
+                <button class="btn btn-primary" onclick="handlePurchase('Security Sticker Pack')">View</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-icon">☕</div>
+                <h3 class="product-name">Security Mindset Mug</h3>
+                <p class="product-desc">"Stay secure, stay smart" ceramic mug</p>
+                <div class="product-price">$14.99</div>
+                <button class="btn btn-primary" onclick="handlePurchase('Security Mindset Mug')">View</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-icon">📔</div>
+                <h3 class="product-name">Password Manager Journal</h3>
+                <p class="product-desc">Hardcover security planning notebook</p>
+                <div class="product-price">$16.99</div>
+                <button class="btn btn-primary" onclick="handlePurchase('Password Manager Journal')">View</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-icon">🎁</div>
+                <h3 class="product-name">Family Safety Bundle</h3>
+                <p class="product-desc">Merch bundle (shirt + hat + stickers)</p>
+                <div class="product-price">$39.99</div>
+                <button class="btn btn-primary" onclick="handlePurchase('Family Safety Bundle')">View</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Free Resources Section -->
+    <section class="section" id="resources">
+        <h2 class="section-title">[ FREE DOWNLOADS ]</h2>
+        <div class="featured">
+            <div style="text-align: center;">
+                <h3 style="font-size: 18px; color: var(--text-primary); margin-bottom: 0.5rem;">Download Your Free Guides</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 2rem;">Get started with cybersecurity basics—no purchase or signup required.</p>
+                <div class="free-resources-grid">
+                    <button class="btn btn-outline" onclick="downloadResource('password-checklist')">
+                        <span style="display: block;">📋</span>
+                        Password Checklist PDF
+                    </button>
+                    <button class="btn btn-outline" onclick="downloadResource('family-safety-plan')">
+                        <span style="display: block;">👨‍👩‍👧‍👦</span>
+                        Family Safety Plan
+                    </button>
+                    <button class="btn btn-outline" onclick="downloadResource('phishing-guide')">
+                        <span style="display: block;">🎣</span>
+                        Phishing Detection Guide
+                    </button>
+                    <button class="btn btn-outline" onclick="downloadResource('quick-tips')">
+                        <span style="display: block;">⚡</span>
+                        Quick Security Tips
+                    </button>
+                    <button class="btn btn-outline" onclick="downloadResource('parental-guide')">
+                        <span style="display: block;">🛡️</span>
+                        Parental Guide
+                    </button>
+                    <button class="btn btn-outline" onclick="downloadResource('social-media-checklist')">
+                        <span style="display: block;">📱</span>
+                        Social Media Checklist
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section class="cta-section">
+        <h2>>>> SUPPORT THE MISSION <<<</h2>
+        <p>▶ HELP US CREATE BETTER CYBERSECURITY EDUCATION FOR FAMILIES ◀</p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="https://buymeacoffee.com/dadcybertips" target="_blank" class="btn" style="background: white; color: var(--fill-accent); border: none;">Buy Me a Coffee</a>
+            <a href="https://linktr.ee/dadcybertips" target="_blank" class="btn" style="background: white; color: var(--fill-accent); border: none;">Visit Linktree</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="featured">
+            <h2 style="font-size: 20px; color: var(--neon-cyan); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">>>> MEET GAVIN MARLOWE <<<</h2>
+            <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">Gavin Marlowe (aka "Cyber Dad") is a cybersecurity educator and privacy advocate dedicated to helping everyday families protect themselves online. Through practical guides, engaging content, and community support, he breaks down complex security topics into actionable advice anyone can implement.</p>
+            <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">With years of experience in digital security, Gavin is passionate about empowering parents and kids to navigate the digital world safely and confidently.</p>
+            <p style="color: var(--text-secondary); line-height: 1.6;">Connect with DadCyberTips on <strong>TikTok, Instagram, YouTube, and Threads</strong> for weekly tips and security updates.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="social-links">
+            <a href="https://instagram.com/dadcybertips" target="_blank">Instagram</a>
+            <a href="https://tiktok.com/@dadcybertips" target="_blank">TikTok</a>
+            <a href="https://youtube.com" target="_blank">YouTube</a>
+            <a href="https://threads.com/@dadcybertips" target="_blank">Threads</a>
+            <a href="mailto:contact@dadcybertips.com">Email</a>
+        </div>
+        <p>© 2026 DadCyberTips by Gavin Marlowe. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; color: var(--text-muted);">Made with ❤️ for families who care about digital safety</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

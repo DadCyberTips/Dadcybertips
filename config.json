@@ -1,0 +1,218 @@
+{
+  "site": {
+    "title": "DadCyberTips",
+    "tagline": "Protect Your Family Online",
+    "description": "Learn practical cybersecurity and privacy strategies from Gavin Marlowe",
+    "author": "Gavin Marlowe",
+    "year": 2026
+  },
+  
+  "social": {
+    "instagram": "https://instagram.com/dadcybertips",
+    "tiktok": "https://tiktok.com/@dadcybertips",
+    "youtube": "https://youtube.com",
+    "threads": "https://threads.com/@dadcybertips",
+    "email": "contact@dadcybertips.com",
+    "buymeacoffee": "https://buymeacoffee.com/dadcybertips",
+    "linktree": "https://linktr.ee/dadcybertips"
+  },
+
+  "products": {
+    "books": [
+      {
+        "id": "raising-privacy-smart-kids",
+        "name": "Raising Privacy-Smart Kids",
+        "description": "Essential guide for parents on teaching digital privacy and online safety to children.",
+        "price": 12.99,
+        "icon": "📚",
+        "featured": true,
+        "store": "payhip",
+        "storeUrl": "https://payhip.com/dadcybertips/raising-privacy-smart-kids"
+      },
+      {
+        "id": "password-security-guide",
+        "name": "Password Security Master Guide",
+        "description": "Master strong passwords, multi-factor authentication, and digital identity protection strategies.",
+        "price": 9.99,
+        "icon": "🔐",
+        "store": "payhip",
+        "storeUrl": "https://payhip.com/dadcybertips/password-guide"
+      },
+      {
+        "id": "home-network-security",
+        "name": "Home Network Security",
+        "description": "Secure your WiFi, IoT devices, and connected home systems from cyber threats.",
+        "price": 11.99,
+        "icon": "🏠",
+        "store": "payhip",
+        "storeUrl": "https://payhip.com/dadcybertips/home-network"
+      },
+      {
+        "id": "social-media-safety-bundle",
+        "name": "Social Media Safety Bundle",
+        "description": "Complete playbook for teens and parents navigating social platforms safely and securely.",
+        "price": 14.99,
+        "icon": "📱",
+        "store": "payhip",
+        "storeUrl": "https://payhip.com/dadcybertips/social-media-bundle"
+      },
+      {
+        "id": "scam-recognition-handbook",
+        "name": "Scam Recognition Handbook",
+        "description": "Learn to spot and avoid common scams, phishing attacks, and online fraud schemes.",
+        "price": 10.99,
+        "icon": "🚨",
+        "store": "payhip",
+        "storeUrl": "https://payhip.com/dadcybertips/scam-handbook"
+      },
+      {
+        "id": "identity-theft-prevention",
+        "name": "Identity Theft Prevention",
+        "description": "Comprehensive strategies to protect personal information and recover from identity theft.",
+        "price": 13.99,
+        "icon": "🔑",
+        "store": "payhip",
+        "storeUrl": "https://payhip.com/dadcybertips/identity-theft"
+      }
+    ],
+    
+    "courses": [
+      {
+        "id": "cybersecurity-masterclass",
+        "name": "Cybersecurity Masterclass",
+        "description": "8-week online course covering everything from password management to identity protection. Perfect for families looking to level up their digital security together.",
+        "price": 49,
+        "icon": "🎓",
+        "featured": true,
+        "highlights": [
+          "Live interactive Q&A sessions",
+          "24 video lessons + downloadable resources",
+          "Certification of completion",
+          "Lifetime access to course materials"
+        ],
+        "store": "payhip",
+        "storeUrl": "https://payhip.com/dadcybertips/masterclass"
+      }
+    ],
+
+    "merchandise": [
+      {
+        "id": "classic-tshirt",
+        "name": "Classic T-Shirt",
+        "description": "\"Less tracking. Fewer scams.\" premium cotton tee",
+        "price": 24.99,
+        "icon": "👕",
+        "store": "fourthwall",
+        "storeUrl": "https://fourthwall.com/dadcybertips/t-shirt"
+      },
+      {
+        "id": "dad-hat",
+        "name": "Dad Hat",
+        "description": "Embroidered DadCyberTips logo cap",
+        "price": 19.99,
+        "icon": "🧢",
+        "store": "fourthwall",
+        "storeUrl": "https://fourthwall.com/dadcybertips/dad-hat"
+      },
+      {
+        "id": "sticker-pack",
+        "name": "Security Sticker Pack",
+        "description": "10 cyber-safety themed vinyl stickers",
+        "price": 4.99,
+        "icon": "🎒",
+        "store": "fourthwall",
+        "storeUrl": "https://fourthwall.com/dadcybertips/sticker-pack"
+      },
+      {
+        "id": "mug",
+        "name": "Security Mindset Mug",
+        "description": "\"Stay secure, stay smart\" ceramic mug",
+        "price": 14.99,
+        "icon": "☕",
+        "store": "fourthwall",
+        "storeUrl": "https://fourthwall.com/dadcybertips/mug"
+      },
+      {
+        "id": "journal",
+        "name": "Password Manager Journal",
+        "description": "Hardcover security planning notebook",
+        "price": 16.99,
+        "icon": "📔",
+        "store": "fourthwall",
+        "storeUrl": "https://fourthwall.com/dadcybertips/journal"
+      },
+      {
+        "id": "bundle",
+        "name": "Family Safety Bundle",
+        "description": "Merch bundle (shirt + hat + stickers)",
+        "price": 39.99,
+        "icon": "🎁",
+        "featured": true,
+        "store": "fourthwall",
+        "storeUrl": "https://fourthwall.com/dadcybertips/bundle"
+      }
+    ]
+  },
+
+  "resources": [
+    {
+      "id": "password-checklist",
+      "title": "Password Security Checklist",
+      "description": "Step-by-step checklist for creating and managing strong passwords",
+      "icon": "📋",
+      "downloadUrl": "#"
+    },
+    {
+      "id": "family-safety-plan",
+      "title": "Family Safety Plan Template",
+      "description": "Printable template for creating a family digital safety plan",
+      "icon": "👨‍👩‍👧‍👦",
+      "downloadUrl": "#"
+    },
+    {
+      "id": "phishing-guide",
+      "title": "Phishing Detection Guide",
+      "description": "Learn to identify and avoid phishing attacks",
+      "icon": "🎣",
+      "downloadUrl": "#"
+    },
+    {
+      "id": "quick-tips",
+      "title": "Quick Security Tips",
+      "description": "Fast reference guide for everyday security practices",
+      "icon": "⚡",
+      "downloadUrl": "#"
+    },
+    {
+      "id": "parental-guide",
+      "title": "Parental Internet Safety Guide",
+      "description": "Comprehensive guide for parents managing children's online safety",
+      "icon": "🛡️",
+      "downloadUrl": "#"
+    },
+    {
+      "id": "social-media-checklist",
+      "title": "Social Media Safety Checklist",
+      "description": "Privacy and security checklist for social media accounts",
+      "icon": "📱",
+      "downloadUrl": "#"
+    }
+  ],
+
+  "colors": {
+    "primary": "#185FA5",
+    "primaryLight": "#378ADD",
+    "primaryDark": "#0C447C",
+    "success": "#639922",
+    "danger": "#E24B4A",
+    "warning": "#BA7517",
+    "bgPrimary": "#ffffff",
+    "bgSecondary": "#F9F8F6",
+    "bgTertiary": "#F0EEEA",
+    "textPrimary": "#2C2C2A",
+    "textSecondary": "#5F5E5A",
+    "textMuted": "#888780",
+    "borderColor": "#E0DFD9",
+    "borderColorStrong": "#BFBDB3"
+  }
+}
