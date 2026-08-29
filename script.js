@@ -495,3 +495,232 @@ async function sendToMailchimp(data) {
         return FREE_RESOURCES;
     }
 };
+
+/**
+ * Masterclass Image Upload
+ */
+function handleMasterclassImageUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+        showNotification('Please upload an image file', 'error');
+        return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+        showNotification('Image must be smaller than 5MB', 'error');
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const preview = document.getElementById('masterclass-image-preview');
+        preview.innerHTML = `<img src="${e.target.result}" style="width: 100%; height: 100%; object-fit: cover; display: block;">`;
+        localStorage.setItem('masterclass_image', e.target.result);
+        showNotification('Course image uploaded successfully!', 'success');
+        trackEvent('masterclass_image_upload', { fileSize: file.size });
+    };
+    reader.readAsDataURL(file);
+}
+
+window.addEventListener('load', function() {
+    const savedImage = localStorage.getItem('masterclass_image');
+    if (savedImage) {
+        const preview = document.getElementById('masterclass-image-preview');
+        preview.innerHTML = `<img src="${savedImage}" style="width: 100%; height: 100%; object-fit: cover; display: block;">`;
+    }
+    updateContactsDisplay();
+});
+
+/**
+ * Marketing Contacts Management
+ */
+function getMarketingContacts() {
+    return JSON.parse(localStorage.getItem('dadcybertips_marketing_contacts') || '[]');
+}
+
+function saveMarketingContacts(contacts) {
+    localStorage.setItem('dadcybertips_marketing_contacts', JSON.stringify(contacts));
+    updateContactsDisplay();
+}
+
+function addMarketingContact(event) {
+    event.preventDefault();
+
+    const name = document.getElementById('contact-name').value.trim();
+    const email = document.getElementById('contact-email').value.trim();
+    const phone = document.getElementById('contact-phone').value.trim();
+    const source = document.getElementById('contact-source').value;
+    const notes = document.getElementById('contact-notes').value.trim();
+
+    if (!name || !email) {
+        showNotification('Please fill in name and email', 'error');
+        return;
+    }
+
+    if (!isValidEmail(email)) {
+        showNotification('Please enter a valid email address', 'error');
+        return;
+    }
+
+    const contact = {
+        id: Date.now(),
+        name: name,
+        email: email,
+        phone: phone,
+        source: source,
+        notes: notes,
+        dateAdded: new Date().toISOString()
+    };
+
+    let contacts = getMarketingContacts();
+    contacts.push(contact);
+    saveMarketingContacts(contacts);
+
+    document.getElementById('marketing-form').reset();
+    showNotification(`${name} added to marketing list!`, 'success');
+    trackEvent('marketing_contact_added', { source: source });
+}
+
+function updateContactsDisplay() {
+    const contacts = getMarketingContacts();
+    const container = document.getElementById('contacts-list');
+    const countEl = document.getElementById('contact-count');
+
+    if (!container || !countEl) return;
+
+    countEl.textContent = contacts.length;
+
+    if (contacts.length === 0) {
+        container.innerHTML = '<p style="color: var(--neon-cyan); text-align: center; font-size: 12px;">No contacts yet. Add one to get started!</p>';
+        return;
+    }
+
+    let html = '';
+    contacts.forEach(contact => {
+        const dateAdded = new Date(contact.dateAdded).toLocaleDateString();
+        html += `
+            <div class="contact-card">
+                <div class="contact-card-name">${escapeHtml(contact.name)}</div>
+                <div class="contact-card-email">📧 ${escapeHtml(contact.email)}</div>
+                ${contact.phone ? `<div class="contact-card-email">📱 ${escapeHtml(contact.phone)}</div>` : ''}
+                <div class="contact-card-meta">Source: ${contact.source} | Added: ${dateAdded}</div>
+                ${contact.notes ? `<div class="contact-card-meta" style="font-style: italic;">Notes: ${escapeHtml(contact.notes)}</div>` : ''}
+                <button type="button" class="contact-card-delete" onclick="deleteContact(${contact.id})">DELETE</button>
+            </div>
+        `;
+    });
+
+    container.innerHTML = html;
+}
+
+function deleteContact(contactId) {
+    if (!confirm('Are you sure you want to delete this contact?')) {
+        return;
+    }
+
+    let contacts = getMarketingContacts();
+    contacts = contacts.filter(c => c.id !== contactId);
+    saveMarketingContacts(contacts);
+
+    showNotification('Contact deleted', 'success');
+}
+
+function clearAllContacts() {
+    if (!confirm('Are you REALLY sure? This will delete all contacts!')) {
+        return;
+    }
+
+    if (!confirm('This action cannot be undone. Clear all contacts?')) {
+        return;
+    }
+
+    localStorage.removeItem('dadcybertips_marketing_contacts');
+    updateContactsDisplay();
+    showNotification('All contacts cleared', 'success');
+}
+
+function exportContacts() {
+    const contacts = getMarketingContacts();
+
+    if (contacts.length === 0) {
+        showNotification('No contacts to export', 'error');
+        return;
+    }
+
+    let csv = 'Name,Email,Phone,Source,Notes,Date Added\n';
+    contacts.forEach(contact => {
+        csv += `"${contact.name}","${contact.email}","${contact.phone}","${contact.source}","${contact.notes}","${contact.dateAdded}"\n`;
+    });
+
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `dadcybertips_marketing_contacts_${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+
+    showNotification(`Exported ${contacts.length} contacts!`, 'success');
+}
+
+function escapeHtml(text) {
+    const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+    };
+    return text.replace(/[&<>"']/g, m => map[m]);
+}
+
+/**
+ * Coming Soon Class Notification
+ */
+function notifyClassLaunch() {
+    const email = prompt('Enter your email to be notified when the class goes live:');
+    
+    if (!email) {
+        return;
+    }
+
+    if (!isValidEmail(email)) {
+        showNotification('Please enter a valid email address', 'error');
+        return;
+    }
+
+    const notification = {
+        id: Date.now(),
+        email: email,
+        classType: 'protecting-family-online',
+        timestamp: new Date().toISOString()
+    };
+
+    let notifications = JSON.parse(localStorage.getItem('dadcybertips_class_notifications') || '[]');
+    notifications.push(notification);
+    localStorage.setItem('dadcybertips_class_notifications', JSON.stringify(notifications));
+
+    showNotification(`Got it! We'll let you know as soon as "Protecting Your Family Online" is live. 🎓`, 'success');
+    trackEvent('class_notification_signup', { class: 'protecting-family-online' });
+}
+
+/**
+ * Scroll to sections with smooth behavior
+ */
+function scrollToContact(type) {
+    const element = document.getElementById('services');
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+function scrollToFreebies() {
+    const element = document.getElementById('resources');
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+    }
+}

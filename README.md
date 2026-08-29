@@ -1,5 +1,3 @@
-https://dadcybertips.github.io/Dadcybertips/
-
 # DadCyberTips Website
 
 A modern, responsive e-commerce website for DadCyberTips by Gavin Marlowe. Built with HTML, CSS, and vanilla JavaScript—ready to deploy on GitHub Pages.
@@ -7,13 +5,26 @@ A modern, responsive e-commerce website for DadCyberTips by Gavin Marlowe. Built
 ## 🚀 Features
 
 - **Responsive Design**: Works beautifully on desktop, tablet, and mobile devices
-- **Product Showcase**: Display digital books, courses, and merchandise
-- **Free Resources**: Offer downloadable guides and checklists
+- **Product Showcase**: Display digital books, courses, and merchandise with REAL IMAGES
+- **Free Resources**: Offer downloadable guides with actual cover images
+- **Security Quiz**: 5-question quiz that assesses family security level
+- **Mailing List Integration**: Capture leads from quiz results
 - **Store Integration**: Seamless links to Payhip (digital products) and Fourthwall (merchandise)
-- **Modern UI**: Clean, professional design with smooth interactions
+- **Modern UI**: Clean, retro 90s neon design with smooth interactions
 - **Analytics Ready**: Built-in event tracking for user interactions
 - **SEO Optimized**: Meta tags and semantic HTML for search engines
 - **No Dependencies**: Pure HTML/CSS/JavaScript—no build tools needed
+
+## 📋 NEW: Product & Guide Images
+
+This version includes **full image support**:
+- 📚 Real book cover images for digital products
+- 🎁 Actual product photos for merchandise
+- 📖 Cover images for free downloadable guides
+- ✨ Neon-styled image containers with hover effects
+- 🔄 Fallback placeholders if images don't load
+
+**See `SETUP_IMAGES.md` for complete image setup instructions.**
 
 ## 📁 File Structure
 
@@ -111,20 +122,55 @@ git push -u origin main
 
 Your site will be live at: `https://yourusername.github.io/dadcybertips-website/`
 
+## 🎓 Services & Coming Soon Class
+
+### Services Section
+Your website now includes three service offerings:
+
+1. **1-on-1 Coaching** - Personal security audits and custom family plans
+2. **Public Speaking & Workshops** - Talks for schools, companies, and community groups
+3. **Exclusive Community** - Private chat group with ongoing support and daily tips
+
+Each service section includes:
+- Clear, casual-but-authoritative description
+- Key benefits in easy-to-scan format
+- Call-to-action buttons (placeholder links)
+
+### Coming Soon Class: "Protecting Your Family Online"
+- **Duration**: 6 weeks
+- **Price**: $100
+- **Format**: Live group sessions with weekly Q&A
+- **Includes**: Downloadable resources, lifetime access, community membership
+
+The section features:
+- Eye-catching gradient border with neon glow
+- Weekly breakdown of topics
+- "Notify Me" button that captures emails for launch notifications
+- Free prep guide link
+
+#### Email Notifications
+When users click "Notify Me When Live," their email is stored locally in:
+```javascript
+localStorage.dadcybertips_class_notifications
+```
+
+You can export these and send emails when the class is ready.
+
 ## 🎨 Customization
 
-### Change Colors
+### Change Neon Colors
 
-Edit the color variables at the top of `styles.css`:
+Edit the neon color variables at the top of `styles.css`:
 
 ```css
 :root {
-    --color-primary: #185FA5;           /* Main blue */
-    --color-primary-light: #378ADD;     /* Light blue */
-    --color-primary-dark: #0C447C;      /* Dark blue */
-    --color-success: #639922;
-    --color-danger: #E24B4A;
-    --color-warning: #BA7517;
+    --neon-cyan: #00F0FF;           /* Main cyan */
+    --neon-pink: #FF006E;           /* Hot pink */
+    --neon-purple: #BD00FF;         /* Electric purple */
+    --neon-lime: #39FF14;           /* Neon lime */
+    --neon-orange: #FF6600;         /* Neon orange */
+    --neon-yellow: #FFFF00;         /* Neon yellow */
+    --neon-blue: #0080FF;           /* Neon blue */
 }
 ```
 
@@ -134,13 +180,15 @@ Edit the color variables at the top of `styles.css`:
 - **Meta Description**: Update the `<meta>` tags in `<head>`
 - **Social Links**: Update footer social media links
 
-### Add New Products
+### Add New Products with Images
 
 In `index.html`, duplicate a product card and update:
 
 ```html
 <div class="product-card">
-    <div class="product-icon">📚</div>
+    <div class="product-image-container">
+        <img src="https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/images/your-product.jpg" alt="Product Name" class="product-image">
+    </div>
     <h3 class="product-name">Your Product Name</h3>
     <p class="product-desc">Your product description</p>
     <div class="product-price">$19.99</div>
@@ -155,6 +203,64 @@ const STORE_LINKS = {
     'Your Product Name': 'https://payhip.com/your-product-url',
 };
 ```
+
+## 📸 Product Images Setup
+
+**CRITICAL**: Your website displays product and guide images hosted on GitHub. Follow these steps:
+
+### Quick Summary
+1. ✅ Create `images/` folder in your GitHub repo
+2. ✅ Upload product photos with exact filenames
+3. ✅ Replace `YOUR_USERNAME` and `YOUR_REPO` in image URLs in HTML
+4. ✅ Deploy and verify images load
+
+**DETAILED GUIDE**: See `SETUP_IMAGES.md` for complete step-by-step instructions
+
+### Image Dimensions & Names
+
+**Digital Books** (150×200px):
+- `privacy-smart-kids.jpg`, `password-guide.jpg`, `home-network.jpg`
+- `social-media-bundle.jpg`, `scam-handbook.jpg`, `identity-theft.jpg`
+
+**Merchandise** (200×200px):
+- `tshirt.jpg`, `dad-hat.jpg`, `sticker-pack.jpg`
+- `mug.jpg`, `journal.jpg`, `bundle.jpg`
+
+**Free Guides** (140×180px):
+- `password-checklist.jpg`, `family-plan.jpg`, `phishing-guide.jpg`
+- `quick-tips.jpg`, `parental-guide.jpg`, `social-media-checklist.jpg`
+
+### Update Image URLs
+
+Find and replace in `index.html`:
+- `YOUR_USERNAME` → Your GitHub username
+- `YOUR_REPO` → Your repository name
+
+Example: `https://raw.githubusercontent.com/dadcybertips/website/main/images/`
+
+## 🎯 Security Quiz & Mailing List
+
+Your site includes a built-in security assessment quiz that captures leads for your mailing list!
+
+### How It Works
+1. Users click "START QUIZ"
+2. Answer 5 quick security questions
+3. Get personalized recommendations (0-100 score)
+4. Optional: Join mailing list with name/email
+5. Data captured for your marketing
+
+### Quiz Features
+- ✅ 5 targeted security questions
+- ✅ Instant scoring with recommendations
+- ✅ Email capture for mailing list
+- ✅ Local data storage (no backend needed)
+- ✅ Easy integration with Mailchimp/ConvertKit
+
+**DETAILED GUIDE**: See `QUIZ_MAILING_LIST_SETUP.md` for:
+- Customizing questions & scoring
+- Integrating with email services
+- Setting up automated follow-up emails
+- Exporting subscriber data
 
 ## 📊 Analytics Setup (Optional)
 

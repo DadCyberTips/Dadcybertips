@@ -15,8 +15,9 @@
             <a href="#books">Books</a>
             <a href="#courses">Courses</a>
             <a href="#merch">Merch</a>
-            <a href="#resources">Free Resources</a>
-            <a href="#about">About</a>
+            <a href="#resources">Free</a>
+            <a href="#services">Services</a>
+            <a href="#coming-soon">Class</a>
         </div>
     </nav>
 
@@ -106,7 +107,7 @@
                 <div class="featured-text">
                     <h3>>>> CYBERSECURITY MASTERCLASS <<<</h3>
                     <p><strong>8-week online course</strong> covering everything from password management to identity protection. Perfect for families looking to level up their digital security together.</p>
-                    <ul style="color: var(--text-secondary); font-size: 13px; margin: 1rem 0; line-height: 1.8;">
+                    <ul style="color: var(--neon-cyan); font-size: 13px; margin: 1rem 0; line-height: 1.8;">
                         <li>✓ Live interactive Q&A sessions</li>
                         <li>✓ 24 video lessons + downloadable resources</li>
                         <li>✓ Certification of completion</li>
@@ -114,7 +115,17 @@
                     </ul>
                     <button class="btn btn-primary" onclick="handlePurchase('Cybersecurity Masterclass')">Enroll Now - $49</button>
                 </div>
-                <div class="featured-image">🎓</div>
+                <div class="featured-image" id="masterclass-image-container">
+                    <div id="masterclass-image-preview" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center;">
+                        <div style="color: var(--neon-cyan); font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">
+                            Click to<br/>Upload<br/>Course<br/>Image
+                        </div>
+                    </div>
+                    <input type="file" id="masterclass-image-input" accept="image/*" style="display: none;" onchange="handleMasterclassImageUpload(event)">
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <button class="btn btn-outline" onclick="document.getElementById('masterclass-image-input').click()" style="font-size: 12px;">[ UPLOAD COURSE IMAGE ]</button>
             </div>
         </div>
     </section>
@@ -281,7 +292,45 @@
         </div>
     </section>
 
-    <!-- Support Section -->
+    <!-- Marketing Contacts List -->
+    <section class="section" id="marketing">
+        <h2 class="section-title">[ MARKETING CONTACTS DATABASE ]</h2>
+        <div class="featured">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <!-- Contact Form -->
+                <div>
+                    <h3 style="color: var(--neon-pink); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">>>> ADD CONTACT <<<</h3>
+                    <form id="marketing-form" onsubmit="addMarketingContact(event)">
+                        <input type="text" id="contact-name" placeholder="Full Name" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 0.75rem; border-radius: 4px;" required>
+                        <input type="email" id="contact-email" placeholder="Email Address" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 0.75rem; border-radius: 4px;" required>
+                        <input type="text" id="contact-phone" placeholder="Phone (optional)" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 0.75rem; border-radius: 4px;">
+                        <select id="contact-source" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 1rem; border-radius: 4px;">
+                            <option value="website">Website</option>
+                            <option value="quiz">Quiz</option>
+                            <option value="event">Event</option>
+                            <option value="social">Social Media</option>
+                            <option value="referral">Referral</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <textarea id="contact-notes" placeholder="Notes (optional)" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 1rem; border-radius: 4px; height: 80px; resize: none;"></textarea>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">[ ADD TO LIST ]</button>
+                    </form>
+                </div>
+
+                <!-- Contacts List -->
+                <div>
+                    <h3 style="color: var(--neon-lime); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">>>> CONTACTS (<span id="contact-count">0</span>) <<<</h3>
+                    <div id="contacts-list" style="background: rgba(57, 255, 20, 0.05); border: 2px solid var(--neon-lime); border-radius: 4px; padding: 1rem; max-height: 400px; overflow-y: auto; margin-bottom: 1rem;">
+                        <p style="color: var(--neon-cyan); text-align: center; font-size: 12px;">No contacts yet. Add one to get started!</p>
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <button class="btn btn-outline" onclick="exportContacts()" style="flex: 1; font-size: 11px;">[ EXPORT CSV ]</button>
+                        <button class="btn btn-outline" onclick="clearAllContacts()" style="flex: 1; font-size: 11px;">[ CLEAR ALL ]</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="cta-section">
         <h2>>>> SUPPORT THE MISSION <<<</h2>
         <p>▶ HELP US CREATE BETTER CYBERSECURITY EDUCATION FOR FAMILIES ◀</p>
@@ -298,6 +347,124 @@
             <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">Gavin Marlowe (aka "Cyber Dad") is a cybersecurity educator and privacy advocate dedicated to helping everyday families protect themselves online. Through practical guides, engaging content, and community support, he breaks down complex security topics into actionable advice anyone can implement.</p>
             <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">With years of experience in digital security, Gavin is passionate about empowering parents and kids to navigate the digital world safely and confidently.</p>
             <p style="color: var(--text-secondary); line-height: 1.6;">Connect with DadCyberTips on <strong>TikTok, Instagram, YouTube, and Threads</strong> for weekly tips and security updates.</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="services">
+        <h2 class="section-title">[ MY SERVICES ]</h2>
+        <div style="max-width: 900px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <p style="color: var(--neon-cyan); font-size: 15px; line-height: 1.8; margin-bottom: 0;">
+                    Look, I get it. Protecting your family online can feel overwhelming. That's why I offer services designed to meet you exactly where you are—whether you need someone to talk strategy with, want to share what you know with your community, or need ongoing support from people who actually understand.
+                </p>
+            </div>
+
+            <!-- Services Grid - Single Column -->
+            <div style="display: flex; flex-direction: column; gap: 2rem; margin-bottom: 3rem;">
+                
+                <!-- One-on-One Coaching -->
+                <div class="featured" style="background: linear-gradient(135deg, rgba(0, 240, 255, 0.08) 0%, rgba(57, 255, 20, 0.08) 100%); border-color: var(--neon-cyan);">
+                    <div style="display: flex; gap: 2rem; align-items: flex-start;">
+                        <div style="flex: 1;">
+                            <h3 style="color: var(--neon-cyan); font-size: 20px; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">👨‍💼 1-ON-1 COACHING</h3>
+                            <p style="color: var(--neon-cyan); font-size: 14px; line-height: 1.8; margin-bottom: 1rem;">
+                                Sometimes you need a real person to help you figure things out. Maybe your teen's just gotten their first phone. Maybe you're worried about something you saw online. Or maybe you just want a custom security plan that actually fits your family. I'm here to help you build that.
+                            </p>
+                            <ul style="color: var(--neon-lime); font-size: 13px; margin: 1rem 0; line-height: 1.8; list-style: none; padding: 0;">
+                                <li>✓ Your family's personal security audit</li>
+                                <li>✓ Customized protection plan (not generic advice)</li>
+                                <li>✓ Ongoing support when questions come up</li>
+                                <li>✓ Real answers to your real problems</li>
+                            </ul>
+                            <button class="btn btn-primary" onclick="scrollToContact('coaching')" style="margin-top: 1rem;">[ GET MORE INFO ]</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Public Speaking -->
+                <div class="featured" style="background: linear-gradient(135deg, rgba(189, 0, 255, 0.08) 0%, rgba(255, 0, 110, 0.08) 100%); border-color: var(--neon-purple);">
+                    <div style="display: flex; gap: 2rem; align-items: flex-start;">
+                        <div style="flex: 1;">
+                            <h3 style="color: var(--neon-pink); font-size: 20px; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">🎤 PUBLIC SPEAKING & WORKSHOPS</h3>
+                            <p style="color: var(--neon-cyan); font-size: 14px; line-height: 1.8; margin-bottom: 1rem;">
+                                Schools want to teach cybersecurity. Companies need it for their team. Parent groups are hungry for real information. And I love sharing what I know with people who actually want to listen. Let me bring practical, real-world cybersecurity to your community.
+                            </p>
+                            <ul style="color: var(--neon-lime); font-size: 13px; margin: 1rem 0; line-height: 1.8; list-style: none; padding: 0;">
+                                <li>✓ Customized talks for any audience (schools, companies, events)</li>
+                                <li>✓ Parent workshops & student assemblies</li>
+                                <li>✓ Corporate security training that doesn't put people to sleep</li>
+                                <li>✓ Story-driven, practical, and actually useful</li>
+                            </ul>
+                            <button class="btn btn-primary" onclick="scrollToContact('speaking')" style="margin-top: 1rem;">[ BOOK A TALK ]</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exclusive Chat Community -->
+                <div class="featured" style="background: linear-gradient(135deg, rgba(255, 0, 110, 0.08) 0%, rgba(189, 0, 255, 0.08) 100%); border-color: var(--neon-pink);">
+                    <div style="display: flex; gap: 2rem; align-items: flex-start;">
+                        <div style="flex: 1;">
+                            <h3 style="color: var(--neon-pink); font-size: 20px; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">💬 EXCLUSIVE COMMUNITY</h3>
+                            <p style="color: var(--neon-cyan); font-size: 14px; line-height: 1.8; margin-bottom: 1rem;">
+                                Join a private community of parents and guardians who actually care about digital safety. Get real-time answers to your questions, share wins with people who get it, and have me available when things come up. It's like having a cybersecurity dad on your team.
+                            </p>
+                            <ul style="color: var(--neon-lime); font-size: 13px; margin: 1rem 0; line-height: 1.8; list-style: none; padding: 0;">
+                                <li>✓ Direct access to me (I answer your questions)</li>
+                                <li>✓ Daily tips, tricks, and real security updates</li>
+                                <li>✓ Peer support from other parents who get it</li>
+                                <li>✓ Exclusive resources & content just for members</li>
+                            </ul>
+                            <button class="btn btn-primary" onclick="scrollToContact('community')" style="margin-top: 1rem;">[ JOIN NOW ]</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon Class -->
+    <section class="section" id="coming-soon">
+        <div class="featured" style="background: linear-gradient(135deg, rgba(255, 0, 110, 0.15) 0%, rgba(189, 0, 255, 0.15) 50%, rgba(0, 240, 255, 0.1) 100%); border: 3px solid; border-image: linear-gradient(90deg, var(--neon-pink), var(--neon-purple), var(--neon-cyan)) 1; box-shadow: 0 0 50px rgba(255, 0, 110, 0.3);">
+            <div style="text-align: center;">
+                <div style="display: inline-block; background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple)); color: white; padding: 0.5rem 1.5rem; border-radius: 4px; margin-bottom: 1rem; font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">🎓 COMING VERY SOON 🎓</div>
+                
+                <h2 style="color: var(--neon-cyan); font-size: 36px; font-weight: 900; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 2px;">PROTECTING YOUR FAMILY ONLINE</h2>
+                
+                <p style="color: var(--neon-pink); font-size: 18px; font-weight: 700; margin-bottom: 2rem;">6-Week Live Class | $100</p>
+                
+                <div style="max-width: 700px; margin: 0 auto; margin-bottom: 2rem;">
+                    <p style="color: var(--neon-cyan); font-size: 15px; line-height: 1.9; margin-bottom: 1.5rem;">
+                        This isn't one of those "cybersecurity for dummies" courses. This is <strong>real, practical training</strong> from someone who actually lives this stuff. Over 6 weeks, we'll cover everything your family needs to stay safe online—and we'll figure it out together.
+                    </p>
+                    
+                    <div style="background: rgba(57, 255, 20, 0.1); border: 2px solid var(--neon-lime); border-radius: 4px; padding: 1.5rem; margin-bottom: 1.5rem;">
+                        <h4 style="color: var(--neon-lime); margin-bottom: 1rem; text-transform: uppercase; font-size: 13px; letter-spacing: 1px;">>>> WHAT YOU'LL LEARN <<<</h4>
+                        <ul style="color: var(--neon-cyan); font-size: 14px; line-height: 1.8; text-align: left; max-width: 500px; margin: 0 auto; list-style: none; padding: 0;">
+                            <li>✓ Week 1: The Real Threats (and How to Protect Against Them)</li>
+                            <li>✓ Week 2: Passwords That Actually Work</li>
+                            <li>✓ Week 3: Parental Controls That Aren't Weird or Overbearing</li>
+                            <li>✓ Week 4: Social Media Safety Without Being That Parent</li>
+                            <li>✓ Week 5: Spotting & Stopping the Bad Stuff</li>
+                            <li>✓ Week 6: Build Your Family's Custom Security Plan</li>
+                        </ul>
+                    </div>
+                    
+                    <p style="color: var(--neon-cyan); font-size: 14px; line-height: 1.8; margin-bottom: 1.5rem;">
+                        Live group sessions, Q&A with me every week, downloadable resources you'll actually use, and lifetime access to course materials. Plus you get added to our exclusive community so the learning doesn't stop after week 6.
+                    </p>
+
+                    <p style="color: var(--neon-lime); font-size: 13px; margin-bottom: 1.5rem; font-style: italic;">
+                        More details coming soon. Spots are intentionally limited to keep the group small and personal.
+                    </p>
+                </div>
+
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; max-width: 600px; margin: 0 auto;">
+                    <button class="btn btn-primary" onclick="notifyClassLaunch()" style="flex: 1; min-width: 250px;">[ NOTIFY ME WHEN LIVE ]</button>
+                    <button class="btn btn-outline" onclick="document.getElementById('resources').scrollIntoView({ behavior: 'smooth' })" style="flex: 1; min-width: 250px;">[ GET FREE PREP GUIDE ]</button>
+                </div>
+            </div>
         </div>
     </section>
 

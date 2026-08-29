@@ -889,3 +889,67 @@ body::before {
     background: linear-gradient(180deg, var(--neon-pink), var(--neon-purple));
     box-shadow: 0 0 10px var(--neon-cyan);
 }
+
+/* Input Field Styling - Retro */
+input[type="text"],
+input[type="email"],
+textarea,
+select {
+    font-family: 'Courier New', monospace;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--neon-pink) !important;
+    box-shadow: 0 0 15px rgba(255, 0, 110, 0.4) !important;
+    background: rgba(255, 0, 110, 0.08) !important;
+}
+
+/* Marketing Contact Cards */
+.contact-card {
+    background: rgba(189, 0, 255, 0.1);
+    border: 1px solid var(--neon-purple);
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 0.75rem;
+    font-size: 12px;
+}
+
+.contact-card-name {
+    color: var(--neon-pink);
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.contact-card-email {
+    color: var(--neon-cyan);
+    word-break: break-all;
+    margin-bottom: 0.25rem;
+}
+
+.contact-card-meta {
+    color: var(--neon-lime);
+    font-size: 11px;
+    margin-bottom: 0.5rem;
+}
+
+.contact-card-delete {
+    background: rgba(255, 0, 110, 0.2);
+    border: 1px solid var(--neon-pink);
+    color: var(--neon-pink);
+    padding: 0.25rem 0.5rem;
+    border-radius: 2px;
+    font-size: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.2s;
+}
+
+.contact-card-delete:hover {
+    background: var(--neon-pink);
+    color: var(--bg-dark);
+    box-shadow: 0 0 10px var(--neon-pink);
+}
