@@ -34,22 +34,107 @@
     </section>
 
     <!-- Digital Books Section -->
+    <section class="section" id="quiz">
+        <h2 class="section-title">[ SECURITY ASSESSMENT QUIZ ]</h2>
+        <div class="featured">
+            <div id="quiz-container">
+                <div id="quiz-intro" style="text-align: center;">
+                    <h3 style="color: var(--neon-cyan); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">>>> WHAT'S YOUR SECURITY LEVEL? <<<</h3>
+                    <p style="color: var(--neon-cyan); margin-bottom: 2rem; line-height: 1.8;">Take our 5-minute security quiz to find out how protected your family really is. <br/>Answer a few quick questions and get personalized cybersecurity recommendations!</p>
+                    <button class="btn btn-primary" onclick="openQuizModal()">[ START QUIZ ]</button>
+                </div>
+
+                <div id="quiz-questions" style="display: none;">
+                    <form id="quizForm" onsubmit="handleQuizSubmit(event)">
+                        <div id="question-container"></div>
+                        <div style="text-align: center; margin-top: 2rem;">
+                            <button type="submit" class="btn btn-primary">[ GET MY RESULTS ]</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="quiz-results" style="display: none; text-align: center;">
+                    <h3 style="color: var(--neon-lime); margin-bottom: 1rem; font-size: 18px; text-transform: uppercase;">>>> YOUR RESULTS <<<</h3>
+                    <div id="results-content" style="background: rgba(57, 255, 20, 0.1); border: 2px solid var(--neon-lime); padding: 2rem; border-radius: 4px; margin-bottom: 2rem;">
+                        <p id="score-text" style="color: var(--neon-cyan); font-size: 14px; margin-bottom: 1rem;"></p>
+                        <p id="recommendation" style="color: var(--neon-cyan); font-size: 13px; line-height: 1.8;"></p>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, rgba(255, 0, 110, 0.1) 0%, rgba(189, 0, 255, 0.1) 100%); border: 2px solid var(--neon-pink); padding: 1.5rem; border-radius: 4px; margin-bottom: 2rem;">
+                        <h4 style="color: var(--neon-pink); margin-bottom: 1rem; text-transform: uppercase; font-size: 13px;">>>> JOIN OUR MAILING LIST <<<</h4>
+                        <p style="color: var(--neon-cyan); font-size: 12px; margin-bottom: 1rem;">Get personalized tips and resources based on your results</p>
+                        <input type="email" id="email" placeholder="your@email.com" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-pink); background: rgba(255, 0, 110, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 0.75rem;" required>
+                        <input type="text" id="name" placeholder="Your Name" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-pink); background: rgba(255, 0, 110, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 1rem;" required>
+                        <button type="button" class="btn btn-primary" onclick="submitMailingList()" style="width: 100%;">[ SEND ME TIPS ]</button>
+                    </div>
+
+                    <button class="btn btn-outline" onclick="resetQuiz()">[ RETAKE QUIZ ]</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="resources">
+        <h2 class="section-title">[ FREE GUIDES - NO SIGNUP REQUIRED ]</h2>
+        <div class="free-resources-grid-books">
+            <div class="free-resource-card">
+                <div class="resource-cover">
+                    <div style="width: 140px; height: 180px; background: linear-gradient(135deg, #00E5FF, #FF00FF); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px;">📧</div>
+                </div>
+                <h4 style="color: var(--neon-cyan); font-size: 13px; margin-top: 1rem; font-weight: 700;">Gmail Privacy Guide</h4>
+                <a href="https://dadcybertips.com/b/gmailprivacyguide" target="_blank" class="btn btn-outline" style="width: 100%; margin-top: 0.5rem; font-size: 11px; text-decoration: none;">DOWNLOAD</a>
+            </div>
+
+            <div class="free-resource-card">
+                <div class="resource-cover">
+                    <div style="width: 140px; height: 180px; background: linear-gradient(135deg, #31ff57, #00E5FF); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px;">⚡</div>
+                </div>
+                <h4 style="color: var(--neon-cyan); font-size: 13px; margin-top: 1rem; font-weight: 700;">5 Privacy Facts</h4>
+                <a href="https://dadcybertips.com/b/5privacyfacts" target="_blank" class="btn btn-outline" style="width: 100%; margin-top: 0.5rem; font-size: 11px; text-decoration: none;">DOWNLOAD</a>
+            </div>
+
+            <div class="free-resource-card">
+                <div class="resource-cover">
+                    <div style="width: 140px; height: 180px; background: linear-gradient(135deg, #FF00FF, #31ff57); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px;">👨‍👩‍👧‍👦</div>
+                </div>
+                <h4 style="color: var(--neon-cyan); font-size: 13px; margin-top: 1rem; font-weight: 700;">Parent Safety Toolkit</h4>
+                <a href="https://dadcybertips.com/b/parentsafetytoolkit" target="_blank" class="btn btn-outline" style="width: 100%; margin-top: 0.5rem; font-size: 11px; text-decoration: none;">DOWNLOAD</a>
+            </div>
+
+            <div class="free-resource-card">
+                <div class="resource-cover">
+                    <div style="width: 140px; height: 180px; background: linear-gradient(135deg, #00E5FF, #FF00FF); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px;">📱</div>
+                </div>
+                <h4 style="color: var(--neon-cyan); font-size: 13px; margin-top: 1rem; font-weight: 700;">Facebook Privacy</h4>
+                <a href="https://dadcybertips.com/b/facebookprivacy" target="_blank" class="btn btn-outline" style="width: 100%; margin-top: 0.5rem; font-size: 11px; text-decoration: none;">DOWNLOAD</a>
+            </div>
+
+            <div class="free-resource-card">
+                <div class="resource-cover">
+                    <div style="width: 140px; height: 180px; background: linear-gradient(135deg, #31ff57, #FF00FF); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px;">👣</div>
+                </div>
+                <h4 style="color: var(--neon-cyan); font-size: 13px; margin-top: 1rem; font-weight: 700;">Digital Footprint</h4>
+                <a href="https://dadcybertips.com/collection/freebies" target="_blank" class="btn btn-outline" style="width: 100%; margin-top: 0.5rem; font-size: 11px; text-decoration: none;">DOWNLOAD</a>
+            </div>
+
+            <div class="free-resource-card">
+                <div class="resource-cover">
+                    <div style="width: 140px; height: 180px; background: linear-gradient(135deg, #00E5FF, #31ff57); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px;">🔐</div>
+                </div>
+                <h4 style="color: var(--neon-cyan); font-size: 13px; margin-top: 1rem; font-weight: 700;">Security Best Practices</h4>
+                <a href="https://dadcybertips.com/collection/freebies" target="_blank" class="btn btn-outline" style="width: 100%; margin-top: 0.5rem; font-size: 11px; text-decoration: none;">DOWNLOAD</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Quiz & Mailing List -->
     <section class="section" id="books">
         <h2 class="section-title">[ DIGITAL BOOKS & GUIDES ]</h2>
         <div class="products-grid">
             <div class="product-card">
-                <div class="product-image-container">
-                    <svg viewBox="0 0 150 200" style="width: 150px; height: 200px; border-radius: 4px;">
-                        <defs>
-                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#FF00FF;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#00E5FF;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <rect width="150" height="200" fill="url(#grad1)"/>
-                        <text x="75" y="85" font-size="50" text-anchor="middle" fill="white" font-weight="bold">🤖</text>
-                        <text x="75" y="160" font-size="12" text-anchor="middle" fill="white" font-weight="bold">AI Scam</text>
-                    </svg>
+                <div class="product-image-container" style="background: linear-gradient(135deg, #FF00FF, #00E5FF); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 150px; height: 200px;">
+                    <div style="font-size: 56px;">🤖</div>
+                    <div style="font-size: 12px; color: white; font-weight: bold; margin-top: 12px; text-align: center;">AI Scam</div>
                 </div>
                 <div class="badge">Featured</div>
                 <h3 class="product-name">The AI Scam Playbook</h3>
@@ -59,18 +144,9 @@
             </div>
             
             <div class="product-card">
-                <div class="product-image-container">
-                    <svg viewBox="0 0 150 200" style="width: 150px; height: 200px; border-radius: 4px;">
-                        <defs>
-                            <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#00E5FF;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#31ff57;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <rect width="150" height="200" fill="url(#grad2)"/>
-                        <text x="75" y="85" font-size="50" text-anchor="middle" fill="white" font-weight="bold">👶</text>
-                        <text x="75" y="160" font-size="11" text-anchor="middle" fill="white" font-weight="bold">Kids Privacy</text>
-                    </svg>
+                <div class="product-image-container" style="background: linear-gradient(135deg, #00E5FF, #31ff57); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 150px; height: 200px;">
+                    <div style="font-size: 56px;">👶</div>
+                    <div style="font-size: 11px; color: white; font-weight: bold; margin-top: 12px; text-align: center;">Kids Privacy</div>
                 </div>
                 <div class="badge">Best Seller</div>
                 <h3 class="product-name">Raising Privacy-Smart Kids</h3>
@@ -80,18 +156,9 @@
             </div>
             
             <div class="product-card">
-                <div class="product-image-container">
-                    <svg viewBox="0 0 150 200" style="width: 150px; height: 200px; border-radius: 4px;">
-                        <defs>
-                            <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#FF00FF;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#00E5FF;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <rect width="150" height="200" fill="url(#grad3)"/>
-                        <text x="75" y="85" font-size="50" text-anchor="middle" fill="white" font-weight="bold">👴</text>
-                        <text x="75" y="160" font-size="11" text-anchor="middle" fill="white" font-weight="bold">Parents</text>
-                    </svg>
+                <div class="product-image-container" style="background: linear-gradient(135deg, #FF00FF, #00E5FF); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 150px; height: 200px;">
+                    <div style="font-size: 56px;">👴</div>
+                    <div style="font-size: 11px; color: white; font-weight: bold; margin-top: 12px; text-align: center;">Parents</div>
                 </div>
                 <h3 class="product-name">Raising Privacy Conscious Parents</h3>
                 <p class="product-desc">Guide for helping our aging parents stay safe and secure in this digital world.</p>
@@ -100,18 +167,9 @@
             </div>
             
             <div class="product-card">
-                <div class="product-image-container">
-                    <svg viewBox="0 0 150 200" style="width: 150px; height: 200px; border-radius: 4px;">
-                        <defs>
-                            <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#31ff57;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#FF00FF;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <rect width="150" height="200" fill="url(#grad4)"/>
-                        <text x="75" y="85" font-size="50" text-anchor="middle" fill="white" font-weight="bold">🔐</text>
-                        <text x="75" y="160" font-size="11" text-anchor="middle" fill="white" font-weight="bold">Take Control</text>
-                    </svg>
+                <div class="product-image-container" style="background: linear-gradient(135deg, #31ff57, #FF00FF); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 150px; height: 200px;">
+                    <div style="font-size: 56px;">🔐</div>
+                    <div style="font-size: 11px; color: white; font-weight: bold; margin-top: 12px; text-align: center;">Take Control</div>
                 </div>
                 <h3 class="product-name">Taking Back Control</h3>
                 <p class="product-desc">Reclaim your digital privacy and security with practical, actionable steps you can take today.</p>
@@ -120,18 +178,9 @@
             </div>
 
             <div class="product-card">
-                <div class="product-image-container">
-                    <svg viewBox="0 0 150 200" style="width: 150px; height: 200px; border-radius: 4px;">
-                        <defs>
-                            <linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#00E5FF;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#FF00FF;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <rect width="150" height="200" fill="url(#grad5)"/>
-                        <text x="75" y="85" font-size="50" text-anchor="middle" fill="white" font-weight="bold">🛡️</text>
-                        <text x="75" y="160" font-size="11" text-anchor="middle" fill="white" font-weight="bold">Privacy Guide</text>
-                    </svg>
+                <div class="product-image-container" style="background: linear-gradient(135deg, #00E5FF, #FF00FF); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 150px; height: 200px;">
+                    <div style="font-size: 56px;">🛡️</div>
+                    <div style="font-size: 11px; color: white; font-weight: bold; margin-top: 12px; text-align: center;">Privacy Guide</div>
                 </div>
                 <h3 class="product-name">The Essential Privacy Guide</h3>
                 <p class="product-desc">Comprehensive guide to protecting your personal information and privacy online.</p>
@@ -140,18 +189,9 @@
             </div>
 
             <div class="product-card">
-                <div class="product-image-container">
-                    <svg viewBox="0 0 150 200" style="width: 150px; height: 200px; border-radius: 4px;">
-                        <defs>
-                            <linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#FF00FF;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#31ff57;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <rect width="150" height="200" fill="url(#grad6)"/>
-                        <text x="75" y="85" font-size="50" text-anchor="middle" fill="white" font-weight="bold">👣</text>
-                        <text x="75" y="160" font-size="11" text-anchor="middle" fill="white" font-weight="bold">Digital Trail</text>
-                    </svg>
+                <div class="product-image-container" style="background: linear-gradient(135deg, #FF00FF, #31ff57); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 150px; height: 200px;">
+                    <div style="font-size: 56px;">👣</div>
+                    <div style="font-size: 11px; color: white; font-weight: bold; margin-top: 12px; text-align: center;">Digital Trail</div>
                 </div>
                 <h3 class="product-name">Your Digital Footprint</h3>
                 <p class="product-desc">Understand and manage the digital trail you leave behind on the internet.</p>
@@ -327,100 +367,6 @@
     </section>
 
     <!-- Free Resources Section -->
-    <section class="section" id="resources">
-        <h2 class="section-title">[ FREE GUIDES - NO SIGNUP REQUIRED ]</h2>
-        <div class="free-resources-grid-books">
-            <div class="free-resource-card">
-                <div class="resource-cover">
-                    <div style="width: 140px; height: 180px; background: linear-gradient(135deg, #00E5FF, #FF00FF); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px;">📧</div>
-                </div>
-                <h4 style="color: var(--neon-cyan); font-size: 13px; margin-top: 1rem; font-weight: 700;">Gmail Privacy Guide</h4>
-                <a href="https://dadcybertips.com/b/gmailprivacyguide" target="_blank" class="btn btn-outline" style="width: 100%; margin-top: 0.5rem; font-size: 11px; text-decoration: none;">DOWNLOAD</a>
-            </div>
-
-            <div class="free-resource-card">
-                <div class="resource-cover">
-                    <div style="width: 140px; height: 180px; background: linear-gradient(135deg, #31ff57, #00E5FF); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px;">⚡</div>
-                </div>
-                <h4 style="color: var(--neon-cyan); font-size: 13px; margin-top: 1rem; font-weight: 700;">5 Privacy Facts</h4>
-                <a href="https://dadcybertips.com/b/5privacyfacts" target="_blank" class="btn btn-outline" style="width: 100%; margin-top: 0.5rem; font-size: 11px; text-decoration: none;">DOWNLOAD</a>
-            </div>
-
-            <div class="free-resource-card">
-                <div class="resource-cover">
-                    <div style="width: 140px; height: 180px; background: linear-gradient(135deg, #FF00FF, #31ff57); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px;">👨‍👩‍👧‍👦</div>
-                </div>
-                <h4 style="color: var(--neon-cyan); font-size: 13px; margin-top: 1rem; font-weight: 700;">Parent Safety Toolkit</h4>
-                <a href="https://dadcybertips.com/b/parentsafetytoolkit" target="_blank" class="btn btn-outline" style="width: 100%; margin-top: 0.5rem; font-size: 11px; text-decoration: none;">DOWNLOAD</a>
-            </div>
-
-            <div class="free-resource-card">
-                <div class="resource-cover">
-                    <div style="width: 140px; height: 180px; background: linear-gradient(135deg, #00E5FF, #FF00FF); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px;">📱</div>
-                </div>
-                <h4 style="color: var(--neon-cyan); font-size: 13px; margin-top: 1rem; font-weight: 700;">Facebook Privacy</h4>
-                <a href="https://dadcybertips.com/b/facebookprivacy" target="_blank" class="btn btn-outline" style="width: 100%; margin-top: 0.5rem; font-size: 11px; text-decoration: none;">DOWNLOAD</a>
-            </div>
-
-            <div class="free-resource-card">
-                <div class="resource-cover">
-                    <div style="width: 140px; height: 180px; background: linear-gradient(135deg, #31ff57, #FF00FF); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px;">👣</div>
-                </div>
-                <h4 style="color: var(--neon-cyan); font-size: 13px; margin-top: 1rem; font-weight: 700;">Digital Footprint</h4>
-                <a href="https://dadcybertips.com/collection/freebies" target="_blank" class="btn btn-outline" style="width: 100%; margin-top: 0.5rem; font-size: 11px; text-decoration: none;">DOWNLOAD</a>
-            </div>
-
-            <div class="free-resource-card">
-                <div class="resource-cover">
-                    <div style="width: 140px; height: 180px; background: linear-gradient(135deg, #00E5FF, #31ff57); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px;">🔐</div>
-                </div>
-                <h4 style="color: var(--neon-cyan); font-size: 13px; margin-top: 1rem; font-weight: 700;">Security Best Practices</h4>
-                <a href="https://dadcybertips.com/collection/freebies" target="_blank" class="btn btn-outline" style="width: 100%; margin-top: 0.5rem; font-size: 11px; text-decoration: none;">DOWNLOAD</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Security Quiz & Mailing List -->
-    <section class="section" id="quiz">
-        <h2 class="section-title">[ SECURITY ASSESSMENT QUIZ ]</h2>
-        <div class="featured">
-            <div id="quiz-container">
-                <div id="quiz-intro" style="text-align: center;">
-                    <h3 style="color: var(--neon-cyan); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">>>> WHAT'S YOUR SECURITY LEVEL? <<<</h3>
-                    <p style="color: var(--neon-cyan); margin-bottom: 2rem; line-height: 1.8;">Take our 5-minute security quiz to find out how protected your family really is. <br/>Answer a few quick questions and get personalized cybersecurity recommendations!</p>
-                    <button class="btn btn-primary" onclick="openQuizModal()">[ START QUIZ ]</button>
-                </div>
-
-                <div id="quiz-questions" style="display: none;">
-                    <form id="quizForm" onsubmit="handleQuizSubmit(event)">
-                        <div id="question-container"></div>
-                        <div style="text-align: center; margin-top: 2rem;">
-                            <button type="submit" class="btn btn-primary">[ GET MY RESULTS ]</button>
-                        </div>
-                    </form>
-                </div>
-
-                <div id="quiz-results" style="display: none; text-align: center;">
-                    <h3 style="color: var(--neon-lime); margin-bottom: 1rem; font-size: 18px; text-transform: uppercase;">>>> YOUR RESULTS <<<</h3>
-                    <div id="results-content" style="background: rgba(57, 255, 20, 0.1); border: 2px solid var(--neon-lime); padding: 2rem; border-radius: 4px; margin-bottom: 2rem;">
-                        <p id="score-text" style="color: var(--neon-cyan); font-size: 14px; margin-bottom: 1rem;"></p>
-                        <p id="recommendation" style="color: var(--neon-cyan); font-size: 13px; line-height: 1.8;"></p>
-                    </div>
-
-                    <div style="background: linear-gradient(135deg, rgba(255, 0, 110, 0.1) 0%, rgba(189, 0, 255, 0.1) 100%); border: 2px solid var(--neon-pink); padding: 1.5rem; border-radius: 4px; margin-bottom: 2rem;">
-                        <h4 style="color: var(--neon-pink); margin-bottom: 1rem; text-transform: uppercase; font-size: 13px;">>>> JOIN OUR MAILING LIST <<<</h4>
-                        <p style="color: var(--neon-cyan); font-size: 12px; margin-bottom: 1rem;">Get personalized tips and resources based on your results</p>
-                        <input type="email" id="email" placeholder="your@email.com" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-pink); background: rgba(255, 0, 110, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 0.75rem;" required>
-                        <input type="text" id="name" placeholder="Your Name" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-pink); background: rgba(255, 0, 110, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 1rem;" required>
-                        <button type="button" class="btn btn-primary" onclick="submitMailingList()" style="width: 100%;">[ SEND ME TIPS ]</button>
-                    </div>
-
-                    <button class="btn btn-outline" onclick="resetQuiz()">[ RETAKE QUIZ ]</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Marketing Contacts List -->
     <section class="section" id="marketing">
         <h2 class="section-title">[ MARKETING CONTACTS DATABASE ]</h2>
