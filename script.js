@@ -724,3 +724,204 @@ function scrollToFreebies() {
         element.scrollIntoView({ behavior: 'smooth' });
     }
 }
+
+// ============= INLINE QUIZ FUNCTIONALITY =============
+
+const quizData = [
+    {
+        question: "How many passwords do you reuse across multiple accounts?",
+        options: ["None — every password is unique", "1-2 passwords reused occasionally", "Several accounts share the same password", "Most of my passwords are identical"],
+        correct: 0,
+        weight: 3,
+        tip: "Use a password manager to generate unique passwords for each account."
+    },
+    {
+        question: "Which method do you primarily use to protect your online accounts?",
+        options: ["Two-Factor Authentication (2FA) on all important accounts", "2FA on some accounts, mostly email and banking", "Only SMS verification or security questions", "No additional protection beyond passwords"],
+        correct: 0,
+        weight: 3,
+        tip: "Enable authenticator apps (Google Authenticator, Authy) over SMS for 2FA."
+    },
+    {
+        question: "How frequently do you update your operating systems and software?",
+        options: ["Within 24 hours of security updates being released", "Within a week of release", "Every few months or when it's convenient", "Rarely or never — I ignore update notifications"],
+        correct: 0,
+        weight: 3,
+        tip: "Enable automatic updates on all devices. Updates patch critical security vulnerabilities."
+    },
+    {
+        question: "How secure is your home WiFi network?",
+        options: ["WPA2/WPA3 encryption with a strong, unique password", "WPA encryption with a decent password", "WEP or shared with neighbors unsecured", "No password set — open network"],
+        correct: 0,
+        weight: 3,
+        tip: "Change your WiFi password from default and use WPA3 if available."
+    },
+    {
+        question: "How do you handle backups of your important data?",
+        options: ["Automated daily backups to cloud storage and external device", "Weekly backups to external storage", "Occasional backups when I remember", "No regular backups — I rely on cloud services"],
+        correct: 0,
+        weight: 2,
+        tip: "Implement 3-2-1 backup rule: 3 copies, 2 different media, 1 offsite."
+    },
+    {
+        question: "How cautious are you about phishing emails and suspicious links?",
+        options: ["Very cautious — I verify sender and never click suspicious links", "Somewhat cautious — check if it seems legitimate", "Rarely check the sender — mostly click if needed", "No — I click on anything that looks interesting"],
+        correct: 0,
+        weight: 2,
+        tip: "Hover over links before clicking. Legitimate companies never ask for passwords via email."
+    },
+    {
+        question: "Where do you download software from?",
+        options: ["Official app stores and verified developer websites", "Official stores with occasional third-party downloads", "Random websites and sources I find online", "Torrent sites and file-sharing platforms"],
+        correct: 0,
+        weight: 2,
+        tip: "Stick to official app stores and developer websites; verify download integrity."
+    },
+    {
+        question: "How many connected smart devices do you have, and how are they configured?",
+        options: ["Minimal devices, all updated with unique passwords and network segmentation", "Moderate number, most have changed passwords and regular updates", "Several with default settings and shared networks", "Many IoT devices with factory settings"],
+        correct: 0,
+        weight: 2,
+        tip: "Isolate IoT devices on a separate VLAN/guest network with unique credentials."
+    },
+    {
+        question: "How often do you review your privacy settings on social media and online accounts?",
+        options: ["Quarterly or whenever major updates occur", "Annually or when prompted", "Occasionally — maybe once a year", "Never — I don't check privacy settings"],
+        correct: 0,
+        weight: 1,
+        tip: "Audit privacy settings annually and after platform updates."
+    },
+    {
+        question: "Do you use any browser extensions or ad blockers?",
+        options: ["Yes, essential privacy extensions + uBlock Origin or similar", "Some basic ad blocking and privacy tools", "A few random extensions installed years ago", "None — I browse with default browser settings"],
+        correct: 0,
+        weight: 1,
+        tip: "Install reputable privacy extensions: uBlock Origin, Privacy Badger, ClearURLs."
+    },
+    {
+        question: "Have you checked if your email has been compromised in known data breaches?",
+        options: ["Yes, regularly using breach monitoring services", "Yes, once or twice using HaveIBeenPwned or similar", "I've heard about it but haven't checked", "No, I'm not aware of this service"],
+        correct: 0,
+        weight: 1,
+        tip: "Check haveibeenpwned.com and set up breach alerts for your email addresses."
+    },
+    {
+        question: "How do you handle public WiFi networks?",
+        options: ["Never use public WiFi for sensitive activities; use VPN if necessary", "Avoid sensitive tasks on public WiFi", "Use public WiFi for anything, minimal concerns", "Freely bank and shop on any public WiFi"],
+        correct: 0,
+        weight: 1,
+        tip: "Always use a VPN on public WiFi. Avoid logging into sensitive accounts without protection."
+    }
+];
+
+const levels = [
+    { min: 22, max: 25, scoreMin: 9, scoreMax: 10, name: "Cyber Fortress", emoji: "🏰", 
+      desc: "Elite security posture. Your digital defenses are excellent!",
+      recs: ["Maintain current practices", "Stay updated on emerging threats", "Share best practices with family/friends"] },
+    { min: 18, max: 21, scoreMin: 7, scoreMax: 8, name: "Fortified Home", emoji: "🔒", 
+      desc: "Strong protections with minor gaps to seal.",
+      recs: ["Review weak areas identified above", "Consider upgrading 2FA to authenticator apps", "Set automated backup schedules"] },
+    { min: 13, max: 17, scoreMin: 5, scoreMax: 6, name: "Basic Lock", emoji: "🚪", 
+      desc: "Moderate security. Several improvements needed urgently.",
+      recs: ["Enable 2FA on all critical accounts immediately", "Update all device firmware and software", "Change default router credentials", "Set up regular backups"] },
+    { min: 8, max: 12, scoreMin: 3, scoreMax: 4, name: "Vulnerable House", emoji: "⚠️", 
+      desc: "Gaps exposed. Your digital home needs immediate attention.",
+      recs: ["Start with password manager setup", "Enable WPA2/WPA3 on your router", "Install firewall software", "Begin backing up important data"] },
+    { min: 0, max: 7, scoreMin: 1, scoreMax: 2, name: "Digital Door Open Wide", emoji: "🏚️", 
+      desc: "Critical risk. Multiple vulnerabilities require urgent action.",
+      recs: ["Change ALL passwords immediately", "Enable 2FA everywhere possible", "Run full antivirus/malware scans", "Reset router to factory and reconfigure securely"] }
+];
+
+let currentQuestionIndex = 0;
+let userAnswers = new Array(quizData.length).fill(null);
+
+function initializeQuiz() {
+    document.getElementById('total-questions').textContent = quizData.length;
+    displayQuestion();
+}
+
+function displayQuestion() {
+    const q = quizData[currentQuestionIndex];
+    
+    document.getElementById('current-question').textContent = currentQuestionIndex + 1;
+    document.getElementById('progress-text').textContent = `${currentQuestionIndex + 1}/${quizData.length}`;
+    const pct = ((currentQuestionIndex + 1) / quizData.length) * 100;
+    document.getElementById('progress').style.width = pct + '%';
+    
+    document.getElementById('question-text').textContent = q.question;
+    
+    const optionsHTML = q.options.map((opt, i) => `
+        <label style="display: flex; align-items: center; padding: 12px 16px; margin: 10px 0; cursor: pointer; border-radius: 4px; border: 2px solid var(--text-secondary); background: transparent; transition: all 0.3s ease; color: var(--text-secondary);">
+            <input type="radio" name="answer" value="${i}" ${userAnswers[currentQuestionIndex] === i ? 'checked' : ''} onchange="recordAnswer(${i})" style="margin-right: 12px; cursor: pointer; accent-color: var(--neon-cyan); width: 18px; height: 18px;">
+            <span>${opt}</span>
+        </label>
+    `).join('');
+    document.getElementById('options-container').innerHTML = optionsHTML;
+    
+    document.getElementById('tip').textContent = '💡 ' + q.tip;
+    
+    document.getElementById('back-btn').disabled = currentQuestionIndex === 0;
+    document.getElementById('back-btn').style.opacity = currentQuestionIndex === 0 ? '0.3' : '1';
+    document.getElementById('next-btn').disabled = userAnswers[currentQuestionIndex] === null;
+    document.getElementById('next-btn').style.opacity = userAnswers[currentQuestionIndex] === null ? '0.3' : '1';
+}
+
+function recordAnswer(answerIndex) {
+    userAnswers[currentQuestionIndex] = answerIndex;
+    document.getElementById('next-btn').disabled = false;
+    document.getElementById('next-btn').style.opacity = '1';
+}
+
+function nextQuestion() {
+    if (currentQuestionIndex < quizData.length - 1) {
+        currentQuestionIndex++;
+        displayQuestion();
+    } else {
+        document.querySelector('#quizContainer > div:first-child').style.display = 'none';
+        document.querySelector('#quizContainer > div:nth-child(2)').style.display = 'none';
+        document.getElementById('email-section').style.display = 'block';
+    }
+}
+
+function previousQuestion() {
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        displayQuestion();
+    }
+}
+
+function calculateAndShowResults() {
+    const email = document.getElementById('email-input').value;
+    if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+    }
+    
+    let rawScore = 0;
+    quizData.forEach((q, i) => {
+        if (userAnswers[i] === q.correct) {
+            rawScore += q.weight;
+        }
+    });
+    
+    const maxScore = quizData.reduce((sum, q) => sum + q.weight, 0);
+    const finalScore = Math.round((rawScore / maxScore) * 10);
+    const clampedScore = Math.max(1, Math.min(10, finalScore));
+    
+    const level = levels.find(l => clampedScore >= l.scoreMin && clampedScore <= l.scoreMax) || levels[4];
+    
+    document.getElementById('email-section').style.display = 'none';
+    document.getElementById('result-section').style.display = 'block';
+    
+    document.getElementById('final-score').textContent = `${clampedScore}/10`;
+    document.getElementById('level-name').innerHTML = `${level.emoji} ${level.name}`;
+    document.getElementById('level-desc').textContent = level.desc;
+    
+    const recList = document.getElementById('recommendations');
+    recList.innerHTML = level.recs.map(rec => `<li style="margin: 12px 0; padding-left: 24px; position: relative; line-height: 1.6;"><span style="position: absolute; left: 0; color: var(--neon-magenta);">→</span>${rec}</li>`).join('');
+    
+    localStorage.setItem('quiz_score', clampedScore);
+    localStorage.setItem('quiz_level', level.name);
+    localStorage.setItem('quiz_email', email);
+    localStorage.setItem('quiz_timestamp', new Date().toISOString());
+}
