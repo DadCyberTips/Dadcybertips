@@ -836,45 +836,116 @@ let currentQuestionIndex = 0;
 let userAnswers = new Array(quizData.length).fill(null);
 
 function initializeQuiz() {
+    console.log('🎯 initializeQuiz() called');
+    console.log('quizData length:', quizData?.length);
+    
     // Reset quiz state
     currentQuestionIndex = 0;
     userAnswers = new Array(quizData.length).fill(null);
     
     // Reset display
-    document.getElementById('email-section').style.display = 'none';
-    document.getElementById('result-section').style.display = 'none';
+    const emailSection = document.getElementById('email-section');
+    const resultSection = document.getElementById('result-section');
     
-    document.getElementById('total-questions').textContent = quizData.length;
-    document.getElementById('current-question').textContent = '1';
-    document.getElementById('progress-text').textContent = `1/${quizData.length}`;
+    if (emailSection) emailSection.style.display = 'none';
+    if (resultSection) resultSection.style.display = 'none';
     
+    // Set question counts
+    const totalQEl = document.getElementById('total-questions');
+    if (totalQEl) {
+        totalQEl.textContent = quizData.length;
+        console.log('✅ Set total questions to:', quizData.length);
+    } else {
+        console.error('❌ total-questions element not found');
+    }
+    
+    const currentQEl = document.getElementById('current-question');
+    if (currentQEl) {
+        currentQEl.textContent = '1';
+        console.log('✅ Set current question to 1');
+    }
+    
+    const progressEl = document.getElementById('progress-text');
+    if (progressEl) {
+        progressEl.textContent = `1/${quizData.length}`;
+        console.log('✅ Set progress text');
+    }
+    
+    // Display first question
+    console.log('📝 Calling displayQuestion()...');
     displayQuestion();
 }
 
 function displayQuestion() {
+    console.log('displayQuestion() - Question index:', currentQuestionIndex);
+    
+    if (!quizData || quizData.length === 0) {
+        console.error('❌ quizData is empty or not loaded!');
+        return;
+    }
+    
     const q = quizData[currentQuestionIndex];
+    console.log('📌 Question:', q.question);
     
-    document.getElementById('current-question').textContent = currentQuestionIndex + 1;
-    document.getElementById('progress-text').textContent = `${currentQuestionIndex + 1}/${quizData.length}`;
-    const pct = ((currentQuestionIndex + 1) / quizData.length) * 100;
-    document.getElementById('progress').style.width = pct + '%';
+    // Update progress
+    const currentQEl = document.getElementById('current-question');
+    if (currentQEl) currentQEl.textContent = currentQuestionIndex + 1;
     
-    document.getElementById('question-text').textContent = q.question;
+    const progressTxt = document.getElementById('progress-text');
+    if (progressTxt) progressTxt.textContent = `${currentQuestionIndex + 1}/${quizData.length}`;
     
+    const progressBar = document.getElementById('progress');
+    if (progressBar) {
+        const pct = ((currentQuestionIndex + 1) / quizData.length) * 100;
+        progressBar.style.width = pct + '%';
+    }
+    
+    // Update question text
+    const qTextEl = document.getElementById('question-text');
+    if (qTextEl) {
+        qTextEl.textContent = q.question;
+        console.log('✅ Question text updated');
+    } else {
+        console.error('❌ question-text element not found');
+    }
+    
+    // Generate options
     const optionsHTML = q.options.map((opt, i) => `
         <label style="display: flex; align-items: center; padding: 12px 16px; margin: 10px 0; cursor: pointer; border-radius: 4px; border: 2px solid var(--text-secondary); background: transparent; transition: all 0.3s ease; color: var(--text-secondary);">
             <input type="radio" name="answer" value="${i}" ${userAnswers[currentQuestionIndex] === i ? 'checked' : ''} onchange="recordAnswer(${i})" style="margin-right: 12px; cursor: pointer; accent-color: var(--neon-cyan); width: 18px; height: 18px;">
             <span>${opt}</span>
         </label>
     `).join('');
-    document.getElementById('options-container').innerHTML = optionsHTML;
     
-    document.getElementById('tip').textContent = '💡 ' + q.tip;
+    const optionsEl = document.getElementById('options-container');
+    if (optionsEl) {
+        optionsEl.innerHTML = optionsHTML;
+        console.log('✅ Options rendered');
+    } else {
+        console.error('❌ options-container element not found');
+    }
     
-    document.getElementById('back-btn').disabled = currentQuestionIndex === 0;
-    document.getElementById('back-btn').style.opacity = currentQuestionIndex === 0 ? '0.3' : '1';
-    document.getElementById('next-btn').disabled = userAnswers[currentQuestionIndex] === null;
-    document.getElementById('next-btn').style.opacity = userAnswers[currentQuestionIndex] === null ? '0.3' : '1';
+    // Update tip
+    const tipEl = document.getElementById('tip');
+    if (tipEl) {
+        tipEl.textContent = '💡 ' + q.tip;
+    }
+    
+    // Update button states
+    const backBtn = document.getElementById('back-btn');
+    const nextBtn = document.getElementById('next-btn');
+    
+    if (backBtn) {
+        backBtn.disabled = currentQuestionIndex === 0;
+        backBtn.style.opacity = currentQuestionIndex === 0 ? '0.3' : '1';
+    }
+    
+    if (nextBtn) {
+        nextBtn.disabled = userAnswers[currentQuestionIndex] === null;
+        nextBtn.style.opacity = userAnswers[currentQuestionIndex] === null ? '0.3' : '1';
+    }
+    
+    console.log('✅ displayQuestion() complete');
 }
 
 function recordAnswer(answerIndex) {
