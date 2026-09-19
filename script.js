@@ -1,6 +1,4 @@
 // DadCyberTips Website - Interactive Script
-window.scriptLoading = true;
-console.log('✅ script.js is loading...');
 
 // Store Integration Configuration
 // Update these with your actual Payhip and Fourthwall links
@@ -713,8 +711,6 @@ function scrollToFreebies() {
 }
 
 // ============= INLINE QUIZ FUNCTIONALITY =============
-console.log('🎯 About to define quizData...');
-window.beforeQuizData = true;
 
 const quizData = [
     {
@@ -832,13 +828,9 @@ if (typeof quizData !== 'undefined' && quizData && quizData.length > 0) {
 }
 
 function initializeQuiz() {
-    console.log('🎯 initializeQuiz() called');
-    console.log('quizData length:', quizData?.length);
-    
     // Initialize userAnswers if not already done
     if (!userAnswers || userAnswers.length !== quizData.length) {
         userAnswers = new Array(quizData.length).fill(null);
-        console.log('✅ userAnswers initialized in initializeQuiz');
     }
     
     // Reset quiz state
@@ -879,15 +871,11 @@ function initializeQuiz() {
 }
 
 function displayQuestion() {
-    console.log('displayQuestion() - Question index:', currentQuestionIndex);
-    
     if (!quizData || quizData.length === 0) {
-        console.error('❌ quizData is empty or not loaded!');
         return;
     }
     
     const q = quizData[currentQuestionIndex];
-    console.log('📌 Question:', q.question);
     
     // Update progress
     const currentQEl = document.getElementById('current-question');
@@ -906,9 +894,6 @@ function displayQuestion() {
     const qTextEl = document.getElementById('question-text');
     if (qTextEl) {
         qTextEl.textContent = q.question;
-        console.log('✅ Question text updated');
-    } else {
-        console.error('❌ question-text element not found');
     }
     
     // Generate options
@@ -922,9 +907,6 @@ function displayQuestion() {
     const optionsEl = document.getElementById('options-container');
     if (optionsEl) {
         optionsEl.innerHTML = optionsHTML;
-        console.log('✅ Options rendered');
-    } else {
-        console.error('❌ options-container element not found');
     }
     
     // Update tip
@@ -946,8 +928,6 @@ function displayQuestion() {
         nextBtn.disabled = userAnswers[currentQuestionIndex] === null;
         nextBtn.style.opacity = userAnswers[currentQuestionIndex] === null ? '0.3' : '1';
     }
-    
-    console.log('✅ displayQuestion() complete');
 }
 
 function recordAnswer(answerIndex) {
@@ -1044,8 +1024,3 @@ function submitQuizToMake(email, score, level) {
         console.log('Webhook submission sent');
     });
 }
-
-// ============= SCRIPT.JS FULLY LOADED =============
-console.log('✅ script.js fully loaded! quizData available:', typeof quizData !== 'undefined');
-window.scriptLoaded = true;
-window.quizDataLoaded = typeof quizData !== 'undefined';
