@@ -604,17 +604,24 @@
 
         // Load quiz inline
         function loadQuizInline() {
+            // Debug: Check script load status
+            console.log('📋 Script load status:');
+            console.log('  - window.scriptLoading:', window.scriptLoading);
+            console.log('  - window.scriptLoaded:', window.scriptLoaded);
+            console.log('  - window.quizDataLoaded:', window.quizDataLoaded);
+            console.log('  - window.beforeQuizData:', window.beforeQuizData);
+            console.log('  - typeof quizData:', typeof quizData);
+            console.log('  - typeof initializeQuiz:', typeof initializeQuiz);
+            
             // Check if quizData is loaded
             if (typeof quizData === 'undefined' || !quizData || quizData.length === 0) {
                 console.error('❌ quizData not loaded! Retrying in 100ms...');
-                console.log('typeof quizData:', typeof quizData);
-                console.log('Available globals:', Object.keys(window).filter(k => k.includes('quiz') || k.includes('Quiz')));
                 setTimeout(loadQuizInline, 100);
                 return;
             }
             
             console.log('✅ quizData loaded:', quizData.length, 'questions');
-            console.log('First question:', quizData[0].question);
+            console.log('✅ First question:', quizData[0].question);
             
             const quizHTML = `
 <h1 style="color: var(--neon-cyan); margin-bottom: 8px; text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);">🔐 How Secure Is Your Digital Home?</h1>
