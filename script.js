@@ -903,6 +903,12 @@ function previousQuestion() {
     }
 }
 
+function goBackToQuiz() {
+    currentQuestionIndex = quizData.length - 1; // Go to last question
+    document.getElementById('email-section').style.display = 'none';
+    displayQuestion();
+}
+
 function calculateAndShowResults() {
     const email = document.getElementById('email-input').value;
     if (!email || !email.includes('@')) {
