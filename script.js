@@ -836,7 +836,18 @@ let currentQuestionIndex = 0;
 let userAnswers = new Array(quizData.length).fill(null);
 
 function initializeQuiz() {
+    // Reset quiz state
+    currentQuestionIndex = 0;
+    userAnswers = new Array(quizData.length).fill(null);
+    
+    // Reset display
+    document.getElementById('email-section').style.display = 'none';
+    document.getElementById('result-section').style.display = 'none';
+    
     document.getElementById('total-questions').textContent = quizData.length;
+    document.getElementById('current-question').textContent = '1';
+    document.getElementById('progress-text').textContent = `1/${quizData.length}`;
+    
     displayQuestion();
 }
 
@@ -877,9 +888,11 @@ function nextQuestion() {
         currentQuestionIndex++;
         displayQuestion();
     } else {
-        document.querySelector('#quizContainer > div:first-child').style.display = 'none';
-        document.querySelector('#quizContainer > div:nth-child(2)').style.display = 'none';
+        // Show email input section
         document.getElementById('email-section').style.display = 'block';
+        // Hide questions section
+        const qSection = document.querySelector('[id*="question"]')?.parentElement;
+        if (qSection) qSection.style.display = 'none';
     }
 }
 
