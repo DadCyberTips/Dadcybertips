@@ -589,6 +589,15 @@
 
         // Load quiz inline
         function loadQuizInline() {
+            // Check if quizData is loaded
+            if (typeof quizData === 'undefined' || !quizData || quizData.length === 0) {
+                console.error('❌ CRITICAL: quizData not loaded! Retrying in 500ms...');
+                setTimeout(loadQuizInline, 500);
+                return;
+            }
+            
+            console.log('✅ quizData loaded:', quizData.length, 'questions');
+            
             const quizHTML = `
 <h1 style="color: var(--neon-cyan); margin-bottom: 8px; text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);">🔐 How Secure Is Your Digital Home?</h1>
 <p style="color: var(--text-secondary); margin-bottom: 8px;">Answer 12 questions to assess your digital security. Takes about 15 minutes.</p>
@@ -637,9 +646,18 @@
     </div>
 </div>
             `;
+            console.log('📝 Injecting quiz HTML into quizContainer...');
             document.getElementById('quizContainer').innerHTML = quizHTML;
+            console.log('✅ HTML injected successfully');
+            
             // Initialize quiz after HTML is injected
-            initializeQuiz();
+            console.log('🚀 Calling initializeQuiz()...');
+            if (typeof initializeQuiz === 'function') {
+                initializeQuiz();
+                console.log('✅ initializeQuiz() called successfully');
+            } else {
+                console.error('❌ ERROR: initializeQuiz is not a function!');
+            }
         }
     </script>
 </body>
