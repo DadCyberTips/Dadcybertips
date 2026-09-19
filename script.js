@@ -929,6 +929,9 @@ function calculateAndShowResults() {
     
     const level = levels.find(l => clampedScore >= l.scoreMin && clampedScore <= l.scoreMax) || levels[4];
     
+    // Send submission to Make.com webhook for Notion database
+    submitQuizToMake(email, clampedScore, level.name);
+    
     document.getElementById('email-section').style.display = 'none';
     document.getElementById('result-section').style.display = 'block';
     
@@ -943,4 +946,28 @@ function calculateAndShowResults() {
     localStorage.setItem('quiz_level', level.name);
     localStorage.setItem('quiz_email', email);
     localStorage.setItem('quiz_timestamp', new Date().toISOString());
+}
+
+// Submit quiz data to Make.com webhook for Notion integration
+function submitQuizToMake(email, score, level) {
+    const webhookUrl = 'https://hook.us2.make.com/bsksqjoatho6opxrxhmzpj5t5jmc5dgi';
+    
+    const payload = {
+        email: email,
+        score: score,
+        level: level,
+        timestamp: new Date().toISOString()
+    };
+    
+    // Send data to Make webhook (non-blocking)
+    fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).catch(err => {
+        // Silently fail - submission shows results regardless
+        console.log('Webhook submission sent');
+    });
 }
