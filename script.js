@@ -1,4 +1,6 @@
 // DadCyberTips Website - Interactive Script
+window.scriptLoading = true;
+console.log('✅ script.js is loading...');
 
 // Store Integration Configuration
 // Update these with your actual Payhip and Fourthwall links
@@ -711,6 +713,8 @@ function scrollToFreebies() {
 }
 
 // ============= INLINE QUIZ FUNCTIONALITY =============
+console.log('🎯 About to define quizData...');
+window.beforeQuizData = true;
 
 const quizData = [
     {
@@ -818,11 +822,24 @@ const levels = [
 ];
 
 let currentQuestionIndex = 0;
-let userAnswers = new Array(quizData.length).fill(null);
+let userAnswers = null; // Will be initialized when quiz starts
+
+// Initialize userAnswers when quizData is ready
+if (typeof quizData !== 'undefined' && quizData && quizData.length > 0) {
+    userAnswers = new Array(quizData.length).fill(null);
+    console.log('✅ quizData and userAnswers initialized at load time');
+    window.quizDataReady = true;
+}
 
 function initializeQuiz() {
     console.log('🎯 initializeQuiz() called');
     console.log('quizData length:', quizData?.length);
+    
+    // Initialize userAnswers if not already done
+    if (!userAnswers || userAnswers.length !== quizData.length) {
+        userAnswers = new Array(quizData.length).fill(null);
+        console.log('✅ userAnswers initialized in initializeQuiz');
+    }
     
     // Reset quiz state
     currentQuestionIndex = 0;
@@ -1027,3 +1044,8 @@ function submitQuizToMake(email, score, level) {
         console.log('Webhook submission sent');
     });
 }
+
+// ============= SCRIPT.JS FULLY LOADED =============
+console.log('✅ script.js fully loaded! quizData available:', typeof quizData !== 'undefined');
+window.scriptLoaded = true;
+window.quizDataLoaded = typeof quizData !== 'undefined';

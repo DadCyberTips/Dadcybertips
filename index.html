@@ -560,7 +560,22 @@
     </div>
 
     <!-- Load script.js FIRST so all functions are available -->
-    <script src="script.js?v=1695139202"></script>
+    <script src="script.js?v=1695139203"></script>
+    
+    <script>
+        // Wait for script.js to fully load
+        window.quizReady = new Promise((resolve) => {
+            const checkReady = () => {
+                if (typeof quizData !== 'undefined' && quizData && quizData.length > 0) {
+                    console.log('✅ script.js loaded successfully');
+                    resolve(true);
+                } else {
+                    setTimeout(checkReady, 50);
+                }
+            };
+            checkReady();
+        });
+    </script>
     
     <script>
         // Function to open quiz modal
@@ -591,12 +606,15 @@
         function loadQuizInline() {
             // Check if quizData is loaded
             if (typeof quizData === 'undefined' || !quizData || quizData.length === 0) {
-                console.error('❌ CRITICAL: quizData not loaded! Retrying in 500ms...');
-                setTimeout(loadQuizInline, 500);
+                console.error('❌ quizData not loaded! Retrying in 100ms...');
+                console.log('typeof quizData:', typeof quizData);
+                console.log('Available globals:', Object.keys(window).filter(k => k.includes('quiz') || k.includes('Quiz')));
+                setTimeout(loadQuizInline, 100);
                 return;
             }
             
             console.log('✅ quizData loaded:', quizData.length, 'questions');
+            console.log('First question:', quizData[0].question);
             
             const quizHTML = `
 <h1 style="color: var(--neon-cyan); margin-bottom: 8px; text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);">🔐 How Secure Is Your Digital Home?</h1>
