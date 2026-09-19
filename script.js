@@ -480,21 +480,6 @@ async function sendToMailchimp(data) {
     }
 }
 */
-    updateStoreLink: function(productName, newLink) {
-        STORE_LINKS[productName] = newLink;
-        console.log(`Updated store link for ${productName}`);
-    },
-    updateResourceLink: function(resourceKey, newLink) {
-        FREE_RESOURCES[resourceKey].url = newLink;
-        console.log(`Updated resource link for ${resourceKey}`);
-    },
-    getStoreLinks: function() {
-        return STORE_LINKS;
-    },
-    getResources: function() {
-        return FREE_RESOURCES;
-    }
-};
 
 /**
  * Masterclass Image Upload
