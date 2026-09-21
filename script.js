@@ -570,7 +570,8 @@ function addMarketingContact(event) {
         name: name,
         email: email,
         phone: phone,
-        source: source,
+        source: 'Contact me',
+        inquiryType: source,
         notes: notes,
         timestamp: new Date().toISOString()
     };
@@ -721,7 +722,7 @@ function notifyClassLaunch() {
     const webhookUrl = 'https://hook.us2.make.com/bsksqjoatho6opxrxhmzpj5t5jmc5dgi';
     const notionPayload = {
         email: email,
-        source: 'class-notification',
+        source: 'Class',
         className: 'Protecting Your Family Online',
         classPrice: '$100',
         timestamp: new Date().toISOString(),
@@ -1059,6 +1060,7 @@ function submitQuizToMake(email, score, level) {
         email: email,
         score: score,
         level: level,
+        source: 'Quiz',
         timestamp: new Date().toISOString()
     };
     
