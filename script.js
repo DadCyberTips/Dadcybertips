@@ -559,13 +559,40 @@ function addMarketingContact(event) {
         dateAdded: new Date().toISOString()
     };
 
+    // Save locally as backup
     let contacts = getMarketingContacts();
     contacts.push(contact);
     saveMarketingContacts(contacts);
 
-    document.getElementById('marketing-form').reset();
-    showNotification(`${name} added to marketing list!`, 'success');
-    trackEvent('marketing_contact_added', { source: source });
+    // Send to Notion via Make.com webhook
+    const webhookUrl = 'https://hook.us2.make.com/bsksqjoatho6opxrxhmzpj5t5jmc5dgi';
+    const notionPayload = {
+        name: name,
+        email: email,
+        phone: phone,
+        source: source,
+        notes: notes,
+        timestamp: new Date().toISOString()
+    };
+
+    fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(notionPayload)
+    }).then(response => {
+        if (response.ok) {
+            document.getElementById('marketing-form').reset();
+            showNotification(`${name} message sent`, 'success');
+            trackEvent('marketing_contact_added', { source: source });
+        } else {
+            throw new Error('Webhook failed');
+        }
+    }).catch(err => {
+        showNotification(`Failed to send ${name} message. Please try again.`, 'error');
+        console.log('Contact submission error:', err);
+    });
 }
 
 function updateContactsDisplay() {
