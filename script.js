@@ -1,3 +1,38 @@
+/**
+ * ============================================================================
+ * DadCyberTips Website - Interactive Script
+ * ============================================================================
+ * 
+ * OVERALL ARCHITECTURE:
+ * --------------------
+ * This script manages the DadCyberTips website including:
+ * - Interactive security assessment quiz
+ * - Contact form with centralized Notion integration
+ * - E-commerce integration (Payhip & Fourthwall)
+ * - Event tracking and analytics
+ * 
+ * DATA FLOW:
+ * ----------
+ * All user submissions (Quiz, Contact Form, Class Notifications) send to:
+ * Notion Database via Make.com Webhook
+ * URL: https://hook.us2.make.com/bsksqjoatho6opxrxhmzpj5t5jmc5dgi
+ * 
+ * Each submission includes a "source" field for categorization:
+ * - source: "Quiz" → Quiz results (email, score, level)
+ * - source: "Contact Form" → Contact submissions (name, email, category, comments)
+ * - source: "Class" → Class notifications (email, className, contactReason)
+ * 
+ * LOCAL BACKUP:
+ * All submissions are saved to localStorage as backup in case webhook fails
+ * 
+ * KEY FUNCTIONS:
+ * - calculateAndShowResults() → Quiz scoring & Notion submission
+ * - addMarketingContact() → Contact form & Notion submission
+ * - scrollToContactForm() → Navigate to centralized contact form
+ * 
+ * ============================================================================
+ */
+
 // DadCyberTips Website - Interactive Script
 
 // Store Integration Configuration
@@ -530,9 +565,15 @@ function saveMarketingContacts(contacts) {
     updateContactsDisplay();
 }
 
+/**
+ * Handle contact form submission
+ * Captures all form fields, validates them, saves locally, and sends to Notion database
+ * @param {Event} event - Form submission event
+ */
 function addMarketingContact(event) {
     event.preventDefault();
 
+    // Capture all form field values
     const name = document.getElementById('contact-name').value.trim();
     const email = document.getElementById('contact-email').value.trim();
     const phone = document.getElementById('contact-phone').value.trim();
@@ -540,16 +581,19 @@ function addMarketingContact(event) {
     const category = document.getElementById('contact-category').value;
     const notes = document.getElementById('contact-notes').value.trim();
 
+    // Validate required fields
     if (!name || !email || !category) {
         showNotification('Please fill in name, email, and category', 'error');
         return;
     }
 
+    // Validate email format
     if (!isValidEmail(email)) {
         showNotification('Please enter a valid email address', 'error');
         return;
     }
 
+    // Create local contact object for backup storage
     const contact = {
         id: Date.now(),
         name: name,
@@ -561,12 +605,13 @@ function addMarketingContact(event) {
         dateAdded: new Date().toISOString()
     };
 
-    // Save locally as backup
+    // Save to local storage as backup
     let contacts = getMarketingContacts();
     contacts.push(contact);
     saveMarketingContacts(contacts);
 
-    // Send to Notion via Make.com webhook - ALL contacts go to SAME database with category
+    // Prepare payload for Notion via Make.com webhook
+    // All contact forms (Quiz, Class, Contact) send to the same Notion database
     const webhookUrl = 'https://hook.us2.make.com/bsksqjoatho6opxrxhmzpj5t5jmc5dgi';
     const notionPayload = {
         name: name,
@@ -579,6 +624,7 @@ function addMarketingContact(event) {
         timestamp: new Date().toISOString()
     };
 
+    // Send contact to Notion database via webhook
     fetch(webhookUrl, {
         method: 'POST',
         headers: {
@@ -587,6 +633,7 @@ function addMarketingContact(event) {
         body: JSON.stringify(notionPayload)
     }).then(response => {
         if (response.ok) {
+            // Success: reset form and show confirmation
             document.getElementById('marketing-form').reset();
             showNotification(`${name} message sent`, 'success');
             trackEvent('contact_form_submitted', { category: category });
@@ -594,6 +641,7 @@ function addMarketingContact(event) {
             throw new Error('Webhook failed');
         }
     }).catch(err => {
+        // Error: show failure message but data is backed up locally
         showNotification(`Failed to send ${name} message. Please try again.`, 'error');
         console.log('Contact submission error:', err);
     });
@@ -695,76 +743,28 @@ function escapeHtml(text) {
 }
 
 /**
- * Coming Soon Class Notification
+ * Scroll to contact form and optionally pre-select a category
+ * @param {string} category - Optional category to pre-select in the contact form
  */
-function notifyClassLaunch() {
-    const email = prompt('Enter your email to be notified when the class goes live:');
+function scrollToContactForm(category = null) {
+    // Scroll to the contact form smoothly
+    document.getElementById('marketing').scrollIntoView({ behavior: 'smooth' });
     
-    if (!email) {
-        return;
+    // Pre-select category if provided
+    if (category) {
+        setTimeout(() => {
+            const categorySelect = document.getElementById('contact-category');
+            // Find and select the option that matches the category
+            for (let option of categorySelect.options) {
+                if (option.text.includes(category) || option.value === category) {
+                    categorySelect.value = option.value;
+                    break;
+                }
+            }
+            // Focus on the first field for better UX
+            document.getElementById('contact-name').focus();
+        }, 300);
     }
-
-    if (!isValidEmail(email)) {
-        showNotification('Please enter a valid email address', 'error');
-        return;
-    }
-
-    const reasonPrompt = `What's your reason for wanting to join?\n\n1. Personal Interest\n2. Family Protection\n3. Professional Development\n4. Teaching Others\n5. Other\n\nEnter the number (1-5):`;
-    
-    const reasonMap = {
-        '1': 'Personal Interest',
-        '2': 'Family Protection',
-        '3': 'Professional Development',
-        '4': 'Teaching Others',
-        '5': 'Other'
-    };
-
-    const reasonInput = prompt(reasonPrompt);
-    
-    if (!reasonInput || !reasonMap[reasonInput]) {
-        showNotification('Please select a valid reason (1-5)', 'error');
-        return;
-    }
-
-    const contactReason = reasonMap[reasonInput];
-
-    const notification = {
-        id: Date.now(),
-        email: email,
-        classType: 'protecting-family-online',
-        timestamp: new Date().toISOString()
-    };
-
-    // Store locally as backup
-    let notifications = JSON.parse(localStorage.getItem('dadcybertips_class_notifications') || '[]');
-    notifications.push(notification);
-    localStorage.setItem('dadcybertips_class_notifications', JSON.stringify(notifications));
-
-    // Send to Notion via Make.com webhook (non-blocking)
-    const webhookUrl = 'https://hook.us2.make.com/bsksqjoatho6opxrxhmzpj5t5jmc5dgi';
-    const notionPayload = {
-        email: email,
-        source: 'Class',
-        className: 'Protecting Your Family Online',
-        classPrice: '$100',
-        contactReason: contactReason,
-        timestamp: new Date().toISOString(),
-        notes: 'Class launch notification request'
-    };
-
-    fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(notionPayload)
-    }).catch(err => {
-        // Silently fail - local storage backup ensures no data loss
-        console.log('Class notification sent to Notion');
-    });
-
-    showNotification(`Got it! We'll let you know as soon as "Protecting Your Family Online" is live. 🎓`, 'success');
-    trackEvent('class_notification_signup', { class: 'protecting-family-online', reason: contactReason });
 }
 
 /**
@@ -1036,13 +1036,19 @@ function goBackToQuiz() {
     displayQuestion();
 }
 
+/**
+ * Calculate quiz score and display results
+ * Validates email, calculates weighted score, determines security level, and sends to Notion
+ */
 function calculateAndShowResults() {
+    // Get and validate email
     const email = document.getElementById('email-input').value;
     if (!email || !email.includes('@')) {
         alert('Please enter a valid email address.');
         return;
     }
     
+    // Calculate raw score based on weighted answers
     let rawScore = 0;
     quizData.forEach((q, i) => {
         if (userAnswers[i] === q.correct) {
@@ -1050,35 +1056,48 @@ function calculateAndShowResults() {
         }
     });
     
+    // Normalize score to 1-10 scale
     const maxScore = quizData.reduce((sum, q) => sum + q.weight, 0);
     const finalScore = Math.round((rawScore / maxScore) * 10);
     const clampedScore = Math.max(1, Math.min(10, finalScore));
     
+    // Find corresponding security level
     const level = levels.find(l => clampedScore >= l.scoreMin && clampedScore <= l.scoreMax) || levels[4];
     
-    // Send submission to Make.com webhook for Notion database
+    // Send quiz submission to Notion via Make.com webhook
     submitQuizToMake(email, clampedScore, level.name);
     
+    // Display results section
     document.getElementById('email-section').style.display = 'none';
     document.getElementById('result-section').style.display = 'block';
     
+    // Populate results display
     document.getElementById('final-score').textContent = `${clampedScore}/10`;
     document.getElementById('level-name').innerHTML = `${level.emoji} ${level.name}`;
     document.getElementById('level-desc').textContent = level.desc;
     
+    // Display recommendations for this level
     const recList = document.getElementById('recommendations');
     recList.innerHTML = level.recs.map(rec => `<li style="margin: 12px 0; padding-left: 24px; position: relative; line-height: 1.6;"><span style="position: absolute; left: 0; color: var(--neon-magenta);">→</span>${rec}</li>`).join('');
     
+    // Store quiz results locally for reference
     localStorage.setItem('quiz_score', clampedScore);
     localStorage.setItem('quiz_level', level.name);
     localStorage.setItem('quiz_email', email);
     localStorage.setItem('quiz_timestamp', new Date().toISOString());
 }
 
-// Submit quiz data to Make.com webhook for Notion integration
+/**
+ * Submit quiz data to Notion database via Make.com webhook
+ * All form submissions (Quiz, Class, Contact) go to the same Notion database
+ * @param {string} email - User's email address
+ * @param {number} score - Quiz score (1-10)
+ * @param {string} level - Security level name
+ */
 function submitQuizToMake(email, score, level) {
     const webhookUrl = 'https://hook.us2.make.com/bsksqjoatho6opxrxhmzpj5t5jmc5dgi';
     
+    // Prepare payload for Notion database
     const payload = {
         email: email,
         score: score,
@@ -1087,7 +1106,7 @@ function submitQuizToMake(email, score, level) {
         timestamp: new Date().toISOString()
     };
     
-    // Send data to Make webhook (non-blocking)
+    // Send to webhook (non-blocking - UI updates regardless)
     fetch(webhookUrl, {
         method: 'POST',
         headers: {
@@ -1095,7 +1114,7 @@ function submitQuizToMake(email, score, level) {
         },
         body: JSON.stringify(payload)
     }).catch(err => {
-        // Silently fail - submission shows results regardless
-        console.log('Webhook submission sent');
+        // Silently fail - results already displayed locally
+        console.log('Quiz submission sent to Notion');
     });
 }
