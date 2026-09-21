@@ -706,6 +706,25 @@ function notifyClassLaunch() {
         return;
     }
 
+    const reasonPrompt = `What's your reason for wanting to join?\n\n1. Personal Interest\n2. Family Protection\n3. Professional Development\n4. Teaching Others\n5. Other\n\nEnter the number (1-5):`;
+    
+    const reasonMap = {
+        '1': 'Personal Interest',
+        '2': 'Family Protection',
+        '3': 'Professional Development',
+        '4': 'Teaching Others',
+        '5': 'Other'
+    };
+
+    const reasonInput = prompt(reasonPrompt);
+    
+    if (!reasonInput || !reasonMap[reasonInput]) {
+        showNotification('Please select a valid reason (1-5)', 'error');
+        return;
+    }
+
+    const contactReason = reasonMap[reasonInput];
+
     const notification = {
         id: Date.now(),
         email: email,
@@ -725,6 +744,7 @@ function notifyClassLaunch() {
         source: 'Class',
         className: 'Protecting Your Family Online',
         classPrice: '$100',
+        contactReason: contactReason,
         timestamp: new Date().toISOString(),
         notes: 'Class launch notification request'
     };
@@ -741,7 +761,7 @@ function notifyClassLaunch() {
     });
 
     showNotification(`Got it! We'll let you know as soon as "Protecting Your Family Online" is live. 🎓`, 'success');
-    trackEvent('class_notification_signup', { class: 'protecting-family-online' });
+    trackEvent('class_notification_signup', { class: 'protecting-family-online', reason: contactReason });
 }
 
 /**
