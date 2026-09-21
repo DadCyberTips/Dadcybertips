@@ -685,9 +685,32 @@ function notifyClassLaunch() {
         timestamp: new Date().toISOString()
     };
 
+    // Store locally as backup
     let notifications = JSON.parse(localStorage.getItem('dadcybertips_class_notifications') || '[]');
     notifications.push(notification);
     localStorage.setItem('dadcybertips_class_notifications', JSON.stringify(notifications));
+
+    // Send to Notion via Make.com webhook (non-blocking)
+    const webhookUrl = 'https://hook.us2.make.com/bsksqjoatho6opxrxhmzpj5t5jmc5dgi';
+    const notionPayload = {
+        email: email,
+        source: 'class-notification',
+        className: 'Protecting Your Family Online',
+        classPrice: '$100',
+        timestamp: new Date().toISOString(),
+        notes: 'Class launch notification request'
+    };
+
+    fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(notionPayload)
+    }).catch(err => {
+        // Silently fail - local storage backup ensures no data loss
+        console.log('Class notification sent to Notion');
+    });
 
     showNotification(`Got it! We'll let you know as soon as "Protecting Your Family Online" is live. 🎓`, 'success');
     trackEvent('class_notification_signup', { class: 'protecting-family-online' });
