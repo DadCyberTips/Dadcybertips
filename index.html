@@ -311,51 +311,36 @@
     </section>
 
     <!-- Free Resources Section -->
-    <!-- Marketing Contacts List -->
+    <!-- Contact Form Section -->
     <section class="section" id="marketing">
-        <h2 class="section-title">[ MARKETING CONTACTS DATABASE ]</h2>
-        <div class="featured">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-                <!-- Contact Form -->
-                <div>
-                    <h3 style="color: var(--neon-pink); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">>>> ADD CONTACT <<<</h3>
-                    <form id="marketing-form" onsubmit="addMarketingContact(event)">
-                        <input type="text" id="contact-name" placeholder="Full Name" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 0.75rem; border-radius: 4px;" required>
-                        <input type="email" id="contact-email" placeholder="Email Address" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 0.75rem; border-radius: 4px;" required>
-                        <input type="text" id="contact-phone" placeholder="Phone (optional)" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 0.75rem; border-radius: 4px;">
-                        <select id="contact-source" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 1rem; border-radius: 4px;">
-                            <option value="website">Website</option>
-                            <option value="quiz">Quiz</option>
-                            <option value="event">Event</option>
-                            <option value="social">Social Media</option>
-                            <option value="referral">Referral</option>
-                            <option value="other">Other</option>
-                        </select>
-                        <textarea id="contact-notes" placeholder="Notes (optional)" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 1rem; border-radius: 4px; height: 80px; resize: none;"></textarea>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">[ ADD TO LIST ]</button>
-                    </form>
-                </div>
-
-                <!-- Contacts List -->
-                <div>
-                    <h3 style="color: var(--neon-lime); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">>>> CONTACTS (<span id="contact-count">0</span>) <<<</h3>
-                    <div id="contacts-list" style="background: rgba(57, 255, 20, 0.05); border: 2px solid var(--neon-lime); border-radius: 4px; padding: 1rem; max-height: 400px; overflow-y: auto; margin-bottom: 1rem;">
-                        <p style="color: var(--neon-cyan); text-align: center; font-size: 12px;">No contacts yet. Add one to get started!</p>
-                    </div>
-                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        <button class="btn btn-outline" onclick="exportContacts()" style="flex: 1; font-size: 11px;">[ EXPORT CSV ]</button>
-                        <button class="btn btn-outline" onclick="clearAllContacts()" style="flex: 1; font-size: 11px;">[ CLEAR ALL ]</button>
-                    </div>
-                </div>
+        <h2 class="section-title">[ CONTACT ME FOR ANY QUESTIONS ]</h2>
+        <div class="featured" style="max-width: 600px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <p style="color: var(--neon-cyan); font-size: 14px; line-height: 1.8;">Have a question about your family's digital safety? Want to discuss services or partnerships? Just want to say hi? Drop a line and I'll get back to you.</p>
             </div>
+            <h3 style="color: var(--neon-pink); margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; text-align: center;">>>> WRITE ME <<<</h3>
+            <form id="marketing-form" onsubmit="addMarketingContact(event)">
+                <input type="text" id="contact-name" placeholder="Your Name" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 0.75rem; border-radius: 4px;" required>
+                <input type="email" id="contact-email" placeholder="Email Address" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 0.75rem; border-radius: 4px;" required>
+                <input type="text" id="contact-phone" placeholder="Phone (optional)" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 0.75rem; border-radius: 4px;">
+                <select id="contact-source" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 0.75rem; border-radius: 4px;">
+                    <option value="general">General Inquiry</option>
+                    <option value="coaching">1-on-1 Coaching Interest</option>
+                    <option value="speaking">Speaking/Workshop Request</option>
+                    <option value="partnership">Partnership Opportunity</option>
+                    <option value="other">Other</option>
+                </select>
+                <textarea id="contact-notes" placeholder="Your message..." style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 1.5rem; border-radius: 4px; height: 100px; resize: none;"></textarea>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">[ SEND MESSAGE ]</button>
+            </form>
         </div>
     </section>
     <section class="cta-section">
         <h2>>>> SUPPORT THE MISSION <<<</h2>
         <p>▶ HELP US CREATE BETTER CYBERSECURITY EDUCATION FOR FAMILIES ◀</p>
         <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-            <a href="https://buymeacoffee.com/dadcybertips" target="_blank" class="btn" style="background: white; color: var(--fill-accent); border: none;">Buy Me a Coffee</a>
-            <a href="https://linktr.ee/dadcybertips" target="_blank" class="btn" style="background: white; color: var(--fill-accent); border: none;">Visit Linktree</a>
+            <a href="https://dadcybertips-shop.fourthwall.com" target="_blank" class="btn" style="background: white; color: var(--fill-accent); border: none;">Fourthwall (Merch)</a>
+            <a href="https://dadcybertips.com" target="_blank" class="btn" style="background: white; color: var(--fill-accent); border: none;">Payhip (Books)</a>
         </div>
     </section>
 
