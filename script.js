@@ -537,6 +537,7 @@ function addMarketingContact(event) {
     const email = document.getElementById('contact-email').value.trim();
     const phone = document.getElementById('contact-phone').value.trim();
     const source = document.getElementById('contact-source').value;
+    const contactReason = document.getElementById('contact-reason').value;
     const notes = document.getElementById('contact-notes').value.trim();
 
     if (!name || !email) {
@@ -555,6 +556,7 @@ function addMarketingContact(event) {
         email: email,
         phone: phone,
         source: source,
+        contactReason: contactReason,
         notes: notes,
         dateAdded: new Date().toISOString()
     };
@@ -572,6 +574,7 @@ function addMarketingContact(event) {
         phone: phone,
         source: 'Contact me',
         inquiryType: source,
+        contactReason: contactReason,
         notes: notes,
         timestamp: new Date().toISOString()
     };
@@ -586,7 +589,7 @@ function addMarketingContact(event) {
         if (response.ok) {
             document.getElementById('marketing-form').reset();
             showNotification(`${name} message sent`, 'success');
-            trackEvent('marketing_contact_added', { source: source });
+            trackEvent('marketing_contact_added', { source: source, reason: contactReason });
         } else {
             throw new Error('Webhook failed');
         }
