@@ -536,12 +536,12 @@ function addMarketingContact(event) {
     const name = document.getElementById('contact-name').value.trim();
     const email = document.getElementById('contact-email').value.trim();
     const phone = document.getElementById('contact-phone').value.trim();
-    const source = document.getElementById('contact-source').value;
-    const contactReason = document.getElementById('contact-reason').value;
+    const organization = document.getElementById('contact-organization').value.trim();
+    const category = document.getElementById('contact-category').value;
     const notes = document.getElementById('contact-notes').value.trim();
 
-    if (!name || !email) {
-        showNotification('Please fill in name and email', 'error');
+    if (!name || !email || !category) {
+        showNotification('Please fill in name, email, and category', 'error');
         return;
     }
 
@@ -555,8 +555,8 @@ function addMarketingContact(event) {
         name: name,
         email: email,
         phone: phone,
-        source: source,
-        contactReason: contactReason,
+        organization: organization,
+        category: category,
         notes: notes,
         dateAdded: new Date().toISOString()
     };
@@ -566,16 +566,16 @@ function addMarketingContact(event) {
     contacts.push(contact);
     saveMarketingContacts(contacts);
 
-    // Send to Notion via Make.com webhook
+    // Send to Notion via Make.com webhook - ALL contacts go to SAME database with category
     const webhookUrl = 'https://hook.us2.make.com/bsksqjoatho6opxrxhmzpj5t5jmc5dgi';
     const notionPayload = {
         name: name,
         email: email,
         phone: phone,
-        source: 'Contact me',
-        inquiryType: source,
-        contactReason: contactReason,
-        notes: notes,
+        organization: organization,
+        category: category,
+        source: 'Contact Form',
+        comments: notes,
         timestamp: new Date().toISOString()
     };
 
@@ -589,7 +589,7 @@ function addMarketingContact(event) {
         if (response.ok) {
             document.getElementById('marketing-form').reset();
             showNotification(`${name} message sent`, 'success');
-            trackEvent('marketing_contact_added', { source: source, reason: contactReason });
+            trackEvent('contact_form_submitted', { category: category });
         } else {
             throw new Error('Webhook failed');
         }

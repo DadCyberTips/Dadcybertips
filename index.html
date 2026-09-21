@@ -311,38 +311,7 @@
     </section>
 
     <!-- Free Resources Section -->
-    <!-- Contact Form Section -->
-    <section class="section" id="marketing">
-        <h2 class="section-title">[ CONTACT ME FOR ANY QUESTIONS ]</h2>
-        <div class="featured" style="max-width: 600px; margin: 0 auto;">
-            <div style="text-align: center; margin-bottom: 2rem;">
-                <p style="color: var(--neon-cyan); font-size: 14px; line-height: 1.8;">Have a question about your family's digital safety? Want to discuss services or partnerships? Just want to say hi? Drop a line and I'll get back to you.</p>
-            </div>
-            <h3 style="color: var(--neon-pink); margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; text-align: center;">>>> WRITE ME <<<</h3>
-            <form id="marketing-form" onsubmit="addMarketingContact(event)">
-                <input type="text" id="contact-name" placeholder="Your Name" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 0.75rem; border-radius: 4px;" required>
-                <input type="email" id="contact-email" placeholder="Email Address" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 0.75rem; border-radius: 4px;" required>
-                <input type="text" id="contact-phone" placeholder="Phone (optional)" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 0.75rem; border-radius: 4px;">
-                <select id="contact-source" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 0.75rem; border-radius: 4px;">
-                    <option value="general">General Inquiry</option>
-                    <option value="coaching">1-on-1 Coaching Interest</option>
-                    <option value="speaking">Speaking/Workshop Request</option>
-                    <option value="partnership">Partnership Opportunity</option>
-                    <option value="other">Other</option>
-                </select>
-                <select id="contact-reason" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 0.75rem; border-radius: 4px;">
-                    <option value="">Select Your Interest (optional)</option>
-                    <option value="personal-interest">Personal Interest</option>
-                    <option value="family-protection">Family Protection</option>
-                    <option value="professional-development">Professional Development</option>
-                    <option value="teaching-others">Teaching Others</option>
-                    <option value="business">Business/Partnership</option>
-                </select>
-                <textarea id="contact-notes" placeholder="Your message..." style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 1.5rem; border-radius: 4px; height: 100px; resize: none;"></textarea>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">[ SEND MESSAGE ]</button>
-            </form>
-        </div>
-    </section>
+    <!-- Support Mission CTA Section -->
     <section class="cta-section">
         <h2>>>> SUPPORT THE MISSION <<<</h2>
         <p>▶ HELP US CREATE BETTER CYBERSECURITY EDUCATION FOR FAMILIES ◀</p>
@@ -493,6 +462,48 @@
         <p>© 2026 DadCyberTips by Gavin Marlowe. All rights reserved.</p>
         <p style="margin-top: 0.5rem; color: var(--text-muted);">Made with ❤️ for families who care about digital safety</p>
     </footer>
+
+    <!-- Contact Form Section - End of Page -->
+    <section class="section" id="marketing" style="background: rgba(0, 240, 255, 0.05); border-top: 2px solid var(--neon-cyan); margin-top: 4rem;">
+        <div class="featured" style="max-width: 700px; margin: 0 auto;">
+            <h2 class="section-title">[ GET IN TOUCH ]</h2>
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <p style="color: var(--neon-cyan); font-size: 14px; line-height: 1.8;">Questions? Interested in working together? Have a story to share? I'd love to hear from you.</p>
+            </div>
+            
+            <form id="marketing-form" onsubmit="addMarketingContact(event)">
+                <!-- Name & Email Row -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0.75rem;">
+                    <input type="text" id="contact-name" placeholder="Your Name" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; border-radius: 4px;" required>
+                    <input type="email" id="contact-email" placeholder="Email Address" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; border-radius: 4px;" required>
+                </div>
+
+                <!-- Phone & Organization Row -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0.75rem;">
+                    <input type="text" id="contact-phone" placeholder="Phone (optional)" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; border-radius: 4px;">
+                    <input type="text" id="contact-organization" placeholder="Organization (optional)" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; border-radius: 4px;">
+                </div>
+
+                <!-- Category Dropdown -->
+                <select id="contact-category" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 0.75rem; border-radius: 4px;" required>
+                    <option value="">Select Category</option>
+                    <option value="General Inquiry">General Inquiry</option>
+                    <option value="1-on-1 Coaching">1-on-1 Coaching</option>
+                    <option value="Speaking/Workshop">Speaking/Workshop</option>
+                    <option value="Partnership">Partnership</option>
+                    <option value="Media/Press">Media/Press</option>
+                    <option value="Customer Support">Customer Support</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <!-- Message/Comments -->
+                <textarea id="contact-notes" placeholder="Your message..." style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 1.5rem; border-radius: 4px; height: 120px; resize: none;"></textarea>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary" style="width: 100%; background: var(--neon-cyan); color: #121212; font-weight: bold; border: none;">[ SEND MESSAGE ]</button>
+            </form>
+        </div>
+    </section>
 
     <!-- Quiz Modal -->
     <div id="quizModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 1000; overflow-y: auto; padding: 20px;">
