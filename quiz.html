@@ -51,10 +51,6 @@
             .then(response => response.text())
             .then(html => {
                 document.getElementById('quiz-content').innerHTML = html;
-                // Ensure quiz scripts are loaded
-                if (typeof loadQuizInline === 'function') {
-                    loadQuizInline();
-                }
             });
     </script>
 </body>
