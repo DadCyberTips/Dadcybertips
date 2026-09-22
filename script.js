@@ -743,29 +743,34 @@ function escapeHtml(text) {
 }
 
 /**
- * Scroll to contact form and optionally pre-select a category
- * @param {string} category - Optional category to pre-select in the contact form
+ * Scroll to service contact form and pre-select category
+ * Works on both index.html and services.html
+ * @param {string} category - Service category to pre-select
  */
-function scrollToContactForm(category = null) {
-    // Scroll to the contact form smoothly
-    document.getElementById('marketing').scrollIntoView({ behavior: 'smooth' });
+function scrollToServiceContact(category) {
+    // Check if on main page (index.html) or services page
+    const contactForm = document.getElementById('marketing') || document.getElementById('contact-services');
     
-    // Pre-select category if provided
-    if (category) {
+    if (contactForm) {
+        contactForm.scrollIntoView({ behavior: 'smooth' });
+        
         setTimeout(() => {
-            const categorySelect = document.getElementById('contact-category');
-            // Find and select the option that matches the category
-            for (let option of categorySelect.options) {
-                if (option.text.includes(category) || option.value === category) {
-                    categorySelect.value = option.value;
-                    break;
-                }
+            // Try to find category select on either page
+            const categorySelect = document.getElementById('contact-category') || document.getElementById('service-category');
+            if (categorySelect) {
+                categorySelect.value = category;
             }
-            // Focus on the first field for better UX
-            document.getElementById('contact-name').focus();
+            
+            // Focus on name field
+            const nameField = document.getElementById('contact-name') || document.getElementById('service-name');
+            if (nameField) {
+                nameField.focus();
+            }
         }, 300);
     }
 }
+
+
 
 /**
  * Scroll to sections with smooth behavior
