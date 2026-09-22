@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - DadCyberTips</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-brand" onclick="window.location.href='index.html'" style="cursor: pointer;">🛡️ DadCyberTips</div>
+        <div class="navbar-links">
+            <a href="index.html#about">About</a>
+            <a href="index.html#books">Books</a>
+            <a href="index.html#courses">Courses</a>
+            <a href="index.html#resources">Free</a>
+            <a href="quiz.html">Quiz</a>
+            <a href="services.html">Services</a>
+            <a href="index.html#merch">Merch</a>
+        </div>
+    </nav>
+
+    <!-- Services Hero Section -->
+    <section class="hero" style="padding: 3rem 2rem;">
+        <h1>🛡️ TRUSTED SECURITY SERVICES 🛡️</h1>
+        <p>> Personalized coaching, workshops, community support & live training<br/>
+           > From individual guidance to group learning<br/>
+           > Let's protect your family together</p>
+    </section>
+
+    <!-- Services Content (Loaded from _services.html) -->
+    <div id="services-content"></div>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact-services" style="background: rgba(0, 240, 255, 0.05); border-top: 2px solid var(--neon-cyan); margin-top: 4rem;">
+        <div class="featured" style="max-width: 700px; margin: 0 auto;">
+            <h2 class="section-title">[ GET IN TOUCH ]</h2>
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <p style="color: var(--neon-cyan); font-size: 14px; line-height: 1.8;">Interested in any of these services? Let's talk about what works best for you.</p>
+            </div>
+            
+            <form id="services-form" onsubmit="handleServiceContact(event)">
+                <!-- Name & Email Row -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0.75rem;">
+                    <input type="text" id="service-name" placeholder="Your Name" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; border-radius: 4px;" required>
+                    <input type="email" id="service-email" placeholder="Email Address" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; border-radius: 4px;" required>
+                </div>
+
+                <!-- Phone & Organization Row -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0.75rem;">
+                    <input type="text" id="service-phone" placeholder="Phone (optional)" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; border-radius: 4px;">
+                    <input type="text" id="service-organization" placeholder="Organization (optional)" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; border-radius: 4px;">
+                </div>
+
+                <!-- Category Dropdown -->
+                <select id="service-category" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 0.75rem; border-radius: 4px;" required>
+                    <option value="">Select Category</option>
+                    <option value="1-on-1 Coaching">1-on-1 Coaching</option>
+                    <option value="Speaking/Workshop">Speaking/Workshop</option>
+                    <option value="Exclusive Community">Exclusive Community</option>
+                    <option value="Class Notification">Class Notification</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <!-- Message/Comments -->
+                <textarea id="service-notes" placeholder="Tell me more about your interest..." style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 1.5rem; border-radius: 4px; height: 120px; resize: none;"></textarea>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary" style="width: 100%; background: var(--neon-cyan); color: #121212; font-weight: bold; border: none;">[ SEND MESSAGE ]</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 DadCyberTips. All rights reserved. | Protecting families online.</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/dadcybertips" target="_blank">Instagram</a>
+            <a href="https://www.tiktok.com/@dadcybertips" target="_blank">TikTok</a>
+            <a href="https://www.youtube.com/@dadcybertips" target="_blank">YouTube</a>
+            <a href="https://threads.net/@dadcybertips" target="_blank">Threads</a>
+            <a href="index.html#marketing">Email</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        /**
+         * Scroll to contact form and pre-select category
+         * @param {string} category - Service category to pre-select
+         */
+        function scrollToServiceContact(category) {
+            document.getElementById('contact-services').scrollIntoView({ behavior: 'smooth' });
+            
+            setTimeout(() => {
+                const categorySelect = document.getElementById('service-category');
+                categorySelect.value = category;
+                document.getElementById('service-name').focus();
+            }, 300);
+        }
+
+        /**
+         * Handle service contact form submission
+         * Sends to same Notion database as main site
+         */
+        function handleServiceContact(event) {
+            event.preventDefault();
+
+            // Capture form values
+            const name = document.getElementById('service-name').value.trim();
+            const email = document.getElementById('service-email').value.trim();
+            const phone = document.getElementById('service-phone').value.trim();
+            const organization = document.getElementById('service-organization').value.trim();
+            const category = document.getElementById('service-category').value;
+            const notes = document.getElementById('service-notes').value.trim();
+
+            // Validate required fields
+            if (!name || !email || !category) {
+                alert('Please fill in name, email, and category');
+                return;
+            }
+
+            // Prepare payload for Notion
+            const webhookUrl = 'https://hook.us2.make.com/bsksqjoatho6opxrxhmzpj5t5jmc5dgi';
+            const payload = {
+                name: name,
+                email: email,
+                phone: phone,
+                organization: organization,
+                category: category,
+                source: 'Contact Form',
+                comments: notes,
+                timestamp: new Date().toISOString()
+            };
+
+            // Send to Notion via webhook
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            }).then(response => {
+                if (response.ok) {
+                    document.getElementById('services-form').reset();
+                    alert(`${name} message sent! I'll be in touch soon.`);
+                } else {
+                    throw new Error('Webhook failed');
+                }
+            }).catch(err => {
+                alert(`Failed to send message. Please try again.`);
+                console.log('Service contact error:', err);
+            });
+        }
+
+        // Load shared services section
+        fetch('_services.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('services-content').innerHTML = html;
+            });
+    </script>
+</body>
+</html>

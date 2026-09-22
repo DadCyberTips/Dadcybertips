@@ -10,15 +10,15 @@
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
-        <div class="navbar-brand">🛡️ DadCyberTips</div>
+        <div class="navbar-brand" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" style="cursor: pointer;">🛡️ DadCyberTips</div>
         <div class="navbar-links">
             <a href="#about">About</a>
             <a href="#books">Books</a>
             <a href="#courses">Courses</a>
-            <a href="#merch">Merch</a>
             <a href="#resources">Free</a>
-            <a href="#services">Services</a>
             <a href="#coming-soon">Class</a>
+            <a href="services.html">Services</a>
+            <a href="#merch">Merch</a>
         </div>
     </nav>
 
@@ -330,80 +330,6 @@
             <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">Gavin Marlowe (aka "Cyber Dad") is a cybersecurity educator and privacy advocate dedicated to helping everyday families protect themselves online. Through practical guides, engaging content, and community support, he breaks down complex security topics into actionable advice anyone can implement.</p>
             <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">With years of experience in digital security, Gavin is passionate about empowering parents and kids to navigate the digital world safely and confidently.</p>
             <p style="color: var(--text-secondary); line-height: 1.6;">Connect with DadCyberTips on <strong>TikTok, Instagram, YouTube, and Threads</strong> for weekly tips and security updates.</p>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="section" id="services">
-        <h2 class="section-title">[ MY SERVICES ]</h2>
-        <div style="max-width: 900px; margin: 0 auto;">
-            <div style="text-align: center; margin-bottom: 3rem;">
-                <p style="color: var(--neon-cyan); font-size: 15px; line-height: 1.8; margin-bottom: 0;">
-                    Look, I get it. Protecting your family online can feel overwhelming. That's why I offer services designed to meet you exactly where you are—whether you need someone to talk strategy with, want to share what you know with your community, or need ongoing support from people who actually understand.
-                </p>
-            </div>
-
-            <!-- Services Grid - Single Column -->
-            <div style="display: flex; flex-direction: column; gap: 2rem; margin-bottom: 3rem;">
-                
-                <!-- One-on-One Coaching -->
-                <div class="featured" style="background: linear-gradient(135deg, rgba(0, 240, 255, 0.08) 0%, rgba(57, 255, 20, 0.08) 100%); border-color: var(--neon-cyan);">
-                    <div style="display: flex; gap: 2rem; align-items: flex-start;">
-                        <div style="flex: 1;">
-                            <h3 style="color: var(--neon-cyan); font-size: 20px; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">👨‍💼 1-ON-1 COACHING</h3>
-                            <p style="color: var(--neon-cyan); font-size: 14px; line-height: 1.8; margin-bottom: 1rem;">
-                                Sometimes you need a real person to help you figure things out. Maybe your teen's just gotten their first phone. Maybe you're worried about something you saw online. Or maybe you just want a custom security plan that actually fits your family. I'm here to help you build that.
-                            </p>
-                            <ul style="color: var(--neon-lime); font-size: 13px; margin: 1rem 0; line-height: 1.8; list-style: none; padding: 0;">
-                                <li>✓ Your family's personal security audit</li>
-                                <li>✓ Customized protection plan (not generic advice)</li>
-                                <li>✓ Ongoing support when questions come up</li>
-                                <li>✓ Real answers to your real problems</li>
-                            </ul>
-                            <button class="btn btn-primary" onclick="document.getElementById('marketing').scrollIntoView({ behavior: 'smooth' })" style="margin-top: 1rem;">[ GET MORE INFO ]</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Public Speaking -->
-                <div class="featured" style="background: linear-gradient(135deg, rgba(189, 0, 255, 0.08) 0%, rgba(255, 0, 110, 0.08) 100%); border-color: var(--neon-purple);">
-                    <div style="display: flex; gap: 2rem; align-items: flex-start;">
-                        <div style="flex: 1;">
-                            <h3 style="color: var(--neon-pink); font-size: 20px; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">🎤 PUBLIC SPEAKING & WORKSHOPS</h3>
-                            <p style="color: var(--neon-cyan); font-size: 14px; line-height: 1.8; margin-bottom: 1rem;">
-                                Schools want to teach cybersecurity. Companies need it for their team. Parent groups are hungry for real information. And I love sharing what I know with people who actually want to listen. Let me bring practical, real-world cybersecurity to your community.
-                            </p>
-                            <ul style="color: var(--neon-lime); font-size: 13px; margin: 1rem 0; line-height: 1.8; list-style: none; padding: 0;">
-                                <li>✓ Customized talks for any audience (schools, companies, events)</li>
-                                <li>✓ Parent workshops & student assemblies</li>
-                                <li>✓ Corporate security training that doesn't put people to sleep</li>
-                                <li>✓ Story-driven, practical, and actually useful</li>
-                            </ul>
-                            <button class="btn btn-primary" onclick="document.getElementById('marketing').scrollIntoView({ behavior: 'smooth' })" style="margin-top: 1rem;">[ BOOK A TALK ]</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Exclusive Chat Community -->
-                <div class="featured" style="background: linear-gradient(135deg, rgba(255, 0, 110, 0.08) 0%, rgba(189, 0, 255, 0.08) 100%); border-color: var(--neon-pink);">
-                    <div style="display: flex; gap: 2rem; align-items: flex-start;">
-                        <div style="flex: 1;">
-                            <h3 style="color: var(--neon-pink); font-size: 20px; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">💬 EXCLUSIVE COMMUNITY</h3>
-                            <p style="color: var(--neon-cyan); font-size: 14px; line-height: 1.8; margin-bottom: 1rem;">
-                                Join a private community of parents and guardians who actually care about digital safety. Get real-time answers to your questions, share wins with people who get it, and have me available when things come up. It's like having a cybersecurity dad on your team.
-                            </p>
-                            <ul style="color: var(--neon-lime); font-size: 13px; margin: 1rem 0; line-height: 1.8; list-style: none; padding: 0;">
-                                <li>✓ Direct access to me (I answer your questions)</li>
-                                <li>✓ Daily tips, tricks, and real security updates</li>
-                                <li>✓ Peer support from other parents who get it</li>
-                                <li>✓ Exclusive resources & content just for members</li>
-                            </ul>
-                            <button class="btn btn-primary" onclick="document.getElementById('marketing').scrollIntoView({ behavior: 'smooth' })" style="margin-top: 1rem;">[ JOIN NOW ]</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
         </div>
     </section>
 

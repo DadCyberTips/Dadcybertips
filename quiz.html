@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Assessment Quiz - DadCyberTips</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-brand" onclick="window.location.href='index.html'" style="cursor: pointer;">🛡️ DadCyberTips</div>
+        <div class="navbar-links">
+            <a href="index.html#about">About</a>
+            <a href="index.html#books">Books</a>
+            <a href="index.html#courses">Courses</a>
+            <a href="index.html#resources">Free</a>
+            <a href="quiz.html">Quiz</a>
+            <a href="services.html">Services</a>
+            <a href="index.html#merch">Merch</a>
+        </div>
+    </nav>
+
+    <!-- Quiz Hero Section -->
+    <section class="hero" style="padding: 3rem 2rem;">
+        <h1>🛡️ SECURITY ASSESSMENT QUIZ 🛡️</h1>
+        <p>> Find out your family's security level<br/>
+           > Get personalized recommendations<br/>
+           > 5 minutes to your security score</p>
+    </section>
+
+    <!-- Quiz Section (Loaded from _quiz.html) -->
+    <div id="quiz-content"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 DadCyberTips. All rights reserved. | Protecting families online.</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/dadcybertips" target="_blank">Instagram</a>
+            <a href="https://www.tiktok.com/@dadcybertips" target="_blank">TikTok</a>
+            <a href="https://www.youtube.com/@dadcybertips" target="_blank">YouTube</a>
+            <a href="https://threads.net/@dadcybertips" target="_blank">Threads</a>
+            <a href="index.html#marketing">Email</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Load shared quiz section
+        fetch('_quiz.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('quiz-content').innerHTML = html;
+                // Ensure quiz scripts are loaded
+                if (typeof loadQuizInline === 'function') {
+                    loadQuizInline();
+                }
+            });
+    </script>
+</body>
+</html>
