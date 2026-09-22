@@ -1102,6 +1102,7 @@ function submitQuizToMake(email, score, level) {
         email: email,
         score: score,
         level: level,
+        category: 'Quiz',
         source: 'Quiz',
         timestamp: new Date().toISOString()
     };
