@@ -1124,3 +1124,71 @@ function submitQuizToMake(email, score, level) {
         console.log('Quiz submission sent to Notion');
     });
 }
+
+// ===== DAD JOKES EASTER EGG =====
+
+const dadJokes = {
+    'Why did the hacker go to the beach?': 'Because they wanted to catch some WAVES (Wireless Access Vector Exploits)!',
+    'I told my password to my therapist...': 'But they said, "That\'s not your secret anymore—it\'s compromised!"',
+    'What did the firewall say to the malware?': '"You shall not PASS!"',
+    'Did you hear about the claustrophobic server?': 'It had a serious compression problem!',
+    'Why do programmers prefer dark mode?': 'Because light attracts bugs!',
+    'How many programmers does it take to change a lightbulb?': 'None, that\'s a hardware problem!',
+    'Why did the cybersecurity expert break up with their girlfriend?': 'She didn\'t meet his security requirements!',
+    'What\'s a password manager\'s favorite type of music?': 'Heavy metal encryption!',
+    'Why don\'t hackers ever get tired?': 'Because they\'re always running scripts!',
+    'What do you call a cybersecurity expert who\'s also a baker?': 'Someone who knows how to protect their cookies!'
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+    const jokeElements = document.querySelectorAll('.dad-joke');
+    const popup = document.getElementById('joke-popup');
+    const jokeAnswer = document.getElementById('joke-answer');
+    let activeJoke = null;
+
+    jokeElements.forEach(joke => {
+        joke.addEventListener('mouseenter', function(e) {
+            const jokeText = this.textContent;
+            const answer = dadJokes[jokeText];
+            
+            if (answer) {
+                jokeAnswer.textContent = jokeText + '\n\n' + answer;
+                
+                // Position popup near cursor
+                const rect = this.getBoundingClientRect();
+                const popupWidth = 280;
+                const popupHeight = 140;
+                
+                let left = rect.left - (popupWidth / 2) + (rect.width / 2);
+                let top = rect.top - popupHeight - 20;
+                
+                // Keep popup in viewport
+                if (left < 10) left = 10;
+                if (left + popupWidth > window.innerWidth - 10) {
+                    left = window.innerWidth - popupWidth - 10;
+                }
+                if (top < 10) {
+                    top = rect.bottom + 20;
+                }
+                
+                popup.style.left = left + 'px';
+                popup.style.top = top + 'px';
+                popup.classList.add('active');
+                activeJoke = this;
+            }
+        });
+
+        joke.addEventListener('mouseleave', function() {
+            if (activeJoke === this) {
+                popup.classList.remove('active');
+                activeJoke = null;
+            }
+        });
+    });
+
+    // Hide popup if mouse leaves it
+    popup.addEventListener('mouseleave', function() {
+        this.classList.remove('active');
+        activeJoke = null;
+    });
+});
