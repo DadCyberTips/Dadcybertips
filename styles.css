@@ -40,6 +40,23 @@ body {
     line-height: 1.6;
     position: relative;
     overflow-x: hidden;
+    background-attachment: fixed;
+}
+
+/* Dad Jokes Wallpaper Background Pattern */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="2400" viewBox="0 0 2000 2400"><defs><style>.joke-text { font-family: "Courier New", monospace; font-size: 13px; fill: %2300e5ff; opacity: 0.08; }</style></defs><text class="joke-text" x="150" y="200" transform="rotate(-15 150 200)">Why did the hacker go to the beach?</text><text class="joke-text" x="1850" y="350" transform="rotate(12 1850 350)">I told my password to my therapist...</text><text class="joke-text" x="300" y="600" transform="rotate(-8 300 600)">What did the firewall say to the malware?</text><text class="joke-text" x="1700" y="900" transform="rotate(20 1700 900)">Did you hear about the claustrophobic server?</text><text class="joke-text" x="500" y="1100" transform="rotate(-12 500 1100)">Why do programmers prefer dark mode?</text><text class="joke-text" x="1600" y="1400" transform="rotate(15 1600 1400)">How many programmers does it take to change a lightbulb?</text><text class="joke-text" x="400" y="1700" transform="rotate(-18 400 1700)">Why did the cybersecurity expert break up with their girlfriend?</text><text class="joke-text" x="1750" y="1950" transform="rotate(10 1750 1950)">What is a password manager favorite music?</text><text class="joke-text" x="600" y="2100" transform="rotate(-14 600 2100)">Why do not hackers ever get tired?</text><text class="joke-text" x="1500" y="2300" transform="rotate(22 1500 2300)">What do you call a cybersecurity expert who bakes?</text></svg>');
+    background-size: 2000px 2400px;
+    background-attachment: fixed;
+    background-repeat: repeat;
+    pointer-events: none;
+    z-index: 1;
 }
 
 /* Retro grid background */
@@ -57,7 +74,6 @@ body::before {
     pointer-events: none;
     z-index: 0;
 }
-
 /* Navigation Bar - Retro Neon */
 .navbar {
     background: linear-gradient(90deg, rgba(10, 14, 39, 0.95) 0%, rgba(13, 0, 39, 0.95) 100%);
@@ -68,6 +84,8 @@ body::before {
     justify-content: space-between;
     align-items: center;
     position: sticky;
+    top: 0;
+    z-index: 100;
     top: 0;
     z-index: 100;
     box-shadow: 0 0 20px rgba(0, 240, 255, 0.3), 0 0 40px rgba(255, 0, 110, 0.2);
@@ -139,7 +157,7 @@ body::before {
         0 0 40px rgba(255, 0, 110, 0.2),
         0 0 60px rgba(0, 240, 255, 0.1);
     position: relative;
-    z-index: 1;
+    z-index: 10;
     margin: 1rem;
 }
 
@@ -263,7 +281,7 @@ body::before {
     max-width: 1200px;
     margin: 0 auto;
     position: relative;
-    z-index: 1;
+    z-index: 10;
 }
 
 .section-title {
@@ -955,38 +973,6 @@ select:focus {
 }
 
 /* ===== BACKGROUND DAD JOKES ===== */
-#jokes-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: -1;
-    overflow: hidden;
-}
-
-.dad-joke {
-    position: absolute;
-    font-family: 'Courier New', monospace;
-    font-size: 12px;
-    color: var(--neon-cyan);
-    opacity: 0.12;
-    pointer-events: auto;
-    cursor: help;
-    transition: all 0.3s ease;
-    max-width: 120px;
-    word-wrap: break-word;
-    text-shadow: 0 0 4px rgba(0, 240, 255, 0.2);
-    user-select: none;
-}
-
-.dad-joke:hover {
-    opacity: 0.4;
-    text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
-    transform: scale(1.05);
-}
-
 /* Joke Popup Bubble */
 .joke-popup {
     position: fixed;
@@ -1032,11 +1018,6 @@ select:focus {
 }
 
 @media (max-width: 768px) {
-    .dad-joke {
-        font-size: 11px;
-        opacity: 0.1;
-    }
-    
     .joke-popup {
         max-width: 220px;
         padding: 1rem;

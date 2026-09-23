@@ -1125,70 +1125,143 @@ function submitQuizToMake(email, score, level) {
     });
 }
 
-// ===== DAD JOKES EASTER EGG =====
+// ===== DAD JOKES EASTER EGG (SVG Background) =====
 
-const dadJokes = {
-    'Why did the hacker go to the beach?': 'Because they wanted to catch some WAVES (Wireless Access Vector Exploits)!',
-    'I told my password to my therapist...': 'But they said, "That\'s not your secret anymore—it\'s compromised!"',
-    'What did the firewall say to the malware?': '"You shall not PASS!"',
-    'Did you hear about the claustrophobic server?': 'It had a serious compression problem!',
-    'Why do programmers prefer dark mode?': 'Because light attracts bugs!',
-    'How many programmers does it take to change a lightbulb?': 'None, that\'s a hardware problem!',
-    'Why did the cybersecurity expert break up with their girlfriend?': 'She didn\'t meet his security requirements!',
-    'What\'s a password manager\'s favorite type of music?': 'Heavy metal encryption!',
-    'Why don\'t hackers ever get tired?': 'Because they\'re always running scripts!',
-    'What do you call a cybersecurity expert who\'s also a baker?': 'Someone who knows how to protect their cookies!'
-};
+const dadJokesData = [
+    {
+        question: 'Why did the hacker go to the beach?',
+        answer: 'Because they wanted to catch some WAVES (Wireless Access Vector Exploits)!',
+        x: 150,
+        y: 200,
+        width: 200,
+        height: 60
+    },
+    {
+        question: 'I told my password to my therapist...',
+        answer: 'But they said, "That\'s not your secret anymore—it\'s compromised!"',
+        x: 1700,
+        y: 300,
+        width: 250,
+        height: 60
+    },
+    {
+        question: 'What did the firewall say to the malware?',
+        answer: '"You shall not PASS!"',
+        x: 250,
+        y: 550,
+        width: 220,
+        height: 60
+    },
+    {
+        question: 'Did you hear about the claustrophobic server?',
+        answer: 'It had a serious compression problem!',
+        x: 1600,
+        y: 850,
+        width: 300,
+        height: 60
+    },
+    {
+        question: 'Why do programmers prefer dark mode?',
+        answer: 'Because light attracts bugs!',
+        x: 450,
+        y: 1050,
+        width: 220,
+        height: 60
+    },
+    {
+        question: 'How many programmers does it take to change a lightbulb?',
+        answer: 'None, that\'s a hardware problem!',
+        x: 1550,
+        y: 1350,
+        width: 300,
+        height: 60
+    },
+    {
+        question: 'Why did the cybersecurity expert break up with their girlfriend?',
+        answer: 'She didn\'t meet his security requirements!',
+        x: 350,
+        y: 1650,
+        width: 320,
+        height: 60
+    },
+    {
+        question: 'What is a password manager favorite music?',
+        answer: 'Heavy metal encryption!',
+        x: 1700,
+        y: 1900,
+        width: 240,
+        height: 60
+    },
+    {
+        question: 'Why do not hackers ever get tired?',
+        answer: 'Because they\'re always running scripts!',
+        x: 550,
+        y: 2050,
+        width: 240,
+        height: 60
+    },
+    {
+        question: 'What do you call a cybersecurity expert who bakes?',
+        answer: 'Someone who knows how to protect their cookies!',
+        x: 1450,
+        y: 2250,
+        width: 300,
+        height: 60
+    }
+];
 
 document.addEventListener('DOMContentLoaded', function() {
-    const jokeElements = document.querySelectorAll('.dad-joke');
     const popup = document.getElementById('joke-popup');
     const jokeAnswer = document.getElementById('joke-answer');
-    let activeJoke = null;
-
-    jokeElements.forEach(joke => {
-        joke.addEventListener('mouseenter', function(e) {
-            const jokeText = this.textContent;
-            const answer = dadJokes[jokeText];
+    const overlay = document.createElement('div');
+    
+    overlay.id = 'jokes-overlay';
+    overlay.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2;';
+    document.body.appendChild(overlay);
+    
+    // Create invisible hover zones for each joke
+    dadJokesData.forEach(joke => {
+        const zone = document.createElement('div');
+        zone.style.cssText = `
+            position: absolute;
+            left: ${(joke.x / 2000) * 100}%;
+            top: ${(joke.y / 2400) * 100}%;
+            width: ${(joke.width / 2000) * 100}%;
+            height: ${(joke.height / 2400) * 100}%;
+            pointer-events: auto;
+            cursor: help;
+        `;
+        
+        zone.addEventListener('mouseenter', function(e) {
+            jokeAnswer.innerHTML = `<strong>${joke.question}</strong><br><br>${joke.answer}`;
             
-            if (answer) {
-                jokeAnswer.textContent = jokeText + '\n\n' + answer;
-                
-                // Position popup near cursor
-                const rect = this.getBoundingClientRect();
-                const popupWidth = 280;
-                const popupHeight = 140;
-                
-                let left = rect.left - (popupWidth / 2) + (rect.width / 2);
-                let top = rect.top - popupHeight - 20;
-                
-                // Keep popup in viewport
-                if (left < 10) left = 10;
-                if (left + popupWidth > window.innerWidth - 10) {
-                    left = window.innerWidth - popupWidth - 10;
-                }
-                if (top < 10) {
-                    top = rect.bottom + 20;
-                }
-                
-                popup.style.left = left + 'px';
-                popup.style.top = top + 'px';
-                popup.classList.add('active');
-                activeJoke = this;
+            // Position popup near cursor
+            let left = e.clientX - 140;
+            let top = e.clientY - 100;
+            
+            // Keep popup in viewport
+            if (left < 10) left = 10;
+            if (left + 280 > window.innerWidth - 10) {
+                left = window.innerWidth - 290;
             }
-        });
-
-        joke.addEventListener('mouseleave', function() {
-            if (activeJoke === this) {
-                popup.classList.remove('active');
-                activeJoke = null;
+            if (top < 10) {
+                top = e.clientY + 20;
             }
+            
+            popup.style.left = left + 'px';
+            popup.style.top = top + 'px';
+            popup.classList.add('active');
         });
+        
+        zone.addEventListener('mouseleave', function() {
+            popup.classList.remove('active');
+        });
+        
+        overlay.appendChild(zone);
     });
-
+    
     // Hide popup if mouse leaves it
     popup.addEventListener('mouseleave', function() {
         this.classList.remove('active');
-        activeJoke = null;
     });
 });
