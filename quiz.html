@@ -29,8 +29,46 @@
            > 5 minutes to your security score</p>
     </section>
 
-    <!-- Quiz Section (Loaded from _quiz.html) -->
-    <div id="quiz-content"></div>
+    <!-- Quiz Section -->
+    <section class="section" id="quiz">
+        <h2 class="section-title">[ SECURITY ASSESSMENT QUIZ ]</h2>
+        <div class="featured">
+            <div id="quiz-container">
+                <div id="quiz-intro" style="text-align: center;">
+                    <h3 style="color: var(--neon-cyan); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">>>> WHAT'S YOUR SECURITY LEVEL? <<<</h3>
+                    <p style="color: var(--neon-cyan); margin-bottom: 2rem; line-height: 1.8;">Take our 5-minute security quiz to find out how protected your family really is. <br/>Answer a few quick questions and get personalized cybersecurity recommendations!</p>
+                    <button class="btn btn-primary" onclick="openQuizModal()">[ START QUIZ ]</button>
+                </div>
+
+                <div id="quiz-questions" style="display: none;">
+                    <form id="quizForm" onsubmit="handleQuizSubmit(event)">
+                        <div id="question-container"></div>
+                        <div style="text-align: center; margin-top: 2rem;">
+                            <button type="submit" class="btn btn-primary">[ GET MY RESULTS ]</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="quiz-results" style="display: none; text-align: center;">
+                    <h3 style="color: var(--neon-lime); margin-bottom: 1rem; font-size: 18px; text-transform: uppercase;">>>> YOUR RESULTS <<<</h3>
+                    <div id="results-content" style="background: rgba(57, 255, 20, 0.1); border: 2px solid var(--neon-lime); padding: 2rem; border-radius: 4px; margin-bottom: 2rem;">
+                        <p id="score-text" style="color: var(--neon-cyan); font-size: 14px; margin-bottom: 1rem;"></p>
+                        <p id="recommendation" style="color: var(--neon-cyan); font-size: 13px; line-height: 1.8;"></p>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, rgba(255, 0, 110, 0.1) 0%, rgba(189, 0, 255, 0.1) 100%); border: 2px solid var(--neon-pink); padding: 1.5rem; border-radius: 4px; margin-bottom: 2rem;">
+                        <h4 style="color: var(--neon-pink); margin-bottom: 1rem; text-transform: uppercase; font-size: 13px;">>>> JOIN OUR MAILING LIST <<<</h4>
+                        <p style="color: var(--neon-cyan); font-size: 12px; margin-bottom: 1rem;">Get personalized tips and resources based on your results</p>
+                        <input type="email" id="email" placeholder="your@email.com" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-pink); background: rgba(255, 0, 110, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 0.75rem;" required>
+                        <input type="text" id="name" placeholder="Your Name" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-pink); background: rgba(255, 0, 110, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 1rem;" required>
+                        <button type="button" class="btn btn-primary" onclick="submitMailingList()" style="width: 100%;">[ SEND ME TIPS ]</button>
+                    </div>
+
+                    <button class="btn btn-outline" onclick="resetQuiz()">[ RETAKE QUIZ ]</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
@@ -45,13 +83,5 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        // Load shared quiz section
-        fetch('_quiz.html')
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('quiz-content').innerHTML = html;
-            });
-    </script>
 </body>
 </html>

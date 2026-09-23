@@ -34,8 +34,46 @@
         </div>
     </section>
 
-    <!-- Quiz Section (Loaded from _quiz.html) -->
-    <div id="quiz-shared"></div>
+    <!-- Quiz Section -->
+    <section class="section" id="quiz">
+        <h2 class="section-title">[ SECURITY ASSESSMENT QUIZ ]</h2>
+        <div class="featured">
+            <div id="quiz-container">
+                <div id="quiz-intro" style="text-align: center;">
+                    <h3 style="color: var(--neon-cyan); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">>>> WHAT'S YOUR SECURITY LEVEL? <<<</h3>
+                    <p style="color: var(--neon-cyan); margin-bottom: 2rem; line-height: 1.8;">Take our 5-minute security quiz to find out how protected your family really is. <br/>Answer a few quick questions and get personalized cybersecurity recommendations!</p>
+                    <button class="btn btn-primary" onclick="openQuizModal()">[ START QUIZ ]</button>
+                </div>
+
+                <div id="quiz-questions" style="display: none;">
+                    <form id="quizForm" onsubmit="handleQuizSubmit(event)">
+                        <div id="question-container"></div>
+                        <div style="text-align: center; margin-top: 2rem;">
+                            <button type="submit" class="btn btn-primary">[ GET MY RESULTS ]</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="quiz-results" style="display: none; text-align: center;">
+                    <h3 style="color: var(--neon-lime); margin-bottom: 1rem; font-size: 18px; text-transform: uppercase;">>>> YOUR RESULTS <<<</h3>
+                    <div id="results-content" style="background: rgba(57, 255, 20, 0.1); border: 2px solid var(--neon-lime); padding: 2rem; border-radius: 4px; margin-bottom: 2rem;">
+                        <p id="score-text" style="color: var(--neon-cyan); font-size: 14px; margin-bottom: 1rem;"></p>
+                        <p id="recommendation" style="color: var(--neon-cyan); font-size: 13px; line-height: 1.8;"></p>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, rgba(255, 0, 110, 0.1) 0%, rgba(189, 0, 255, 0.1) 100%); border: 2px solid var(--neon-pink); padding: 1.5rem; border-radius: 4px; margin-bottom: 2rem;">
+                        <h4 style="color: var(--neon-pink); margin-bottom: 1rem; text-transform: uppercase; font-size: 13px;">>>> JOIN OUR MAILING LIST <<<</h4>
+                        <p style="color: var(--neon-cyan); font-size: 12px; margin-bottom: 1rem;">Get personalized tips and resources based on your results</p>
+                        <input type="email" id="email" placeholder="your@email.com" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-pink); background: rgba(255, 0, 110, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 0.75rem;" required>
+                        <input type="text" id="name" placeholder="Your Name" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-pink); background: rgba(255, 0, 110, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 1rem;" required>
+                        <button type="button" class="btn btn-primary" onclick="submitMailingList()" style="width: 100%;">[ SEND ME TIPS ]</button>
+                    </div>
+
+                    <button class="btn btn-outline" onclick="resetQuiz()">[ RETAKE QUIZ ]</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
     <section class="section" id="resources">
@@ -296,11 +334,123 @@
         </div>
     </section>
 
-    <!-- Services Section (Loaded from _services.html) -->
-    <div id="services-shared"></div>
+    <!-- Services Section -->
+    <section class="section" id="services">
+        <h2 class="section-title">[ MY SERVICES ]</h2>
+        <div style="max-width: 900px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <p style="color: var(--neon-cyan); font-size: 15px; line-height: 1.8; margin-bottom: 0;">
+                    Look, I get it. Protecting your family online can feel overwhelming. That's why I offer services designed to meet you exactly where you are—whether you need someone to talk strategy with, want to share what you know with your community, or need ongoing support from people who actually understand.
+                </p>
+            </div>
+
+            <!-- Services Grid - Single Column -->
+            <div style="display: flex; flex-direction: column; gap: 2rem; margin-bottom: 3rem;">
+                
+                <!-- One-on-One Coaching -->
+                <div class="featured" style="background: linear-gradient(135deg, rgba(0, 240, 255, 0.08) 0%, rgba(57, 255, 20, 0.08) 100%); border-color: var(--neon-cyan);">
+                    <div style="display: flex; gap: 2rem; align-items: flex-start;">
+                        <div style="flex: 1;">
+                            <h3 style="color: var(--neon-cyan); font-size: 20px; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">👨‍💼 1-ON-1 COACHING</h3>
+                            <p style="color: var(--neon-cyan); font-size: 14px; line-height: 1.8; margin-bottom: 1rem;">
+                                Sometimes you need a real person to help you figure things out. Maybe your teen's just gotten their first phone. Maybe you're worried about something you saw online. Or maybe you just want a custom security plan that actually fits your family. I'm here to help you build that.
+                            </p>
+                            <ul style="color: var(--neon-lime); font-size: 13px; margin: 1rem 0; line-height: 1.8; list-style: none; padding: 0;">
+                                <li>✓ Your family's personal security audit</li>
+                                <li>✓ Customized protection plan (not generic advice)</li>
+                                <li>✓ Ongoing support when questions come up</li>
+                                <li>✓ Real answers to your real problems</li>
+                            </ul>
+                            <button class="btn btn-primary" onclick="scrollToServiceContact('1-on-1 Coaching')" style="margin-top: 1rem;">[ GET MORE INFO ]</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Public Speaking -->
+                <div class="featured" style="background: linear-gradient(135deg, rgba(189, 0, 255, 0.08) 0%, rgba(255, 0, 110, 0.08) 100%); border-color: var(--neon-purple);">
+                    <div style="display: flex; gap: 2rem; align-items: flex-start;">
+                        <div style="flex: 1;">
+                            <h3 style="color: var(--neon-pink); font-size: 20px; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">🎤 PUBLIC SPEAKING & WORKSHOPS</h3>
+                            <p style="color: var(--neon-cyan); font-size: 14px; line-height: 1.8; margin-bottom: 1rem;">
+                                Schools want to teach cybersecurity. Companies need it for their team. Parent groups are hungry for real information. And I love sharing what I know with people who actually want to listen. Let me bring practical, real-world cybersecurity to your community.
+                            </p>
+                            <ul style="color: var(--neon-lime); font-size: 13px; margin: 1rem 0; line-height: 1.8; list-style: none; padding: 0;">
+                                <li>✓ Customized talks for any audience (schools, companies, events)</li>
+                                <li>✓ Parent workshops & student assemblies</li>
+                                <li>✓ Corporate security training that doesn't put people to sleep</li>
+                                <li>✓ Story-driven, practical, and actually useful</li>
+                            </ul>
+                            <button class="btn btn-primary" onclick="scrollToServiceContact('Speaking/Workshop')" style="margin-top: 1rem;">[ BOOK A TALK ]</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exclusive Chat Community -->
+                <div class="featured" style="background: linear-gradient(135deg, rgba(255, 0, 110, 0.08) 0%, rgba(189, 0, 255, 0.08) 100%); border-color: var(--neon-pink);">
+                    <div style="display: flex; gap: 2rem; align-items: flex-start;">
+                        <div style="flex: 1;">
+                            <h3 style="color: var(--neon-pink); font-size: 20px; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">💬 EXCLUSIVE COMMUNITY</h3>
+                            <p style="color: var(--neon-cyan); font-size: 14px; line-height: 1.8; margin-bottom: 1rem;">
+                                Join a private community of parents and guardians who actually care about digital safety. Get real-time answers to your questions, share wins with people who get it, and have me available when things come up. It's like having a cybersecurity dad on your team.
+                            </p>
+                            <ul style="color: var(--neon-lime); font-size: 13px; margin: 1rem 0; line-height: 1.8; list-style: none; padding: 0;">
+                                <li>✓ Direct access to me (I answer your questions)</li>
+                                <li>✓ Daily tips, tricks, and real security updates</li>
+                                <li>✓ Peer support from other parents who get it</li>
+                                <li>✓ Exclusive resources & content just for members</li>
+                            </ul>
+                            <button class="btn btn-primary" onclick="scrollToServiceContact('Exclusive Community')" style="margin-top: 1rem;">[ JOIN NOW ]</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
 
     <!-- Coming Soon Class -->
     <section class="section" id="coming-soon">
+        <div class="featured" style="background: linear-gradient(135deg, rgba(255, 0, 110, 0.15) 0%, rgba(189, 0, 255, 0.15) 50%, rgba(0, 240, 255, 0.1) 100%); border: 3px solid; border-image: linear-gradient(90deg, var(--neon-pink), var(--neon-purple), var(--neon-cyan)) 1; box-shadow: 0 0 50px rgba(255, 0, 110, 0.3);">
+            <div style="text-align: center;">
+                <div style="display: inline-block; background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple)); color: white; padding: 0.5rem 1.5rem; border-radius: 4px; margin-bottom: 1rem; font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">🎓 COMING VERY SOON 🎓</div>
+                
+                <h2 style="color: var(--neon-cyan); font-size: 36px; font-weight: 900; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 2px;">PROTECTING YOUR FAMILY ONLINE</h2>
+                
+                <p style="color: var(--neon-pink); font-size: 18px; font-weight: 700; margin-bottom: 2rem;">6-Week Live Class | $100</p>
+                
+                <div style="max-width: 700px; margin: 0 auto; margin-bottom: 2rem;">
+                    <p style="color: var(--neon-cyan); font-size: 15px; line-height: 1.9; margin-bottom: 1.5rem;">
+                        This isn't one of those "cybersecurity for dummies" courses. This is <strong>real, practical training</strong> from someone who actually lives this stuff. Over 6 weeks, we'll cover everything your family needs to stay safe online—and we'll figure it out together.
+                    </p>
+                    
+                    <div style="background: rgba(57, 255, 20, 0.1); border: 2px solid var(--neon-lime); border-radius: 4px; padding: 1.5rem; margin-bottom: 1.5rem;">
+                        <h4 style="color: var(--neon-lime); margin-bottom: 1rem; text-transform: uppercase; font-size: 13px; letter-spacing: 1px;">>>> WHAT YOU'LL LEARN <<<</h4>
+                        <ul style="color: var(--neon-cyan); font-size: 14px; line-height: 1.8; text-align: left; max-width: 500px; margin: 0 auto; list-style: none; padding: 0;">
+                            <li>✓ Week 1: The Real Threats (and How to Protect Against Them)</li>
+                            <li>✓ Week 2: Passwords That Actually Work</li>
+                            <li>✓ Week 3: Parental Controls That Aren't Weird or Overbearing</li>
+                            <li>✓ Week 4: Social Media Safety Without Being That Parent</li>
+                            <li>✓ Week 5: Spotting & Stopping the Bad Stuff</li>
+                            <li>✓ Week 6: Build Your Family's Custom Security Plan</li>
+                        </ul>
+                    </div>
+                    
+                    <p style="color: var(--neon-cyan); font-size: 14px; line-height: 1.8; margin-bottom: 1.5rem;">
+                        Live group sessions, Q&A with me every week, downloadable resources you'll actually use, and lifetime access to course materials. Plus you get added to our exclusive community so the learning doesn't stop after week 6.
+                    </p>
+
+                    <p style="color: var(--neon-lime); font-size: 13px; margin-bottom: 1.5rem; font-style: italic;">
+                        More details coming soon. Spots are intentionally limited to keep the group small and personal.
+                    </p>
+                </div>
+
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; max-width: 600px; margin: 0 auto;">
+                    <button class="btn btn-primary" onclick="scrollToServiceContact('Class Notification')" style="flex: 1; min-width: 250px;">[ NOTIFY ME WHEN LIVE ]</button>
+                    <button class="btn btn-outline" onclick="document.getElementById('resources').scrollIntoView({ behavior: 'smooth' })" style="flex: 1; min-width: 250px;">[ GET FREE PREP GUIDE ]</button>
+                </div>
+            </div>
+        </div>
+    </section>    <section class="section" id="coming-soon">
         <div class="featured" style="background: linear-gradient(135deg, rgba(255, 0, 110, 0.15) 0%, rgba(189, 0, 255, 0.15) 50%, rgba(0, 240, 255, 0.1) 100%); border: 3px solid; border-image: linear-gradient(90deg, var(--neon-pink), var(--neon-purple), var(--neon-cyan)) 1; box-shadow: 0 0 50px rgba(255, 0, 110, 0.3);">
             <div style="text-align: center;">
                 <div style="display: inline-block; background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple)); color: white; padding: 0.5rem 1.5rem; border-radius: 4px; margin-bottom: 1rem; font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">🎓 COMING VERY SOON 🎓</div>
@@ -496,29 +646,6 @@
             // Initialize quiz after HTML is injected
             initializeQuiz();
         }
-    </script>
-    
-    <!-- Load Shared Quiz and Services Sections -->
-    <script>
-        /**
-         * Load shared quiz section from _quiz.html
-         */
-        fetch('_quiz.html')
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('quiz-shared').innerHTML = html;
-            })
-            .catch(err => console.log('Using inline quiz section'));
-
-        /**
-         * Load shared services section from _services.html
-         */
-        fetch('_services.html')
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('services-shared').innerHTML = html;
-            })
-            .catch(err => console.log('Using inline services section'));
     </script>
 </body>
 </html>
