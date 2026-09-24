@@ -10,14 +10,19 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="navbar-brand" onclick="window.location.href='index.html'" style="cursor: pointer;">🛡️ DadCyberTips</div>
-        <div class="navbar-links">
-            <a href="index.html#about">About</a>
-            <a href="index.html#books">Books</a>
-            <a href="index.html#courses">Courses</a>
-            <a href="index.html#resources">Free</a>
-            <a href="quiz.html">Quiz</a>
-            <a href="services.html">Services</a>
-            <a href="index.html#merch">Merch</a>
+        <div class="navbar-toggle" onclick="toggleMobileMenu()" id="navbar-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="navbar-links" id="navbar-links">
+            <a href="index.html#about" onclick="closeMobileMenu()">About</a>
+            <a href="index.html#books" onclick="closeMobileMenu()">Books</a>
+            <a href="index.html#courses" onclick="closeMobileMenu()">Courses</a>
+            <a href="index.html#resources" onclick="closeMobileMenu()">Free</a>
+            <a href="quiz.html" onclick="closeMobileMenu()">Quiz</a>
+            <a href="services.html" onclick="closeMobileMenu()">Services</a>
+            <a href="index.html#merch" onclick="closeMobileMenu()">Merch</a>
         </div>
     </nav>
 

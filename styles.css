@@ -141,6 +141,79 @@ body::before {
     width: 100%;
 }
 
+/* Mobile Hamburger Menu */
+.navbar-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.navbar-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--neon-cyan);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px var(--neon-cyan);
+}
+
+.navbar-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(10px, 10px);
+}
+
+.navbar-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.navbar-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Mobile Menu Styles */
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap;
+    }
+
+    .navbar-toggle {
+        display: flex;
+    }
+
+    .navbar-links {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        background: linear-gradient(180deg, rgba(10, 14, 39, 0.98) 0%, rgba(13, 0, 39, 0.98) 100%);
+        flex-direction: column;
+        gap: 0;
+        padding: 1rem 0;
+        border-bottom: 2px solid var(--neon-cyan);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    .navbar-links.active {
+        max-height: 400px;
+    }
+
+    .navbar-links a {
+        padding: 1rem 2rem;
+        border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+        font-size: 14px;
+    }
+
+    .navbar-links a:hover {
+        background: rgba(0, 240, 255, 0.1);
+    }
+
+    .navbar-links a::before {
+        display: none;
+    }
+}
+
 /* Hero Section - Retro Neon */
 .hero {
     background: linear-gradient(180deg, 

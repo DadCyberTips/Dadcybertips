@@ -18,14 +18,19 @@
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="navbar-brand" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" style="cursor: pointer;">🛡️ DadCyberTips</div>
-        <div class="navbar-links">
-            <a href="#about">About</a>
-            <a href="#books">Books</a>
-            <a href="#courses">Courses</a>
-            <a href="#resources">Free</a>
-            <a href="#coming-soon">Class</a>
+        <div class="navbar-toggle" onclick="toggleMobileMenu()" id="navbar-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="navbar-links" id="navbar-links">
+            <a href="#about" onclick="closeMobileMenu()">About</a>
+            <a href="#books" onclick="closeMobileMenu()">Books</a>
+            <a href="#courses" onclick="closeMobileMenu()">Courses</a>
+            <a href="#resources" onclick="closeMobileMenu()">Free</a>
+            <a href="#coming-soon" onclick="closeMobileMenu()">Class</a>
             <a href="services.html">Services</a>
-            <a href="#merch">Merch</a>
+            <a href="#merch" onclick="closeMobileMenu()">Merch</a>
         </div>
     </nav>
 

@@ -1125,6 +1125,28 @@ function submitQuizToMake(email, score, level) {
     });
 }
 
+// ===== MOBILE MENU TOGGLE =====
+
+function toggleMobileMenu() {
+    const toggle = document.getElementById('navbar-toggle');
+    const links = document.getElementById('navbar-links');
+    
+    if (toggle && links) {
+        toggle.classList.toggle('active');
+        links.classList.toggle('active');
+    }
+}
+
+function closeMobileMenu() {
+    const toggle = document.getElementById('navbar-toggle');
+    const links = document.getElementById('navbar-links');
+    
+    if (toggle && links) {
+        toggle.classList.remove('active');
+        links.classList.remove('active');
+    }
+}
+
 // ===== DAD JOKES EASTER EGG (SVG Background) =====
 
 const dadJokesData = [
