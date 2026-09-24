@@ -1154,81 +1154,81 @@ const dadJokesData = [
         question: 'Why did the hacker go to the beach?',
         answer: 'Because they wanted to catch some WAVES (Wireless Access Vector Exploits)!',
         x: 75,
-        y: 100,
-        width: 140,
-        height: 40
+        y: 85,
+        width: 160,
+        height: 50
     },
     {
         question: 'I told my password to my therapist...',
         answer: 'But they said, "That\'s not your secret anymore—it\'s compromised!"',
         x: 925,
-        y: 175,
-        width: 150,
-        height: 40
+        y: 160,
+        width: 160,
+        height: 50
     },
     {
         question: 'What did the firewall say to the malware?',
         answer: '"You shall not PASS!"',
         x: 150,
-        y: 300,
-        width: 140,
-        height: 40
+        y: 280,
+        width: 160,
+        height: 60
     },
     {
         question: 'Did you hear about the claustrophobic server?',
         answer: 'It had a serious compression problem!',
         x: 850,
-        y: 450,
-        width: 160,
-        height: 40
+        y: 430,
+        width: 180,
+        height: 60
     },
     {
         question: 'Why do programmers prefer dark mode?',
         answer: 'Because light attracts bugs!',
         x: 250,
-        y: 550,
-        width: 140,
-        height: 40
+        y: 530,
+        width: 160,
+        height: 50
     },
     {
         question: 'How many programmers does it take to change a lightbulb?',
         answer: 'None, that\'s a hardware problem!',
         x: 800,
-        y: 700,
-        width: 170,
-        height: 40
+        y: 680,
+        width: 180,
+        height: 70
     },
     {
         question: 'Why did the cybersecurity expert break up with their girlfriend?',
         answer: 'She didn\'t meet his security requirements!',
         x: 200,
-        y: 850,
+        y: 830,
         width: 180,
-        height: 40
+        height: 60
     },
     {
         question: 'What is a password manager favorite music?',
         answer: 'Heavy metal encryption!',
         x: 875,
-        y: 975,
-        width: 140,
-        height: 40
+        y: 955,
+        width: 160,
+        height: 60
     },
     {
-        question: 'Why do not hackers ever get tired?',
+        question: 'Why do hackers never get tired?',
         answer: 'Because they\'re always running scripts!',
         x: 300,
-        y: 1050,
-        width: 140,
-        height: 40
+        y: 1030,
+        width: 160,
+        height: 50
     },
     {
         question: 'What do you call a cybersecurity expert who bakes?',
         answer: 'Someone who knows how to protect their cookies!',
         x: 750,
-        y: 1150,
-        width: 170,
-        height: 40
+        y: 1130,
+        width: 180,
+        height: 60
     }
 ];
 
