@@ -1153,82 +1153,82 @@ const dadJokesData = [
     {
         question: 'Why did the hacker go to the beach?',
         answer: 'Because they wanted to catch some WAVES (Wireless Access Vector Exploits)!',
-        x: 150,
-        y: 200,
-        width: 280,
-        height: 80
+        x: 75,
+        y: 100,
+        width: 140,
+        height: 40
     },
     {
         question: 'I told my password to my therapist...',
         answer: 'But they said, "That\'s not your secret anymore—it\'s compromised!"',
-        x: 1700,
-        y: 300,
-        width: 300,
-        height: 80
+        x: 925,
+        y: 175,
+        width: 150,
+        height: 40
     },
     {
         question: 'What did the firewall say to the malware?',
         answer: '"You shall not PASS!"',
-        x: 250,
-        y: 550,
-        width: 280,
-        height: 80
+        x: 150,
+        y: 300,
+        width: 140,
+        height: 40
     },
     {
         question: 'Did you hear about the claustrophobic server?',
         answer: 'It had a serious compression problem!',
-        x: 1600,
-        y: 850,
-        width: 320,
-        height: 80
+        x: 850,
+        y: 450,
+        width: 160,
+        height: 40
     },
     {
         question: 'Why do programmers prefer dark mode?',
         answer: 'Because light attracts bugs!',
-        x: 450,
-        y: 1050,
-        width: 280,
-        height: 80
+        x: 250,
+        y: 550,
+        width: 140,
+        height: 40
     },
     {
         question: 'How many programmers does it take to change a lightbulb?',
         answer: 'None, that\'s a hardware problem!',
-        x: 1550,
-        y: 1350,
-        width: 340,
-        height: 80
+        x: 800,
+        y: 700,
+        width: 170,
+        height: 40
     },
     {
         question: 'Why did the cybersecurity expert break up with their girlfriend?',
         answer: 'She didn\'t meet his security requirements!',
-        x: 350,
-        y: 1650,
-        width: 360,
-        height: 80
+        x: 200,
+        y: 850,
+        width: 180,
+        height: 40
     },
     {
         question: 'What is a password manager favorite music?',
         answer: 'Heavy metal encryption!',
-        x: 1700,
-        y: 1900,
-        width: 280,
-        height: 80
+        x: 875,
+        y: 975,
+        width: 140,
+        height: 40
     },
     {
         question: 'Why do not hackers ever get tired?',
         answer: 'Because they\'re always running scripts!',
-        x: 550,
-        y: 2050,
-        width: 280,
-        height: 80
+        x: 300,
+        y: 1050,
+        width: 140,
+        height: 40
     },
     {
         question: 'What do you call a cybersecurity expert who bakes?',
         answer: 'Someone who knows how to protect their cookies!',
-        x: 1450,
-        y: 2250,
-        width: 340,
-        height: 80
+        x: 750,
+        y: 1150,
+        width: 170,
+        height: 40
     }
 ];
 
@@ -1248,8 +1248,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.appendChild(overlay);
     
     // Background pattern dimensions (from CSS)
-    const BG_WIDTH = 2000;
-    const BG_HEIGHT = 2400;
+    const BG_WIDTH = 1000;
+    const BG_HEIGHT = 1200;
     
     // The joke zones need to tile with the background
     // Create zones for multiple tile repeats to cover viewport
