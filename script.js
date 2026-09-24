@@ -1242,49 +1242,57 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
     
+    // Create overlay for hover zones
     const overlay = document.createElement('div');
-    
     overlay.id = 'jokes-overlay';
-    overlay.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2;';
+    overlay.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50;';
     document.body.appendChild(overlay);
     
+    // Track current active zone to prevent conflicts
+    let activeZone = null;
+    
     // Create invisible hover zones for each joke
-    dadJokesData.forEach(joke => {
+    dadJokesData.forEach((joke, index) => {
         const zone = document.createElement('div');
         
-        // Calculate percentages for fixed positioning
-        const leftPercent = (joke.x / 2000) * 100;
-        const topPercent = (joke.y / 2400) * 100;
-        const widthPercent = (joke.width / 2000) * 100;
-        const heightPercent = (joke.height / 2400) * 100;
-        
+        // Use the joke dimensions directly as pixels, scaled to viewport
+        // The SVG is 2000x2400, we need zones to match those positions in the fixed background
+        zone.setAttribute('data-joke-index', index);
         zone.style.cssText = `
             position: fixed;
-            left: ${leftPercent}%;
-            top: ${topPercent}%;
-            width: ${widthPercent}%;
-            height: ${heightPercent}%;
+            left: ${(joke.x / 2000) * window.innerWidth}px;
+            top: ${(joke.y / 2400) * window.innerHeight}px;
+            width: ${(joke.width / 2000) * window.innerWidth}px;
+            height: ${(joke.height / 2400) * window.innerHeight}px;
             pointer-events: auto;
             cursor: help;
-            z-index: 50;
+            z-index: 51;
+            border: 0px solid transparent;
         `;
         
         zone.addEventListener('mouseenter', function(e) {
-            if (!jokeAnswer || !popup) return;
+            if (activeZone === index) return; // Already showing this joke
+            activeZone = index;
             
+            // Update popup content
             jokeAnswer.innerHTML = `<strong>${joke.question}</strong><br><br>${joke.answer}`;
             
             // Position popup near cursor
-            let left = e.clientX - 140;
-            let top = e.clientY - 100;
+            let left = e.clientX + 15;
+            let top = e.clientY + 15;
             
             // Keep popup in viewport
-            if (left < 10) left = 10;
-            if (left + 280 > window.innerWidth - 10) {
-                left = window.innerWidth - 290;
+            if (left + 320 > window.innerWidth) {
+                left = window.innerWidth - 330;
+            }
+            if (left < 10) {
+                left = 10;
+            }
+            if (top + 200 > window.innerHeight) {
+                top = window.innerHeight - 210;
             }
             if (top < 10) {
-                top = e.clientY + 20;
+                top = 10;
             }
             
             popup.style.left = left + 'px';
@@ -1293,19 +1301,47 @@ document.addEventListener('DOMContentLoaded', function() {
             popup.classList.add('active');
         });
         
+        zone.addEventListener('mousemove', function(e) {
+            if (activeZone === index) {
+                // Keep popup near cursor as it moves
+                let left = e.clientX + 15;
+                let top = e.clientY + 15;
+                
+                if (left + 320 > window.innerWidth) {
+                    left = window.innerWidth - 330;
+                }
+                if (left < 10) {
+                    left = 10;
+                }
+                if (top + 200 > window.innerHeight) {
+                    top = window.innerHeight - 210;
+                }
+                if (top < 10) {
+                    top = 10;
+                }
+                
+                popup.style.left = left + 'px';
+                popup.style.top = top + 'px';
+            }
+        });
+        
         zone.addEventListener('mouseleave', function() {
-            if (popup) {
+            if (activeZone === index) {
                 popup.classList.remove('active');
+                activeZone = null;
             }
         });
         
         overlay.appendChild(zone);
     });
     
-    // Hide popup if mouse leaves it
+    // Also handle when mouse leaves the popup itself
     if (popup) {
         popup.addEventListener('mouseleave', function() {
-            this.classList.remove('active');
+            if (activeZone !== null) {
+                this.classList.remove('active');
+                activeZone = null;
+            }
         });
     }
 });
