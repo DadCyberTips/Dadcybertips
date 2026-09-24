@@ -1235,6 +1235,13 @@ const dadJokesData = [
 document.addEventListener('DOMContentLoaded', function() {
     const popup = document.getElementById('joke-popup');
     const jokeAnswer = document.getElementById('joke-answer');
+    
+    // Make sure popup elements exist
+    if (!popup || !jokeAnswer) {
+        console.error('Joke popup elements not found');
+        return;
+    }
+    
     const overlay = document.createElement('div');
     
     overlay.id = 'jokes-overlay';
@@ -1259,10 +1266,12 @@ document.addEventListener('DOMContentLoaded', function() {
             height: ${heightPercent}%;
             pointer-events: auto;
             cursor: help;
-            z-index: 3;
+            z-index: 50;
         `;
         
         zone.addEventListener('mouseenter', function(e) {
+            if (!jokeAnswer || !popup) return;
+            
             jokeAnswer.innerHTML = `<strong>${joke.question}</strong><br><br>${joke.answer}`;
             
             // Position popup near cursor
@@ -1280,11 +1289,14 @@ document.addEventListener('DOMContentLoaded', function() {
             
             popup.style.left = left + 'px';
             popup.style.top = top + 'px';
+            popup.style.display = 'block';
             popup.classList.add('active');
         });
         
         zone.addEventListener('mouseleave', function() {
-            popup.classList.remove('active');
+            if (popup) {
+                popup.classList.remove('active');
+            }
         });
         
         overlay.appendChild(zone);

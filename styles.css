@@ -1060,6 +1060,8 @@ select:focus {
     pointer-events: none;
     transition: opacity 0.2s ease;
     display: none;
+    left: -9999px;
+    top: -9999px;
 }
 
 .joke-popup.active {
