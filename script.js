@@ -1244,14 +1244,22 @@ document.addEventListener('DOMContentLoaded', function() {
     // Create invisible hover zones for each joke
     dadJokesData.forEach(joke => {
         const zone = document.createElement('div');
+        
+        // Calculate percentages for fixed positioning
+        const leftPercent = (joke.x / 2000) * 100;
+        const topPercent = (joke.y / 2400) * 100;
+        const widthPercent = (joke.width / 2000) * 100;
+        const heightPercent = (joke.height / 2400) * 100;
+        
         zone.style.cssText = `
-            position: absolute;
-            left: ${(joke.x / 2000) * 100}%;
-            top: ${(joke.y / 2400) * 100}%;
-            width: ${(joke.width / 2000) * 100}%;
-            height: ${(joke.height / 2400) * 100}%;
+            position: fixed;
+            left: ${leftPercent}%;
+            top: ${topPercent}%;
+            width: ${widthPercent}%;
+            height: ${heightPercent}%;
             pointer-events: auto;
             cursor: help;
+            z-index: 3;
         `;
         
         zone.addEventListener('mouseenter', function(e) {
@@ -1283,7 +1291,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Hide popup if mouse leaves it
-    popup.addEventListener('mouseleave', function() {
-        this.classList.remove('active');
-    });
+    if (popup) {
+        popup.addEventListener('mouseleave', function() {
+            this.classList.remove('active');
+        });
+    }
 });
