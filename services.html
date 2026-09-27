@@ -240,15 +240,15 @@
                 return;
             }
 
-            // Prepare payload for Notion
-            const webhookUrl = 'https://hook.us2.make.com/bsksqjoatho6opxrxhmzpj5t5jmc5dgi';
+            // Prepare payload for Notion via new Contact Submissions webhook
+            const webhookUrl = 'https://hook.us2.make.com/ojmt2rjmx8lhejmt1o9n8nfiwjz4vsml';
             const payload = {
                 name: name,
                 email: email,
                 phone: phone,
                 organization: organization,
                 category: category,
-                source: 'Contact Form',
+                source: 'Services Contact Form',
                 comments: notes,
                 timestamp: new Date().toISOString()
             };

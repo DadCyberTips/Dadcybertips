@@ -611,8 +611,8 @@ function addMarketingContact(event) {
     saveMarketingContacts(contacts);
 
     // Prepare payload for Notion via Make.com webhook
-    // All contact forms (Quiz, Class, Contact) send to the same Notion database
-    const webhookUrl = 'https://hook.us2.make.com/bsksqjoatho6opxrxhmzpj5t5jmc5dgi';
+    // Contact forms go to Contact Submissions database
+    const webhookUrl = 'https://hook.us2.make.com/ojmt2rjmx8lhejmt1o9n8nfiwjz4vsml';
     const notionPayload = {
         name: name,
         email: email,
