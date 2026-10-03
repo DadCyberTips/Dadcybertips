@@ -1097,6 +1097,33 @@ select:focus {
     box-shadow: 0 0 20px rgba(0, 240, 255, 0.8);
 }
 
+/* Enhanced Select Dropdown Styling */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 10"><polyline points="1,1 10,9 19,1" stroke="%2300e5ff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    padding-right: 40px;
+}
+
+select option {
+    background: #0a0a0a;
+    color: #00e5ff;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 0.5rem;
+}
+
+select option:checked {
+    background: linear-gradient(#00e5ff, #00e5ff);
+    background-color: #00e5ff;
+    color: #0a0a0a;
+}
+
 @media (max-width: 768px) {
     .joke-popup {
         max-width: 220px;
