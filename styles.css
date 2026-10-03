@@ -1097,6 +1097,30 @@ select:focus {
     box-shadow: 0 0 20px rgba(0, 240, 255, 0.8);
 }
 
+/* Privacy Policy Link - Prominent Footer */
+.privacy-link {
+    font-weight: bold !important;
+    font-size: 1.1rem !important;
+    color: var(--neon-magenta) !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 0.5rem 1rem !important;
+    border: 2px solid var(--neon-magenta) !important;
+    border-radius: 6px;
+    display: inline-block;
+    background: rgba(255, 0, 255, 0.1);
+    text-shadow: 0 0 10px rgba(255, 0, 255, 0.6);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.privacy-link:hover {
+    background: rgba(255, 0, 255, 0.2);
+    box-shadow: 0 0 25px rgba(255, 0, 255, 0.6);
+    text-shadow: 0 0 15px rgba(255, 0, 255, 0.8);
+    transform: scale(1.05);
+}
+
 /* Enhanced Select Dropdown Styling */
 select {
     appearance: none;
