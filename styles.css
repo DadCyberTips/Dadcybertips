@@ -1100,18 +1100,18 @@ select:focus {
 /* Floating Social Sidebar - Icon Only */
 .social-sidebar {
     position: fixed;
-    left: 15px;
+    left: 12px;
     top: 50%;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
     z-index: 9999;
     background: rgba(18, 18, 18, 0.95);
-    padding: 12px;
-    border-radius: 16px;
-    border: 2px solid #00e5ff;
-    box-shadow: 0 0 40px rgba(0, 229, 255, 0.4), inset 0 0 20px rgba(0, 229, 255, 0.1);
+    padding: 6px;
+    border-radius: 8px;
+    border: 1px solid #00e5ff;
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.3), inset 0 0 10px rgba(0, 229, 255, 0.05);
     backdrop-filter: blur(15px);
     pointer-events: auto;
 }
@@ -1120,16 +1120,16 @@ select:focus {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 10px;
+    width: 28px;
+    height: 28px;
+    border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
-    font-size: 1.8rem;
+    font-size: 0.9rem;
     transition: all 0.3s ease;
-    border: 2px solid;
+    border: 1px solid;
     cursor: pointer;
-    box-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
+    box-shadow: 0 0 8px rgba(0, 229, 255, 0.2);
     line-height: 1;
 }
 
@@ -1143,8 +1143,8 @@ select:focus {
 .social-btn.tiktok:hover {
     background: #00f7ef;
     color: #000;
-    box-shadow: 0 0 35px rgba(0, 247, 239, 1);
-    transform: scale(1.15) rotate(5deg);
+    box-shadow: 0 0 20px rgba(0, 247, 239, 1);
+    transform: scale(1.2) rotate(3deg);
 }
 
 /* YouTube Button */
@@ -1157,8 +1157,8 @@ select:focus {
 .social-btn.youtube:hover {
     background: #ff0000;
     color: #fff;
-    box-shadow: 0 0 35px rgba(255, 0, 0, 1);
-    transform: scale(1.15) rotate(5deg);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 1);
+    transform: scale(1.2) rotate(3deg);
 }
 
 /* Threads Button */
@@ -1171,8 +1171,8 @@ select:focus {
 .social-btn.threads:hover {
     background: #31a24c;
     color: #fff;
-    box-shadow: 0 0 35px rgba(49, 162, 76, 1);
-    transform: scale(1.15) rotate(5deg);
+    box-shadow: 0 0 20px rgba(49, 162, 76, 1);
+    transform: scale(1.2) rotate(3deg);
 }
 
 /* Instagram Button */
@@ -1185,23 +1185,23 @@ select:focus {
 .social-btn.instagram:hover {
     background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     color: #fff;
-    box-shadow: 0 0 35px rgba(225, 48, 108, 1);
-    transform: scale(1.15) rotate(5deg);
+    box-shadow: 0 0 20px rgba(225, 48, 108, 1);
+    transform: scale(1.2) rotate(3deg);
     border-color: transparent;
 }
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .social-sidebar {
-        left: 12px;
-        padding: 10px;
-        gap: 8px;
+        left: 10px;
+        padding: 5px;
+        gap: 4px;
     }
     
     .social-btn {
-        width: 45px;
-        height: 45px;
-        font-size: 1.6rem;
+        width: 26px;
+        height: 26px;
+        font-size: 0.85rem;
     }
 }
 
