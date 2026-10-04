@@ -1,0 +1,12 @@
+title: DadCyberTips Blog
+description: Practical family cybersecurity tips from Gavin Marlowe
+url: https://dadcybertips.com
+baseurl: ""
+permalink: /blog/:title/
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+exclude:
+  - README.md
+  - SERVICES_COMING_SOON_SETUP.md
+  - CNAME_NOTES.md

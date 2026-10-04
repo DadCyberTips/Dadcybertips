@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} | {% endif %}DadCyberTips</title>
+    <meta name="description" content="{{ page.description | default: page.intro | default: site.description | strip_html | truncate: 160 }}">
+    <link rel="alternate" type="application/atom+xml" title="DadCyberTips Blog" href="{{ '/feed.xml' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/blog.css' | relative_url }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand" onclick="location.href='{{ '/' | relative_url }}'" style="cursor: pointer;">🛡️ DadCyberTips</div>
+        <div class="navbar-toggle" onclick="toggleMobileMenu()" id="navbar-toggle"><span></span><span></span><span></span></div>
+        <div class="navbar-links" id="navbar-links">
+            <a href="{{ '/index.html#about' | relative_url }}">About</a>
+            <a href="{{ '/index.html#books' | relative_url }}">Books</a>
+            <a href="{{ '/index.html#resources' | relative_url }}">Free</a>
+            <a href="{{ '/blog/' | relative_url }}">Blog</a>
+            <a href="{{ '/services.html' | relative_url }}">Services</a>
+            <a href="{{ '/index.html#merch' | relative_url }}">Merch</a>
+            <a href="{{ '/privacy.html' | relative_url }}">Privacy</a>
+        </div>
+    </nav>
+
+    {{ content }}
+
+    <footer class="footer">
+        <div class="social-links">
+            <a href="https://instagram.com/dadcybertips" target="_blank">Instagram</a>
+            <a href="https://tiktok.com/@dadcybertips" target="_blank">TikTok</a>
+            <a href="https://youtube.com" target="_blank">YouTube</a>
+            <a href="https://threads.com/@dadcybertips" target="_blank">Threads</a>
+            <a href="mailto:info@dadcybertips.com">Email</a>
+            <a href="{{ '/privacy.html' | relative_url }}" class="privacy-link">🛡️ PRIVACY POLICY 🛡️</a>
+        </div>
+        <p>© 2026 DadCyberTips by Gavin Marlowe. All rights reserved.</p>
+    </footer>
+    <script>
+        function toggleMobileMenu() { var n = document.querySelector('.navbar-links'); if (n) n.classList.toggle('active'); }
+        function closeMobileMenu() { var n = document.querySelector('.navbar-links'); if (n) n.classList.remove('active'); }
+    </script>
+    {% if page.scripts %}{{ page.scripts }}{% endif %}
+</body>
+</html>
