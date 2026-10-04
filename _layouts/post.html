@@ -5,6 +5,5 @@ layout: default
     <a class="blog-back" href="{{ '/blog/' | relative_url }}">&lt; BACK TO BLOG</a>
     <div class="blog-tile-meta"><span class="blog-tag">{{ page.category }}</span><span class="blog-date">{{ page.date | date: "%b %-d, %Y" }}</span></div>
     <h1 class="blog-post-title">{{ page.title }}</h1>
-    {% if page.image %}<img class="post-cover" src="{{ page.image }}" alt="">{% endif %}
     <div class="post-body">{{ content }}</div>
 </section>

@@ -3,7 +3,6 @@ layout: post
 title: "Back to School Means Back to Digital Privacy Conversations"
 category: Kids & Privacy
 intro: "Back-to-school season brings new teachers, new schedules, new supplies—and a whole new round of apps, accounts, devices, group chats, and online forms."
-image: https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1jvu1hbo891h1d0p165ku57ar6c.jpg
 ---
 Back-to-school season brings new teachers, new schedules, new supplies—and a whole new round of apps, accounts, devices, group chats, and online forms. As a dad, I’ve learned that protecting our kids online is not about becoming the “technology police.” It is about creating enough trust that they will talk to us before a small online mistake becomes a bigger problem.
 

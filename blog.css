@@ -12,21 +12,12 @@
 .blog-count { color: var(--text-gray); font-size: 12px; margin-bottom: 1rem; }
 .blog-empty { display: none; text-align: center; color: var(--neon-pink); padding: 3rem 0; }
 
-/* Tiles: same size/shape as the book & merch cards on the main page (~266 x 530, i.e. 1:2) */
-.blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; }
-.blog-tile { aspect-ratio: 1 / 2; display: flex; flex-direction: column; overflow: hidden; padding: 1.5rem; cursor: pointer; position: relative;
-    background: linear-gradient(135deg, rgba(45,33,69,.8) 0%, rgba(26,31,58,.8) 100%);
-    border: 3px solid var(--neon-cyan); border-radius: var(--radius-lg); box-shadow: 0 0 15px rgba(0,240,255,.2); transition: all .3s ease; }
-.blog-tile:hover, .blog-tile:focus-visible { border-color: var(--neon-pink); outline: none; transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 0 20px var(--neon-cyan), 0 0 40px var(--neon-pink), inset 0 0 20px rgba(255,0,110,.1); }
+/* Tiles reuse the shop's .products-grid / .product-card styles from styles.css */
+.blog-tile { cursor: pointer; }
 .blog-tile[hidden] { display: none; }
-.blog-tile-meta { display: flex; justify-content: space-between; align-items: center; gap: .5rem; font-size: 11px; margin-bottom: .6rem; }
-.blog-tag { color: #050812; background: var(--neon-lime); padding: .15rem .5rem; border-radius: var(--radius); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-.blog-date { color: var(--text-gray); }
-.blog-tile-title { font-size: 15px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; line-height: 1.35; color: var(--neon-pink); margin-bottom: .75rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.blog-tile-intro { flex: 1; min-height: 0; overflow: hidden; font-size: 12px; color: var(--text-white); line-height: 1.5;
-    -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent); mask-image: linear-gradient(180deg, #000 70%, transparent); }
-.blog-tile-more { margin-top: .75rem; text-align: center; font-size: 12px; color: var(--neon-cyan); letter-spacing: 1px; }
+.blog-tag { color: #050812; background: var(--neon-lime); padding: .15rem .5rem; border-radius: var(--radius); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 11px; }
+.blog-date { color: var(--text-gray); font-size: 11px; }
+.blog-tile-meta { display: flex; justify-content: space-between; align-items: center; gap: .5rem; margin-bottom: .6rem; }
 
 /* Popup */
 .blog-modal { position: fixed; inset: 0; z-index: 2000; display: none; align-items: center; justify-content: center; padding: 1rem; background: rgba(5,8,18,.88); }
@@ -59,15 +50,3 @@
     .blog-modal-title, .blog-post-title { font-size: 21px; }
 }
 
-/* Cover image (reuses shop .product-image-container look) */
-.blog-tile .product-image-container { flex: 0 0 auto; margin-bottom: 1rem; font-size: 56px; }
-.blog-modal-cover { width: 100%; max-height: 280px; object-fit: cover; border: 2px solid var(--neon-cyan); border-radius: var(--radius-lg); margin: .75rem 0 0; display: none; }
-.blog-modal-cover.show { display: block; }
-.post-cover { width: 100%; max-height: 320px; object-fit: cover; border: 2px solid var(--neon-cyan); border-radius: var(--radius-lg); margin: .5rem 0 1rem; }
-
-/* Mobile: single column like the shop; natural height */
-@media (max-width: 768px) {
-    .blog-grid { grid-template-columns: 1fr; gap: 1rem; }
-    .blog-tile { aspect-ratio: auto; }
-    .blog-tile-intro { flex: none; max-height: 9em; }
-}

@@ -3,7 +3,6 @@ layout: post
 title: "Is Your Family’s Digital Life Actually Protected?"
 category: Family Safety
 intro: "We protect our homes. We teach our kids to look both ways before crossing the street. We lock the doors at night. But when was the last time you checked the digital doors your family uses every day?"
-image: https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1k0if9corsb41kqp1lfk1vl9np2c.jpg
 ---
 We protect our homes. We teach our kids to look both ways before crossing the street. We lock the doors at night.
 

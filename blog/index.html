@@ -24,17 +24,17 @@ description: Practical, no-jargon family cybersecurity tips from Gavin Marlowe.
     </div>
     <div class="blog-count" id="blog-count"></div>
 
-    <div class="blog-grid" id="blog-grid">
+    <div class="products-grid" id="blog-grid">
     {% for post in site.posts %}
         {% assign intro = post.intro | default: post.content | strip_html | strip_newlines | truncatewords: 45 %}
-        <article class="blog-tile" tabindex="0" role="button" aria-label="Read: {{ post.title | escape }}"
+        <article class="product-card blog-tile"
                  data-slug="{{ post.slug }}" data-cat="{{ post.category | escape }}"
                  data-date="{{ post.date | date: '%Y-%m-%d' }}" data-year="{{ post.date | date: '%Y' }}">
-            <div class="blog-tile-meta"><span class="blog-tag">{{ post.category }}</span><span class="blog-date">{{ post.date | date: "%b %-d, %Y" }}</span></div>
-            <div class="product-image-container">{% if post.image %}<img class="product-image" src="{{ post.image }}" alt="" loading="lazy">{% else %}🛡️{% endif %}</div>
-            <h3 class="blog-tile-title">{{ post.title }}</h3>
-            <p class="blog-tile-intro">{{ intro }}</p>
-            <span class="blog-tile-more">[ READ MORE ]</span>
+            <div class="badge">{{ post.category }}</div>
+            <h3 class="product-name">{{ post.title }}</h3>
+            <p class="product-desc">{{ intro }}</p>
+            <div class="product-price">{{ post.date | date: "%b %-d, %Y" }}</div>
+            <button type="button" class="btn btn-primary" aria-label="Read: {{ post.title | escape }}">Read Post</button>
         </article>
     {% endfor %}
     </div>
@@ -43,7 +43,7 @@ description: Practical, no-jargon family cybersecurity tips from Gavin Marlowe.
 
 <!-- Post bodies (hidden until opened in the popup) -->
 {% for post in site.posts %}
-<template id="post-{{ post.slug }}" data-title="{{ post.title | escape }}" data-cat="{{ post.category | escape }}" data-date="{{ post.date | date: '%b %-d, %Y' }}" data-url="{{ post.url | relative_url }}" data-image="{{ post.image }}">{{ post.content }}</template>
+<template id="post-{{ post.slug }}" data-title="{{ post.title | escape }}" data-cat="{{ post.category | escape }}" data-date="{{ post.date | date: '%b %-d, %Y' }}" data-url="{{ post.url | relative_url }}">{{ post.content }}</template>
 {% endfor %}
 
 <div class="blog-modal" id="blog-modal" role="dialog" aria-modal="true" aria-labelledby="blog-modal-title">
@@ -51,7 +51,6 @@ description: Practical, no-jargon family cybersecurity tips from Gavin Marlowe.
         <button type="button" class="blog-modal-close" id="blog-modal-close" aria-label="Close post">[ X CLOSE ]</button>
         <div class="blog-tile-meta"><span class="blog-tag" id="blog-modal-cat"></span><span class="blog-date" id="blog-modal-date"></span></div>
         <h2 class="blog-modal-title" id="blog-modal-title"></h2>
-        <img class="blog-modal-cover" id="blog-modal-cover" alt="">
         <div class="post-body" id="blog-modal-body"></div>
         <div class="blog-share"><button type="button" class="btn" id="blog-copy">[ COPY LINK ]</button></div>
     </div>
@@ -105,8 +104,6 @@ description: Practical, no-jargon family cybersecurity tips from Gavin Marlowe.
         document.getElementById('blog-modal-title').textContent = tpl.dataset.title;
         document.getElementById('blog-modal-cat').textContent = tpl.dataset.cat;
         document.getElementById('blog-modal-date').textContent = tpl.dataset.date;
-        var cover = document.getElementById('blog-modal-cover');
-        if (tpl.dataset.image) { cover.src = tpl.dataset.image; cover.classList.add('show'); } else { cover.removeAttribute('src'); cover.classList.remove('show'); }
         var body = document.getElementById('blog-modal-body');
         body.innerHTML = ''; body.appendChild(tpl.content.cloneNode(true));
         document.getElementById('blog-modal-panel').scrollTop = 0;
@@ -122,7 +119,6 @@ description: Practical, no-jargon family cybersecurity tips from Gavin Marlowe.
     }
     tiles.forEach(function (t) {
         t.addEventListener('click', function () { openPost(t.dataset.slug, true); });
-        t.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openPost(t.dataset.slug, true); } });
     });
     document.getElementById('blog-modal-close').addEventListener('click', closePost);
     modal.addEventListener('click', function (e) { if (e.target === modal) closePost(); });

@@ -3,7 +3,6 @@ layout: post
 title: "DadCyberTips: The Internet's Friendly Neighborhood Dad"
 category: Welcome
 intro: "Hey there, friend — welcome to DadCyberTips, your friendly neighborhood dad for all things internet. I'm not going to pretend I'm some Silicon Valley genius or a hacker in a hoodie."
-image: https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1jupmn5gkd2g1rkg1t5q1m0f1i7jc.png
 ---
 Hey there, friend — welcome to DadCyberTips, your friendly neighborhood dad for all things internet.
 
