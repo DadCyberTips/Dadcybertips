@@ -80,6 +80,10 @@
 
     var env = {
       js_now_ms: function () { return performance.now(); },
+      js_level_complete: function (epsd, last, skill, kills, maxk, items, maxi, secrets, maxs, tics, par, cheated) {
+        if (opts.onLevelComplete) opts.onLevelComplete({ episode: epsd + 1, map: last + 1, skill: skill, kills: kills, maxKills: maxk,
+          items: items, maxItems: maxi, secrets: secrets, maxSecrets: maxs, seconds: Math.floor(tics / 35), parSeconds: Math.floor(par / 35), cheated: !!cheated });
+      },
       js_draw: function () {
         var w = inst.exports.dg_width(), h = inst.exports.dg_height(), n = w * h;
         var src = new Uint32Array(mem.buffer, inst.exports.dg_fb(), n);
@@ -103,7 +107,8 @@
         pause: function () { running = false; },
         key: function (pressed, code) { inst.exports.dg_key(pressed ? 1 : 0, code); },
         tick: function () { inst.exports.dg_tick(); },
-        isRunning: function () { return running; }
+        isRunning: function () { return running; },
+        exports: inst.exports
       };
     });
   }

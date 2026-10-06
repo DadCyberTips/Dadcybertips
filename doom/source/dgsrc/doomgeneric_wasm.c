@@ -3,12 +3,17 @@
 #include <stdint.h>
 #include "doomkeys.h"
 #include "doomgeneric.h"
+#include "doomstat.h"
+#include "d_player.h"
+#include "g_game.h"
 
 #define WASM_IMPORT(name) __attribute__((import_module("env"), import_name(name)))
 #define WASM_EXPORT(name) __attribute__((export_name(name)))
 
 WASM_IMPORT("js_draw") extern void js_draw(void);
 WASM_IMPORT("js_now_ms") extern double js_now_ms(void);
+WASM_IMPORT("js_level_complete") extern void js_level_complete(int epsd, int last, int skill, int kills, int maxkills,
+    int items, int maxitems, int secrets, int maxsecrets, int time_tics, int par_tics, int cheated);
 
 #define KEYQUEUE_SIZE 64
 static unsigned short key_queue[KEYQUEUE_SIZE];
@@ -46,6 +51,19 @@ WASM_EXPORT("dg_tick") void dg_tick(void) { doomgeneric_Tick(); }
 WASM_EXPORT("dg_fb") uint32_t *dg_fb(void) { return DG_ScreenBuffer; }
 WASM_EXPORT("dg_width") int dg_width(void) { return DOOMGENERIC_RESX; }
 WASM_EXPORT("dg_height") int dg_height(void) { return DOOMGENERIC_RESY; }
+
+// Called from WI_Start() when a level is finished (single player only).
+void dg_level_complete(wbstartstruct_t *wb)
+{
+    if (netgame || deathmatch) return;
+    int cheated = (players[consoleplayer].cheats & (CF_NOCLIP | CF_GODMODE)) ? 1 : 0;
+    js_level_complete(wb->epsd, wb->last, (int)gameskill, wb->plyr[0].skills, wb->maxkills, wb->plyr[0].sitems, wb->maxitems,
+                      wb->plyr[0].ssecret, wb->maxsecret, wb->plyr[0].stime, wb->partime, cheated);
+}
+
+#ifdef DG_TEST   /* test builds only: lets the smoke test finish a level instantly */
+WASM_EXPORT("dg_test_exit") void dg_test_exit(void) { G_ExitLevel(); }
+#endif
 
 // wasi-libc has no system(); i_system.c calls it to pop up an error dialog on some platforms.
 int system(const char *cmd) { (void)cmd; return -1; }

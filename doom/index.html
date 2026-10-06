@@ -7,11 +7,11 @@
     <meta name="description" content="Play the classic shareware DOOM right in your browser, powered by open-source code.">
     <link rel="stylesheet" href="../styles.css">
     <style>
-        .doom-wrap { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem 4rem; position: relative; z-index: 2; color: var(--text-white); }
+        .doom-wrap { max-width: 760px; margin: 0 auto; padding: 2rem 1.5rem 4rem; position: relative; z-index: 2; color: var(--text-white); }
         .doom-intro { text-align: center; margin: -1.5rem auto 1.5rem; max-width: 640px; }
-        .doom-stage { position: relative; width: 100%; aspect-ratio: 8 / 5; background: #000; border: 3px solid var(--neon-cyan); border-radius: var(--radius-lg);
+        .doom-stage { position: relative; width: 100%; max-width: 640px; margin: 0 auto; aspect-ratio: 8 / 5; background: #000; border: 3px solid var(--neon-cyan); border-radius: var(--radius-lg);
             box-shadow: 0 0 20px var(--neon-cyan), 0 0 45px rgba(255,0,110,.35); overflow: hidden; }
-        .doom-stage:fullscreen { border: 0; border-radius: 0; aspect-ratio: auto; display: flex; align-items: center; justify-content: center; }
+        .doom-stage:fullscreen { max-width: none; border: 0; border-radius: 0; aspect-ratio: auto; display: flex; align-items: center; justify-content: center; }
         .doom-stage:fullscreen canvas { width: auto; height: 100%; max-width: 100%; }
         #doom-canvas { display: block; width: 100%; height: 100%; image-rendering: pixelated; image-rendering: crisp-edges; background: #000; }
         .doom-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; text-align: center;
@@ -21,6 +21,7 @@
         .doom-overlay p { font-size: 13px; color: var(--text-gray); max-width: 420px; }
         .doom-bar { height: 10px; width: min(320px, 70%); border: 2px solid var(--neon-cyan); border-radius: var(--radius); overflow: hidden; }
         .doom-bar > div { height: 100%; width: 0; background: var(--neon-lime); transition: width .15s; }
+        .doom-actions, .doom-touch, .doom-toast { max-width: 640px; margin-left: auto; margin-right: auto; }
         .doom-actions { display: flex; flex-wrap: wrap; gap: .75rem 1.25rem; align-items: center; justify-content: space-between; margin: 1rem 0 0; font-size: 13px; }
         .doom-actions label { cursor: pointer; }
         .doom-actions .btn { width: auto; padding: .5rem 1rem; font-size: 13px; }
@@ -36,6 +37,19 @@
         .doom-touch .act { grid-template-columns: repeat(2, 76px); grid-template-rows: repeat(2, 56px); }
         .doom-touch button { font-family: 'Courier New', monospace; font-weight: 700; font-size: 13px; background: rgba(5,8,18,.9); color: var(--neon-cyan); border: 2px solid var(--neon-cyan); border-radius: var(--radius); touch-action: none; }
         .doom-touch button:active, .doom-touch button.on { background: var(--neon-cyan); color: #050812; }
+        .doom-toast { display: none; margin-top: 1rem; padding: .6rem .9rem; border: 2px solid var(--neon-lime); border-radius: var(--radius); color: var(--neon-lime); font-size: 13px; text-align: center; }
+        .doom-toast.show { display: block; }
+        .doom-scores-bar { display: flex; flex-wrap: wrap; gap: .75rem 1rem; align-items: center; justify-content: space-between; margin-bottom: .75rem; font-size: 13px; }
+        .doom-scores-bar input, .doom-scores-bar select { font-family: 'Courier New', monospace; font-size: 13px; background: rgba(5,8,18,.9); color: var(--neon-cyan); border: 2px solid var(--neon-cyan); border-radius: var(--radius); padding: .35rem .5rem; }
+        .doom-scores-bar input { width: 9.5em; }
+        .doom-table-wrap { overflow-x: auto; }
+        .doom-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .doom-table th { color: var(--neon-cyan); text-align: left; border-bottom: 2px solid var(--neon-cyan); padding: .4rem .5rem; white-space: nowrap; }
+        .doom-table td { padding: .4rem .5rem; border-bottom: 1px dashed rgba(0,240,255,.25); white-space: nowrap; }
+        .doom-table td.sc { color: var(--neon-lime); font-weight: 700; text-align: right; }
+        .doom-table tr.new td { background: rgba(255,0,110,.18); }
+        .doom-empty { color: var(--text-gray); font-size: 13px; padding: .75rem 0; }
+        .doom-link-btn { background: none; border: 0; color: var(--neon-pink); font-family: 'Courier New', monospace; font-size: 12px; cursor: pointer; text-decoration: underline; padding: 0; }
         @media (pointer: coarse) { .doom-touch { display: flex; } .doom-controls-kb { display: none; } }
     </style>
 </head>
@@ -87,6 +101,23 @@
             </div>
         </div>
 
+        <div class="doom-toast" id="doom-toast" role="status" aria-live="polite"></div>
+
+        <h3 class="doom-h">> Top scores</h3>
+        <div class="doom-scores-bar">
+            <label>Name <input type="text" id="doom-name" maxlength="12" placeholder="Dad" autocomplete="off"></label>
+            <label>Level <select id="doom-level"><option value="">All levels</option></select></label>
+            <button type="button" class="doom-link-btn" id="doom-clear">clear my scores</button>
+        </div>
+        <div class="doom-table-wrap">
+            <table class="doom-table" id="doom-table">
+                <thead><tr><th>#</th><th>Name</th><th>Level</th><th>Skill</th><th>Time</th><th>K / I / S</th><th style="text-align:right">Score</th></tr></thead>
+                <tbody id="doom-rows"></tbody>
+            </table>
+        </div>
+        <p class="doom-empty" id="doom-none">No scores yet. Finish a level to get on the board!</p>
+        <p class="doom-legal">Score = (kills % + items % + secrets %) &times; 10, plus 5 points for every second under the level's par time, times a skill bonus (x0.5 easiest up to x2 on Nightmare). Runs that use god mode or no-clip cheats don't count. Scores are saved only in this browser, on this device. Nothing is uploaded.</p>
+
         <h3 class="doom-h doom-controls-kb">> Controls</h3>
         <div class="doom-controls doom-controls-kb">
             <div><span>Move / turn</span><b>Arrows or WASD</b></div>
@@ -98,7 +129,7 @@
             <div><span>Map</span><b>Tab</b></div>
             <div><span>Menu / back</span><b>Esc</b></div>
         </div>
-        <p class="doom-legal">Tip: click the game to start; click anywhere outside it to give the keyboard back to the page. This version has no sound. It saves nothing, so your progress resets when you reload.</p>
+        <p class="doom-legal">Tip: click the game to start; click anywhere outside it to give the keyboard back to the page. This version has no sound. Game saves are off, so reloading restarts the game (your top scores are kept).</p>
 
         <h3 class="doom-h">> About this page &amp; licenses</h3>
         <p class="doom-legal">
@@ -145,10 +176,61 @@
                 });
             });
         }
+        // ---------- top scores (browser-local) ----------
+        var SKILLS = ['I\'m too young to die', 'Hey, not too rough', 'Hurt me plenty', 'Ultra-violence', 'Nightmare!'];
+        var SHORT = ['ITYTD', 'HNTR', 'HMP', 'UV', 'NM'], MULT = [0.5, 0.75, 1, 1.5, 2];
+        var KEY = 'dct_doom_scores_v1', NAME = 'dct_doom_name_v1';
+        var nameEl = document.getElementById('doom-name'), levelSel = document.getElementById('doom-level'), rows = document.getElementById('doom-rows');
+        var noneEl = document.getElementById('doom-none'), toast = document.getElementById('doom-toast'), newId = null, toastTimer = null;
+        function load() { try { var a = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(a) ? a : []; } catch (e) { return []; } }
+        function save(a) { try { localStorage.setItem(KEY, JSON.stringify(a.slice(0, 200))); } catch (e) {} }
+        try { nameEl.value = localStorage.getItem(NAME) || ''; } catch (e) {}
+        nameEl.addEventListener('input', function () { try { localStorage.setItem(NAME, nameEl.value.trim().slice(0, 12)); } catch (e) {} });
+        // keep typing in the name box from being sent to the game
+        nameEl.addEventListener('focus', function () { active = false; });
+        function pct(n, max) { return max > 0 ? Math.min(100, Math.round(100 * n / max)) : 100; }
+        function fmt(s) { return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
+        function lvl(r) { return 'E' + r.episode + 'M' + r.map; }
+        function calcScore(r) {
+            var base = (pct(r.kills, r.maxKills) + pct(r.items, r.maxItems) + pct(r.secrets, r.maxSecrets)) * 10;
+            var bonus = Math.max(0, r.parSeconds - r.seconds) * 5;
+            return Math.round((base + bonus) * (MULT[r.skill] || 1));
+        }
+        function render() {
+            var all = load(), f = levelSel.value;
+            var seen = {}; all.forEach(function (r) { seen[lvl(r)] = 1; });
+            var keep = levelSel.value; levelSel.length = 1;
+            Object.keys(seen).sort().forEach(function (k) { var o = document.createElement('option'); o.value = k; o.textContent = k; levelSel.appendChild(o); });
+            levelSel.value = seen[keep] ? keep : ''; f = levelSel.value;
+            var list = all.filter(function (r) { return !f || lvl(r) === f; }).sort(function (a, b) { return b.score - a.score || a.seconds - b.seconds; }).slice(0, 10);
+            rows.innerHTML = '';
+            list.forEach(function (r, i) {
+                var tr = document.createElement('tr'); if (r.id === newId) tr.className = 'new';
+                var cells = [i + 1, r.name || 'Dad', lvl(r), SHORT[r.skill] || '?', fmt(r.seconds), pct(r.kills, r.maxKills) + ' / ' + pct(r.items, r.maxItems) + ' / ' + pct(r.secrets, r.maxSecrets), r.score];
+                cells.forEach(function (c, j) { var td = document.createElement('td'); td.textContent = c; if (j === 6) td.className = 'sc'; tr.appendChild(td); });
+                rows.appendChild(tr);
+            });
+            noneEl.style.display = list.length ? 'none' : ''; document.getElementById('doom-table').style.display = list.length ? '' : 'none';
+        }
+        levelSel.addEventListener('change', function () { render(); });
+        document.getElementById('doom-clear').addEventListener('click', function () {
+            if (confirm('Clear all of your saved Doom scores on this device?')) { try { localStorage.removeItem(KEY); } catch (e) {} newId = null; render(); }
+        });
+        function say(text) { toast.textContent = text; toast.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 9000); }
+        function onLevelComplete(r) {
+            if (r.cheated) { say('Level ' + lvl(r) + ' complete, but cheats were used, so it doesn\'t count toward the scoreboard.'); return; }
+            r.score = calcScore(r); r.id = Date.now() + '' + Math.floor(Math.random() * 1000); r.name = (nameEl.value.trim() || 'Dad').slice(0, 12); r.when = Date.now();
+            var all = load(); all.push(r); save(all); newId = r.id;
+            var rank = all.filter(function (x) { return lvl(x) === lvl(r) && (x.score > r.score); }).length + 1;
+            levelSel.value = lvl(r); render();
+            say(lvl(r) + ' complete! ' + r.score + ' points (' + SHORT[r.skill] + '), #' + rank + ' on your ' + lvl(r) + ' board.');
+        }
+        render();
+
         function fail(e) { title.textContent = 'COULD NOT LOAD'; msg.textContent = 'Sorry, the game failed to start (' + e.message + '). Try reloading the page.'; barwrap.style.display = 'none'; }
 
         Promise.all([fetchBuf('doom.wasm', 8, 0), fetchBuf('doom1.wad', 90, 8)]).then(function (r) {
-            return DoomWasm.start({ canvas: canvas, wasm: r[0], wad: new Uint8Array(r[1]) });
+            return DoomWasm.start({ canvas: canvas, wasm: r[0], wad: new Uint8Array(r[1]), onLevelComplete: onLevelComplete });
         }).then(function (g) {
             game = g; bar.style.width = '100%';
             for (var i = 0; i < 3; i++) g.tick();   // draw the first frame behind the overlay

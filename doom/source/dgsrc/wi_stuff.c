@@ -1815,8 +1815,12 @@ void WI_initVariables(wbstartstruct_t* wbstartstruct)
 	wbs->epsd -= 3;
 }
 
+// Browser build: report level-complete stats to the web page (see doomgeneric_wasm.c)
+extern void dg_level_complete(wbstartstruct_t* wb);
+
 void WI_Start(wbstartstruct_t* wbstartstruct)
 {
+    dg_level_complete(wbstartstruct);
     WI_initVariables(wbstartstruct);
     WI_loadData();
 
