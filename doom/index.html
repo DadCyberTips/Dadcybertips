@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play DOOM | DadCyberTips</title>
+    <meta name="description" content="Play the classic shareware DOOM right in your browser, powered by open-source code.">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .doom-wrap { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem 4rem; position: relative; z-index: 2; color: var(--text-white); }
+        .doom-intro { text-align: center; margin: -1.5rem auto 1.5rem; max-width: 640px; }
+        .doom-stage { position: relative; width: 100%; aspect-ratio: 8 / 5; background: #000; border: 3px solid var(--neon-cyan); border-radius: var(--radius-lg);
+            box-shadow: 0 0 20px var(--neon-cyan), 0 0 45px rgba(255,0,110,.35); overflow: hidden; }
+        .doom-stage:fullscreen { border: 0; border-radius: 0; aspect-ratio: auto; display: flex; align-items: center; justify-content: center; }
+        .doom-stage:fullscreen canvas { width: auto; height: 100%; max-width: 100%; }
+        #doom-canvas { display: block; width: 100%; height: 100%; image-rendering: pixelated; image-rendering: crisp-edges; background: #000; }
+        .doom-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; text-align: center;
+            background: rgba(5,8,18,.88); padding: 1rem; }
+        .doom-overlay.hidden { display: none; }
+        .doom-overlay h3 { color: var(--neon-pink); font-size: 22px; text-shadow: 0 0 12px rgba(255,0,110,.6); }
+        .doom-overlay p { font-size: 13px; color: var(--text-gray); max-width: 420px; }
+        .doom-bar { height: 10px; width: min(320px, 70%); border: 2px solid var(--neon-cyan); border-radius: var(--radius); overflow: hidden; }
+        .doom-bar > div { height: 100%; width: 0; background: var(--neon-lime); transition: width .15s; }
+        .doom-actions { display: flex; flex-wrap: wrap; gap: .75rem 1.25rem; align-items: center; justify-content: space-between; margin: 1rem 0 0; font-size: 13px; }
+        .doom-actions label { cursor: pointer; }
+        .doom-actions .btn { width: auto; padding: .5rem 1rem; font-size: 13px; }
+        .doom-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: .5rem 1.5rem; margin: 2rem 0; font-size: 13px; }
+        .doom-controls div { border-bottom: 1px dashed rgba(0,240,255,.35); padding: .35rem 0; display: flex; justify-content: space-between; gap: 1rem; }
+        .doom-controls b { color: var(--neon-cyan); font-weight: 700; white-space: nowrap; }
+        .doom-h { color: var(--neon-pink); font-size: 18px; margin: 2rem 0 .75rem; }
+        .doom-legal { font-size: 12px; line-height: 1.7; color: var(--text-gray); }
+        .doom-legal a { color: var(--neon-lime); }
+        .doom-touch { display: none; margin-top: 1rem; gap: .5rem; justify-content: space-between; user-select: none; -webkit-user-select: none; touch-action: none; }
+        .doom-touch .grp { display: grid; gap: .4rem; }
+        .doom-touch .dpad { grid-template-columns: repeat(3, 56px); grid-template-rows: repeat(2, 56px); }
+        .doom-touch .act { grid-template-columns: repeat(2, 76px); grid-template-rows: repeat(2, 56px); }
+        .doom-touch button { font-family: 'Courier New', monospace; font-weight: 700; font-size: 13px; background: rgba(5,8,18,.9); color: var(--neon-cyan); border: 2px solid var(--neon-cyan); border-radius: var(--radius); touch-action: none; }
+        .doom-touch button:active, .doom-touch button.on { background: var(--neon-cyan); color: #050812; }
+        @media (pointer: coarse) { .doom-touch { display: flex; } .doom-controls-kb { display: none; } }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand" onclick="location.href='../index.html'" style="cursor: pointer;">🛡️ DadCyberTips</div>
+        <div class="navbar-toggle" onclick="toggleMobileMenu()" id="navbar-toggle"><span></span><span></span><span></span></div>
+        <div class="navbar-links" id="navbar-links">
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#books">Books</a>
+            <a href="../index.html#resources">Free</a>
+            <a href="../blog/">Blog</a>
+            <a href="../services.html">Services</a>
+            <a href="../index.html#merch">Merch</a>
+            <a href="../privacy.html">Privacy</a>
+        </div>
+    </nav>
+
+    <section class="section doom-wrap">
+        <h2 class="section-title">[ PLAY DOOM ]</h2>
+        <p class="doom-intro">> The 1993 classic, running right here in your browser. Episode 1 is free. Take a break, then get back to protecting the family.</p>
+
+        <div class="doom-stage" id="doom-stage">
+            <canvas id="doom-canvas" width="640" height="400"></canvas>
+            <div class="doom-overlay" id="doom-overlay">
+                <h3 id="doom-title">LOADING...</h3>
+                <div class="doom-bar" id="doom-barwrap"><div id="doom-bar"></div></div>
+                <p id="doom-msg">Downloading the game (about 4.6 MB).</p>
+                <button type="button" class="btn btn-primary" id="doom-play" style="display:none; width:auto; padding:.75rem 2rem;">[ CLICK TO PLAY ]</button>
+            </div>
+        </div>
+
+        <div class="doom-actions">
+            <label><input type="checkbox" id="doom-wasd" checked> WASD controls</label>
+            <span>
+                <button type="button" class="btn btn-secondary" id="doom-pause">[ PAUSE ]</button>
+                <button type="button" class="btn btn-secondary" id="doom-full">[ FULLSCREEN ]</button>
+            </span>
+        </div>
+
+        <div class="doom-touch" id="doom-touch">
+            <div class="grp dpad">
+                <span></span><button data-k="173">▲</button><span></span>
+                <button data-k="172">◀</button><button data-k="175">▼</button><button data-k="174">▶</button>
+            </div>
+            <div class="grp act">
+                <button data-k="163">FIRE</button><button data-k="162">USE</button>
+                <button data-k="13">ENTER</button><button data-k="27">ESC</button>
+            </div>
+        </div>
+
+        <h3 class="doom-h doom-controls-kb">> Controls</h3>
+        <div class="doom-controls doom-controls-kb">
+            <div><span>Move / turn</span><b>Arrows or WASD</b></div>
+            <div><span>Strafe</span><b>Q / E or , .</b></div>
+            <div><span>Fire</span><b>Ctrl</b></div>
+            <div><span>Open doors / switches</span><b>Space</b></div>
+            <div><span>Run</span><b>Shift</b></div>
+            <div><span>Choose weapon</span><b>1 – 7</b></div>
+            <div><span>Map</span><b>Tab</b></div>
+            <div><span>Menu / back</span><b>Esc</b></div>
+        </div>
+        <p class="doom-legal">Tip: click the game to start; click anywhere outside it to give the keyboard back to the page. This version has no sound. It saves nothing, so your progress resets when you reload.</p>
+
+        <h3 class="doom-h">> About this page &amp; licenses</h3>
+        <p class="doom-legal">
+            The game engine is <a href="https://github.com/ozkl/doomgeneric" target="_blank" rel="noopener">doomgeneric</a>, built from the open-source Doom code that id Software released under the
+            <b>GNU General Public License v2</b> in 1999. It is compiled to WebAssembly and runs entirely in your browser; nothing is sent anywhere.
+            The complete source for this build, with a license copy and rebuild instructions, is in the
+            <a href="source/">source folder</a> (<a href="source/README.md">README</a>, <a href="source/COPYING">GPL text</a>).<br><br>
+            The game data is the official, unmodified <b>shareware</b> Episode 1 (<code>doom1.wad</code>) &copy; id Software, which may be shared freely and is not covered by the GPL.
+            DOOM is a trademark of id Software LLC / ZeniMax Media; this site is not affiliated with or endorsed by them. Want the whole game? It's on Steam and GOG.
+        </p>
+    </section>
+
+    <footer class="footer">
+        <div class="social-links">
+            <a href="https://instagram.com/dadcybertips" target="_blank">Instagram</a>
+            <a href="https://tiktok.com/@dadcybertips" target="_blank">TikTok</a>
+            <a href="https://youtube.com" target="_blank">YouTube</a>
+            <a href="https://threads.com/@dadcybertips" target="_blank">Threads</a>
+            <a href="mailto:info@dadcybertips.com">Email</a>
+            <a href="../privacy.html" class="privacy-link">🛡️ PRIVACY POLICY 🛡️</a>
+        </div>
+        <p>© 2026 DadCyberTips by Gavin Marlowe. All rights reserved.</p>
+    </footer>
+
+    <script src="doom.js"></script>
+    <script>
+    function toggleMobileMenu() { var n = document.querySelector('.navbar-links'); if (n) n.classList.toggle('active'); }
+    (function () {
+        var stage = document.getElementById('doom-stage'), canvas = document.getElementById('doom-canvas');
+        var overlay = document.getElementById('doom-overlay'), title = document.getElementById('doom-title'), msg = document.getElementById('doom-msg');
+        var bar = document.getElementById('doom-bar'), barwrap = document.getElementById('doom-barwrap'), playBtn = document.getElementById('doom-play');
+        var wasdBox = document.getElementById('doom-wasd'), game = null, active = false, down = {};
+
+        function fetchBuf(url, weight, base) {
+            return fetch(url).then(function (r) {
+                if (!r.ok) throw new Error(url + ' ' + r.status);
+                var total = +r.headers.get('content-length') || 0, got = 0, chunks = [], rd = r.body && r.body.getReader();
+                if (!rd) return r.arrayBuffer();
+                return rd.read().then(function pump(x) {
+                    if (x.done) { var all = new Uint8Array(got), o = 0; chunks.forEach(function (c) { all.set(c, o); o += c.length; }); return all.buffer; }
+                    chunks.push(x.value); got += x.value.length;
+                    if (total) bar.style.width = (base + weight * got / total) + '%';
+                    return rd.read().then(pump);
+                });
+            });
+        }
+        function fail(e) { title.textContent = 'COULD NOT LOAD'; msg.textContent = 'Sorry, the game failed to start (' + e.message + '). Try reloading the page.'; barwrap.style.display = 'none'; }
+
+        Promise.all([fetchBuf('doom.wasm', 8, 0), fetchBuf('doom1.wad', 90, 8)]).then(function (r) {
+            return DoomWasm.start({ canvas: canvas, wasm: r[0], wad: new Uint8Array(r[1]) });
+        }).then(function (g) {
+            game = g; bar.style.width = '100%';
+            for (var i = 0; i < 3; i++) g.tick();   // draw the first frame behind the overlay
+            title.textContent = 'DOOM'; msg.textContent = 'Shareware Episode 1: Knee-Deep in the Dead'; barwrap.style.display = 'none'; playBtn.style.display = '';
+        }).catch(fail);
+
+        function start() { if (!game) return; overlay.classList.add('hidden'); active = true; game.run(); }
+        function stop(text) { active = false; releaseAll(); }
+        function releaseAll() { Object.keys(down).forEach(function (c) { game && game.key(false, +c); }); down = {}; }
+        playBtn.addEventListener('click', function (e) { e.stopPropagation(); start(); });
+        stage.addEventListener('click', function () { if (game && overlay.classList.contains('hidden')) { active = true; if (!game.isRunning()) game.run(); } });
+        document.addEventListener('click', function (e) { if (!stage.contains(e.target) && !document.getElementById('doom-touch').contains(e.target)) stop(); });
+
+        function onKey(e, pressed) {
+            if (!active || !game) return;
+            var k = DoomWasm.doomKey(e, wasdBox.checked); if (k === null) return;
+            e.preventDefault();
+            if (pressed && down[k] && e.repeat) return;
+            if (pressed) down[k] = 1; else delete down[k];
+            game.key(pressed, k);
+        }
+        document.addEventListener('keydown', function (e) { onKey(e, true); });
+        document.addEventListener('keyup', function (e) { onKey(e, false); });
+        window.addEventListener('blur', releaseAll);
+        document.addEventListener('visibilitychange', function () { if (document.hidden && game) { game.pause(); releaseAll(); } else if (game && !overlay.classList.contains('hidden') === true && active) game.run(); });
+
+        var pauseBtn = document.getElementById('doom-pause');
+        pauseBtn.addEventListener('click', function () {
+            if (!game || !overlay.classList.contains('hidden')) return;
+            if (game.isRunning()) { game.pause(); releaseAll(); pauseBtn.textContent = '[ RESUME ]'; } else { game.run(); active = true; pauseBtn.textContent = '[ PAUSE ]'; }
+        });
+        document.getElementById('doom-full').addEventListener('click', function () {
+            if (document.fullscreenElement) document.exitFullscreen(); else if (stage.requestFullscreen) stage.requestFullscreen();
+        });
+
+        // touch buttons
+        Array.prototype.forEach.call(document.querySelectorAll('#doom-touch button'), function (b) {
+            var k = +b.dataset.k;
+            function on(e) { e.preventDefault(); if (!game) return; if (overlay.classList.contains('hidden') === false) start(); if (!game.isRunning()) game.run(); b.classList.add('on'); game.key(true, k); }
+            function off(e) { e.preventDefault(); b.classList.remove('on'); if (game) game.key(false, k); }
+            b.addEventListener('pointerdown', on); b.addEventListener('pointerup', off); b.addEventListener('pointercancel', off); b.addEventListener('pointerleave', off);
+        });
+    })();
+    </script>
+</body>
+</html>
