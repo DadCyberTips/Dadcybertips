@@ -1,5 +1,5 @@
 // Browser glue for doom.wasm (GPL doomgeneric port). Minimal in-memory WASI shim + game loop.
-// GPL-2.0-or-later. Source: see /doom/source/ in this repository.
+// GPL-2.0-or-later. Source: see the source/ folder next to this file.
 (function (root) {
   'use strict';
   var TIC_MS = 1000 / 35;

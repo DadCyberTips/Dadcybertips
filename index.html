@@ -348,7 +348,7 @@
             <h2 style="font-size: 20px; color: var(--neon-cyan); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">>>> MEET GAVIN MARLOWE <<<</h2>
             <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">Hi, I'm Gavin Marlowe, the creator of DadCyberTips.</p>
             <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">I'm a cybersecurity professional, author, dad, and old school gamer who has spent more than a decade working in cybersecurity and helping people understand how technology affects their lives.</p>
-            <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">My fascination with technology started much earlier—with computers, games, and figuring out how things worked. I grew up playing games like StarCraft, DOOM, and others, where finding the right cheat code or hack could make you feel like a god inside the game.</p>
+            <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">My fascination with technology started much earlier—with computers, games, and figuring out how things worked. I grew up playing games like StarCraft, DOOM, and others, where finding the right cheat code or hack could make you feel like a <span id="gx" style="color:inherit;font:inherit;cursor:inherit">god inside the game</span>.</p>
             <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">These days, I don't have a God Mode button for protecting my family—and neither do you.</p>
             <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">What we do have is knowledge.</p>
             <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">I created DadCyberTips because I believe cybersecurity shouldn't be something only technical people understand. The same security lessons we use at work should help protect our families at home—especially our kids and aging parents.</p>
@@ -634,5 +634,41 @@
             initializeQuiz();
         }
     </script>
+<style>
+#gx-m{position:fixed;inset:0;z-index:3000;display:none;align-items:center;justify-content:center;padding:1rem;background:rgba(5,8,18,.88)}
+#gx-m.on{display:flex}
+#gx-b{width:100%;max-width:380px;padding:1.25rem 1.25rem 1rem;background:#0a0e27;border:2px solid var(--neon-cyan);border-radius:var(--radius-lg);box-shadow:0 0 22px var(--neon-cyan),0 0 44px rgba(255,0,110,.3);font-family:'Courier New',monospace}
+#gx-b label{display:block;color:var(--neon-cyan);font-size:14px;letter-spacing:2px;margin-bottom:.6rem}
+#gx-i{width:100%;box-sizing:border-box;font:inherit;font-size:16px;letter-spacing:3px;color:var(--neon-lime);background:#050812;border:2px solid var(--neon-cyan);border-radius:var(--radius);padding:.55rem .7rem;outline:none;text-transform:uppercase}
+#gx-i:focus{border-color:var(--neon-pink)}
+#gx-s{min-height:1.2em;margin-top:.6rem;font-size:12px;letter-spacing:2px;color:var(--text-gray)}
+#gx-s.bad{color:var(--neon-pink)} #gx-s.ok{color:var(--neon-lime)}
+#gx-b.shake{animation:gxs .35s}
+@keyframes gxs{20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+</style>
+<div id="gx-m" role="dialog" aria-modal="true" aria-label="Enter code"><div id="gx-b"><label for="gx-i">&gt; ENTER CODE_</label><input id="gx-i" type="text" maxlength="32" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="text"><div id="gx-s" aria-live="polite"></div></div></div>
+<script>
+(function(){
+  var E={"i":200000,"s":"0sC3HEeNU6zN3UeShVV3TQ==","v":"9XVQI6EbcyE5/RoX","d":"DVCnOMBPSg/qgDzTLaEasp/AA9gqVp0f0fFp24s2kHrI0DIEAg=="}, t=document.getElementById('gx'), m=document.getElementById('gx-m'), b=document.getElementById('gx-b'), i=document.getElementById('gx-i'), s=document.getElementById('gx-s'), busy=false;
+  if(!t||!m||!window.crypto||!crypto.subtle) return;
+  function u(x){return Uint8Array.from(atob(x),function(c){return c.charCodeAt(0)})}
+  function open(){m.classList.add('on');s.className='';s.textContent='';i.value='';document.body.style.overflow='hidden';i.focus()}
+  function close(){m.classList.remove('on');document.body.style.overflow=''}
+  t.addEventListener('click',function(){var g=window.getSelection&&String(window.getSelection());if(g)return;open()});
+  m.addEventListener('click',function(e){if(e.target===m)close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.classList.contains('on'))close()});
+  function bad(){s.className='bad';s.textContent='ACCESS DENIED';b.classList.remove('shake');void b.offsetWidth;b.classList.add('shake');i.value='';i.focus()}
+  i.addEventListener('keydown',function(e){
+    if(e.key!=='Enter'||busy)return; e.preventDefault();
+    var code=i.value.trim().toLowerCase(); if(!code)return; busy=true; s.className='';s.textContent='...';
+    crypto.subtle.importKey('raw',new TextEncoder().encode(code),'PBKDF2',false,['deriveKey'])
+    .then(function(k){return crypto.subtle.deriveKey({name:'PBKDF2',salt:u(E.s),iterations:E.i,hash:'SHA-256'},k,{name:'AES-GCM',length:256},false,['decrypt'])})
+    .then(function(k){return crypto.subtle.decrypt({name:'AES-GCM',iv:u(E.v)},k,u(E.d))})
+    .then(function(p){var to=new TextDecoder().decode(p);s.className='ok';s.textContent='ACCESS GRANTED';setTimeout(function(){location.href=new URL(to,location.href).href},450)},
+          function(){bad()})
+    .then(function(){busy=false});
+  });
+})();
+</script>
 </body>
 </html>
