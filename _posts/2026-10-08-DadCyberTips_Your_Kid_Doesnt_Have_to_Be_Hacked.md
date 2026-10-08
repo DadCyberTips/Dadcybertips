@@ -1,3 +1,11 @@
+---
+layout: post
+title: "Your Kid Doesn't Have to Be Hacked for Your Family to Be Compromised"
+category: Kids & Privacy
+intro: "*One reused password. One forgotten account. One connected device. Sometimes that's all it takes.*"
+---
+
+
 # Your Kid Doesn't Have to Be Hacked for Your Family to Be Compromised
 
 *One reused password. One forgotten account. One connected device. Sometimes that's all it takes.*
