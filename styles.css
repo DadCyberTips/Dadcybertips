@@ -424,13 +424,6 @@ body::before {
     opacity: 1;
 }
 
-.product-icon {
-    font-size: 42px;
-    margin-bottom: 1rem;
-    display: block;
-    animation: float 3s ease-in-out infinite;
-}
-
 @keyframes float {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-10px); }
@@ -514,81 +507,7 @@ body::before {
     100% { opacity: 1; }
 }
 
-.featured-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: center;
-}
-
-.featured-text h3 {
-    font-size: 24px;
-    font-weight: 900;
-    color: var(--neon-cyan);
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-}
-
-.featured-text p {
-    color: var(--neon-cyan);
-    line-height: 1.7;
-    margin-bottom: 1rem;
-    font-size: 13px;
-}
-
-.featured-text ul {
-    margin-left: 1.5rem;
-    margin-bottom: 1.5rem;
-    list-style: none;
-}
-
-.featured-text ul li {
-    margin-bottom: 0.5rem;
-    color: var(--neon-lime);
-    font-weight: 600;
-}
-
-.featured-image {
-    background: linear-gradient(135deg, rgba(189, 0, 255, 0.2), rgba(0, 240, 255, 0.2));
-    border: 3px dashed var(--neon-cyan);
-    border-radius: var(--radius-lg);
-    aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 80px;
-    box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
-}
-
 /* Free Resources Grid - Retro */
-.free-resources-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 1rem;
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.free-resources-grid .btn {
-    padding: 1.25rem 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 12px;
-    background: rgba(57, 255, 20, 0.1);
-    border-color: var(--neon-lime);
-    color: var(--neon-lime);
-}
-
-.free-resources-grid .btn:hover {
-    box-shadow: 0 0 20px var(--neon-lime), inset 0 0 20px rgba(57, 255, 20, 0.2);
-}
-
-.free-resources-grid .btn span {
-    font-size: 28px;
-}
 
 /* CTA Section - Retro */
 .cta-section {
@@ -773,22 +692,8 @@ body::before {
         gap: 1rem;
     }
     
-    .featured-content {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
     .featured {
         padding: 1.5rem;
-    }
-    
-    .free-resources-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.75rem;
-    }
-    
-    .featured-image {
-        font-size: 64px;
     }
     
     .cta-section {
@@ -832,10 +737,6 @@ body::before {
         grid-template-columns: 1fr;
     }
     
-    .free-resources-grid {
-        grid-template-columns: 1fr;
-    }
-    
     .product-card {
         padding: 1rem;
     }
@@ -858,14 +759,6 @@ body::before {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.product-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
 }
 
 /* Free Resources Grid - Retro */
@@ -904,13 +797,6 @@ body::before {
     justify-content: center;
     margin-bottom: 1rem;
 }
-
-.resource-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
 @keyframes slideUp {
     from {
         opacity: 0;
@@ -919,15 +805,6 @@ body::before {
     to {
         opacity: 1;
         transform: translateY(0);
-    }
-}
-
-@keyframes neonFlicker {
-    0%, 100% {
-        text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
-    }
-    50% {
-        text-shadow: 0 0 5px var(--neon-cyan), 0 0 10px var(--neon-cyan);
     }
 }
 
@@ -949,23 +826,6 @@ body::before {
 }
 
 /* Utility Classes */
-.text-center {
-    text-align: center;
-}
-
-.mt-1 { margin-top: 1rem; }
-.mt-2 { margin-top: 2rem; }
-.mb-1 { margin-bottom: 1rem; }
-.mb-2 { margin-bottom: 2rem; }
-
-.neon-glow {
-    text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
-    box-shadow: 0 0 20px var(--neon-cyan);
-}
-
-.shadow-neon {
-    box-shadow: 0 0 20px var(--neon-cyan), 0 0 40px var(--neon-pink);
-}
 
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
@@ -1005,50 +865,6 @@ select:focus {
 }
 
 /* Marketing Contact Cards */
-.contact-card {
-    background: rgba(189, 0, 255, 0.1);
-    border: 1px solid var(--neon-purple);
-    padding: 0.75rem;
-    border-radius: 4px;
-    margin-bottom: 0.75rem;
-    font-size: 12px;
-}
-
-.contact-card-name {
-    color: var(--neon-pink);
-    font-weight: 700;
-    margin-bottom: 0.25rem;
-}
-
-.contact-card-email {
-    color: var(--neon-cyan);
-    word-break: break-all;
-    margin-bottom: 0.25rem;
-}
-
-.contact-card-meta {
-    color: var(--neon-lime);
-    font-size: 11px;
-    margin-bottom: 0.5rem;
-}
-
-.contact-card-delete {
-    background: rgba(255, 0, 110, 0.2);
-    border: 1px solid var(--neon-pink);
-    color: var(--neon-pink);
-    padding: 0.25rem 0.5rem;
-    border-radius: 2px;
-    font-size: 10px;
-    cursor: pointer;
-    font-weight: 700;
-    transition: all 0.2s;
-}
-
-.contact-card-delete:hover {
-    background: var(--neon-pink);
-    color: var(--bg-dark);
-    box-shadow: 0 0 10px var(--neon-pink);
-}
 
 /* ===== BACKGROUND DAD JOKES ===== */
 /* Joke Popup Bubble */

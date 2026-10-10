@@ -1,92 +1,17 @@
+---
+sitemap: false
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Security Assessment Quiz - DadCyberTips</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="robots" content="noindex">
+    <meta http-equiv="refresh" content="0; url=index.html#quiz">
+    <title>DadCyberTips Quiz</title>
+    <script>location.replace('index.html#quiz');</script>
 </head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="navbar-brand" onclick="window.location.href='index.html'" style="cursor: pointer;">🛡️ DadCyberTips</div>
-        <div class="navbar-toggle" onclick="toggleMobileMenu()" id="navbar-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div class="navbar-links" id="navbar-links">
-            <a href="index.html#about" onclick="closeMobileMenu()">About</a>
-            <a href="index.html#books" onclick="closeMobileMenu()">Books</a>
-            <a href="index.html#resources" onclick="closeMobileMenu()">Free</a>
-            <a href="quiz.html" onclick="closeMobileMenu()">Quiz</a>
-            <a href="services.html">Services</a>
-            <a href="index.html#merch" onclick="closeMobileMenu()">Merch</a>
-            <a href="blog/">Blog</a>
-        </div>
-    </nav>
-
-    <!-- Quiz Hero Section -->
-    <section class="hero" style="padding: 3rem 2rem;">
-        <h1>🛡️ SECURITY ASSESSMENT QUIZ 🛡️</h1>
-        <p>> Find out your family's security level<br/>
-           > Get personalized recommendations<br/>
-           > 5 minutes to your security score</p>
-    </section>
-
-    <!-- Quiz Section -->
-    <section class="section" id="quiz">
-        <h2 class="section-title">[ SECURITY ASSESSMENT QUIZ ]</h2>
-        <div class="featured">
-            <div id="quiz-container">
-                <div id="quiz-intro" style="text-align: center;">
-                    <h3 style="color: var(--neon-cyan); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">>>> WHAT'S YOUR SECURITY LEVEL? <<<</h3>
-                    <p style="color: var(--neon-cyan); margin-bottom: 2rem; line-height: 1.8;">Take our 5-minute security quiz to find out how protected your family really is. <br/>Answer a few quick questions and get personalized cybersecurity recommendations!</p>
-                    <button class="btn btn-primary" onclick="openQuizModal()">[ START QUIZ ]</button>
-                </div>
-
-                <div id="quiz-questions" style="display: none;">
-                    <form id="quizForm" onsubmit="handleQuizSubmit(event)">
-                        <div id="question-container"></div>
-                        <div style="text-align: center; margin-top: 2rem;">
-                            <button type="submit" class="btn btn-primary">[ GET MY RESULTS ]</button>
-                        </div>
-                    </form>
-                </div>
-
-                <div id="quiz-results" style="display: none; text-align: center;">
-                    <h3 style="color: var(--neon-lime); margin-bottom: 1rem; font-size: 18px; text-transform: uppercase;">>>> YOUR RESULTS <<<</h3>
-                    <div id="results-content" style="background: rgba(57, 255, 20, 0.1); border: 2px solid var(--neon-lime); padding: 2rem; border-radius: 4px; margin-bottom: 2rem;">
-                        <p id="score-text" style="color: var(--neon-cyan); font-size: 14px; margin-bottom: 1rem;"></p>
-                        <p id="recommendation" style="color: var(--neon-cyan); font-size: 13px; line-height: 1.8;"></p>
-                    </div>
-
-                    <div style="background: linear-gradient(135deg, rgba(255, 0, 110, 0.1) 0%, rgba(189, 0, 255, 0.1) 100%); border: 2px solid var(--neon-pink); padding: 1.5rem; border-radius: 4px; margin-bottom: 2rem;">
-                        <h4 style="color: var(--neon-pink); margin-bottom: 1rem; text-transform: uppercase; font-size: 13px;">>>> JOIN OUR MAILING LIST <<<</h4>
-                        <p style="color: var(--neon-cyan); font-size: 12px; margin-bottom: 1rem;">Get personalized tips and resources based on your results</p>
-                        <input type="email" id="email" placeholder="your@email.com" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-pink); background: rgba(255, 0, 110, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 0.75rem;" required>
-                        <input type="text" id="name" placeholder="Your Name" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-pink); background: rgba(255, 0, 110, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 1rem;" required>
-                        <button type="button" class="btn btn-primary" onclick="submitMailingList()" style="width: 100%;">[ SEND ME TIPS ]</button>
-                    </div>
-
-                    <button class="btn btn-outline" onclick="resetQuiz()">[ RETAKE QUIZ ]</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2024 DadCyberTips. All rights reserved. | Protecting families online.</p>
-        <div class="social-links">
-            <a href="https://www.instagram.com/dadcybertips" target="_blank">Instagram</a>
-            <a href="https://www.tiktok.com/@dadcybertips" target="_blank">TikTok</a>
-            <a href="https://www.youtube.com/@dadcybertips" target="_blank">YouTube</a>
-            <a href="https://threads.net/@dadcybertips" target="_blank">Threads</a>
-            <a href="mailto:info@dadcybertips.com">Email</a>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+<body style="background:#121212;color:#00e5ff;font-family:'Courier New',monospace;text-align:center;padding:3rem 1rem">
+    <p>Taking you to the quiz... <a href="index.html#quiz" style="color:#31ff57">Click here if nothing happens</a>.</p>
 </body>
 </html>

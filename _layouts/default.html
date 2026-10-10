@@ -11,16 +11,22 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="navbar-brand" onclick="location.href='{{ '/' | relative_url }}'" style="cursor: pointer;">🛡️ DadCyberTips</div>
-        <div class="navbar-toggle" onclick="toggleMobileMenu()" id="navbar-toggle"><span></span><span></span><span></span></div>
+        <div class="navbar-brand" onclick="window.location.href='{{ '/' | relative_url }}'" style="cursor: pointer;">🛡️ DadCyberTips</div>
+        <div class="navbar-toggle" onclick="toggleMobileMenu()" id="navbar-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <div class="navbar-links" id="navbar-links">
-            <a href="{{ '/index.html#about' | relative_url }}">About</a>
-            <a href="{{ '/index.html#books' | relative_url }}">Books</a>
-            <a href="{{ '/index.html#resources' | relative_url }}">Free</a>
-            <a href="{{ '/blog/' | relative_url }}">Blog</a>
-            <a href="{{ '/services.html' | relative_url }}">Services</a>
-            <a href="{{ '/index.html#merch' | relative_url }}">Merch</a>
-            <a href="{{ '/privacy.html' | relative_url }}">Privacy</a>
+            <a href="{{ '/index.html#about' | relative_url }}" onclick="closeMobileMenu()">About</a>
+            <a href="{{ '/index.html#books' | relative_url }}" onclick="closeMobileMenu()">Books</a>
+            <a href="{{ '/index.html#resources' | relative_url }}" onclick="closeMobileMenu()">Free</a>
+            <a href="{{ '/index.html#quiz' | relative_url }}" onclick="closeMobileMenu()">Quiz</a>
+            <a href="{{ '/index.html#coming-soon' | relative_url }}" onclick="closeMobileMenu()">Class</a>
+            <a href="{{ '/services.html' | relative_url }}" onclick="closeMobileMenu()">Services</a>
+            <a href="{{ '/index.html#merch' | relative_url }}" onclick="closeMobileMenu()">Merch</a>
+            <a href="{{ '/blog/' | relative_url }}" onclick="closeMobileMenu()">Blog</a>
+            <a href="{{ '/privacy.html' | relative_url }}" onclick="closeMobileMenu()">Privacy</a>
         </div>
     </nav>
 

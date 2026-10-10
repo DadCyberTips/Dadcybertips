@@ -64,16 +64,22 @@ sitemap: false
 </head>
 <body>
     <nav class="navbar">
-        <div class="navbar-brand" onclick="location.href='../index.html'" style="cursor: pointer;">🛡️ DadCyberTips</div>
-        <div class="navbar-toggle" onclick="toggleMobileMenu()" id="navbar-toggle"><span></span><span></span><span></span></div>
+        <div class="navbar-brand" onclick="window.location.href='../index.html'" style="cursor: pointer;">🛡️ DadCyberTips</div>
+        <div class="navbar-toggle" onclick="toggleMobileMenu()" id="navbar-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <div class="navbar-links" id="navbar-links">
-            <a href="../index.html#about">About</a>
-            <a href="../index.html#books">Books</a>
-            <a href="../index.html#resources">Free</a>
-            <a href="../blog/">Blog</a>
-            <a href="../services.html">Services</a>
-            <a href="../index.html#merch">Merch</a>
-            <a href="../privacy.html">Privacy</a>
+            <a href="../index.html#about" onclick="closeMobileMenu()">About</a>
+            <a href="../index.html#books" onclick="closeMobileMenu()">Books</a>
+            <a href="../index.html#resources" onclick="closeMobileMenu()">Free</a>
+            <a href="../index.html#quiz" onclick="closeMobileMenu()">Quiz</a>
+            <a href="../index.html#coming-soon" onclick="closeMobileMenu()">Class</a>
+            <a href="../services.html" onclick="closeMobileMenu()">Services</a>
+            <a href="../index.html#merch" onclick="closeMobileMenu()">Merch</a>
+            <a href="../blog/" onclick="closeMobileMenu()">Blog</a>
+            <a href="../privacy.html" onclick="closeMobileMenu()">Privacy</a>
         </div>
     </nav>
 
@@ -173,6 +179,7 @@ sitemap: false
     <script src="doom.js"></script>
     <script>
     function toggleMobileMenu() { var n = document.querySelector('.navbar-links'); if (n) n.classList.toggle('active'); }
+    function closeMobileMenu() { var n = document.querySelector('.navbar-links'); if (n) n.classList.remove('active'); }
     (function () {
         var stage = document.getElementById('doom-stage'), canvas = document.getElementById('doom-canvas');
         var overlay = document.getElementById('doom-overlay'), title = document.getElementById('doom-title'), msg = document.getElementById('doom-msg');

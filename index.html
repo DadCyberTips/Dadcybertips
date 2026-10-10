@@ -35,11 +35,12 @@
             <a href="#about" onclick="closeMobileMenu()">About</a>
             <a href="#books" onclick="closeMobileMenu()">Books</a>
             <a href="#resources" onclick="closeMobileMenu()">Free</a>
+            <a href="#quiz" onclick="closeMobileMenu()">Quiz</a>
             <a href="#coming-soon" onclick="closeMobileMenu()">Class</a>
-            <a href="services.html">Services</a>
+            <a href="services.html" onclick="closeMobileMenu()">Services</a>
             <a href="#merch" onclick="closeMobileMenu()">Merch</a>
-            <a href="blog/">Blog</a>
-            <a href="privacy.html">Privacy</a>
+            <a href="blog/" onclick="closeMobileMenu()">Blog</a>
+            <a href="privacy.html" onclick="closeMobileMenu()">Privacy</a>
         </div>
     </nav>
 
@@ -58,39 +59,13 @@
     <!-- Quiz Section -->
     <section class="section" id="quiz">
         <h2 class="section-title">[ SECURITY ASSESSMENT QUIZ ]</h2>
+        <!-- Access code: MPKFA -->
         <div class="featured">
             <div id="quiz-container">
                 <div id="quiz-intro" style="text-align: center;">
                     <h3 style="color: var(--neon-cyan); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">>>> WHAT'S YOUR SECURITY LEVEL? <<<</h3>
                     <p style="color: var(--neon-cyan); margin-bottom: 2rem; line-height: 1.8;">Take our 5-minute security quiz to find out how protected your family really is. <br/>Answer a few quick questions and get personalized cybersecurity recommendations!</p>
                     <button class="btn btn-primary" onclick="openQuizModal()">[ START QUIZ ]</button>
-                </div>
-
-                <div id="quiz-questions" style="display: none;">
-                    <form id="quizForm" onsubmit="handleQuizSubmit(event)">
-                        <div id="question-container"></div>
-                        <div style="text-align: center; margin-top: 2rem;">
-                            <button type="submit" class="btn btn-primary">[ GET MY RESULTS ]</button>
-                        </div>
-                    </form>
-                </div>
-
-                <div id="quiz-results" style="display: none; text-align: center;">
-                    <h3 style="color: var(--neon-lime); margin-bottom: 1rem; font-size: 18px; text-transform: uppercase;">>>> YOUR RESULTS <<<</h3>
-                    <div id="results-content" style="background: rgba(57, 255, 20, 0.1); border: 2px solid var(--neon-lime); padding: 2rem; border-radius: 4px; margin-bottom: 2rem;">
-                        <p id="score-text" style="color: var(--neon-cyan); font-size: 14px; margin-bottom: 1rem;"></p>
-                        <p id="recommendation" style="color: var(--neon-cyan); font-size: 13px; line-height: 1.8;"></p>
-                    </div>
-
-                    <div style="background: linear-gradient(135deg, rgba(255, 0, 110, 0.1) 0%, rgba(189, 0, 255, 0.1) 100%); border: 2px solid var(--neon-pink); padding: 1.5rem; border-radius: 4px; margin-bottom: 2rem;">
-                        <h4 style="color: var(--neon-pink); margin-bottom: 1rem; text-transform: uppercase; font-size: 13px;">>>> JOIN OUR MAILING LIST <<<</h4>
-                        <p style="color: var(--neon-cyan); font-size: 12px; margin-bottom: 1rem;">Get personalized tips and resources based on your results</p>
-                        <input type="email" id="email" placeholder="your@email.com" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-pink); background: rgba(255, 0, 110, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 0.75rem;" required>
-                        <input type="text" id="name" placeholder="Your Name" style="width: 100%; padding: 0.75rem; border: 2px solid var(--neon-pink); background: rgba(255, 0, 110, 0.1); color: var(--neon-cyan); font-family: 'Courier New', monospace; margin-bottom: 1rem;" required>
-                        <button type="button" class="btn btn-primary" onclick="submitMailingList()" style="width: 100%;">[ SEND ME TIPS ]</button>
-                    </div>
-
-                    <button class="btn btn-outline" onclick="resetQuiz()">[ RETAKE QUIZ ]</button>
                 </div>
             </div>
         </div>
@@ -223,6 +198,7 @@
     <!-- Merchandise Section -->
     <section class="section" id="merch">
         <h2 class="section-title">[ MERCH & COLLECTIBLES ]</h2>
+        <!-- Access code: WhosYourDaddy -->
         <div class="products-grid">
             <!-- T-SHIRTS ROW -->
             <div class="product-card" data-category="tshirt" style="order: 1;">
@@ -611,6 +587,7 @@
     <p style="color: var(--text-secondary); margin-bottom: 20px;">Enter your email to receive your personalized security score and recommendations.</p>
     <input type="email" id="email-input" placeholder="your@email.com" style="width: 100%; max-width: 400px; padding: 12px 16px; margin: 16px auto; border: 2px solid var(--neon-cyan); background: transparent; border-radius: 4px; font-size: 14px; color: var(--text-secondary); font-family: 'Courier New', monospace; display: block;" required>
     <p style="font-size: 11px; color: #888; margin-top: 16px; font-style: italic; text-transform: uppercase; letter-spacing: 0.5px;">✓ We'll never share your email. Results sent instantly.</p>
+    <p style="font-size: 12px; margin-top: 10px;"><a href="privacy.html" target="_blank" rel="noopener" style="color: var(--neon-cyan); text-decoration: underline;">Read our Privacy Policy</a> before you enter your email</p>
     <div style="margin-top: 20px;">
         <button onclick="calculateAndShowResults()" style="background: transparent; color: var(--neon-cyan); border: 2px solid var(--neon-cyan); padding: 12px 24px; border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-family: 'Courier New', monospace; margin-right: 8px; transition: all 0.3s ease;">Get My Security Score →</button>
         <button onclick="goBackToQuiz()" style="background: transparent; color: var(--neon-magenta); border: 2px solid var(--neon-magenta); padding: 12px 24px; border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-family: 'Courier New', monospace; transition: all 0.3s ease;">← Back</button>
@@ -652,7 +629,7 @@
 <div id="gx-m" role="dialog" aria-modal="true" aria-label="Enter code"><div id="gx-b"><label for="gx-i">&gt; ENTER CODE_</label><input id="gx-i" type="text" maxlength="32" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="text"><div id="gx-s" aria-live="polite"></div></div></div>
 <script>
 (function(){
-  var E={"i":200000,"s":"0sC3HEeNU6zN3UeShVV3TQ==","v":"9XVQI6EbcyE5/RoX","d":"DVCnOMBPSg/qgDzTLaEasp/AA9gqVp0f0fFp24s2kHrI0DIEAg=="}, t=document.getElementById('gx'), m=document.getElementById('gx-m'), b=document.getElementById('gx-b'), i=document.getElementById('gx-i'), s=document.getElementById('gx-s'), busy=false;
+  var E={"i":200000,"s":"FAJf3c1O20oqB5TBa2IJ8A==","e":[{"v":"p8NKsta9TYun13jI","d":"uqmK9wo0zHnLMW1QIofDTSUPEwqGRF5yrg61irMF9RtlZb63gw=="},{"v":"T8ttMJm6o0AD5D1E","d":"wL3RTH+ZLBTtPClYY1jKOG4GlAOr6Hkjl6MXH2vOCFSUo4Fz0g=="},{"v":"WhRVKGvbZtm9pRlZ","d":"kBBmKRPs/iCYnn/VpzR4O/bt+hYSi4TBK0EaHMhAsjwvWThliw=="},{"v":"RZLQN/cvO3KRC+HM","d":"e3MDEXMxpaE9QObi19AEdzXSfgcpEiJ77GWAurg+5+vDlRjW9w=="},{"v":"+poquwfkZEUL0kf4","d":"/eEAzfv3nnO32TQoNCqt8uxUE6sfwPfGCO6sl5tWXHv9kbFYVA=="},{"v":"M4J0l7LDvVmHz4Iq","d":"OmbB3S3t3RGSeQ/qlVJcoFp6Qu6q8L6aqAzsRVZVtFhFEjkahw=="}]}, t=document.getElementById('gx'), m=document.getElementById('gx-m'), b=document.getElementById('gx-b'), i=document.getElementById('gx-i'), s=document.getElementById('gx-s'), busy=false;
   if(!t||!m||!window.crypto||!crypto.subtle) return;
   function u(x){return Uint8Array.from(atob(x),function(c){return c.charCodeAt(0)})}
   function open(){m.classList.add('on');s.className='';s.textContent='';i.value='';document.body.style.overflow='hidden';i.focus()}
@@ -662,12 +639,16 @@
   m.addEventListener('click',function(e){if(e.target===m)close()});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.classList.contains('on'))close()});
   function bad(){s.className='bad';s.textContent='ACCESS DENIED';b.classList.remove('shake');void b.offsetWidth;b.classList.add('shake');i.value='';i.focus()}
+  function tryEach(k,n){
+    if(n>=E.e.length) return Promise.reject();
+    return crypto.subtle.decrypt({name:'AES-GCM',iv:u(E.e[n].v)},k,u(E.e[n].d)).catch(function(){return tryEach(k,n+1)});
+  }
   i.addEventListener('keydown',function(e){
     if(e.key!=='Enter'||busy)return; e.preventDefault();
-    var code=i.value.trim().toLowerCase(); if(!code)return; busy=true; s.className='';s.textContent='...';
+    var code=i.value.toLowerCase().replace(/[^a-z0-9]/g,''); if(!code)return; busy=true; s.className='';s.textContent='...';
     crypto.subtle.importKey('raw',new TextEncoder().encode(code),'PBKDF2',false,['deriveKey'])
     .then(function(k){return crypto.subtle.deriveKey({name:'PBKDF2',salt:u(E.s),iterations:E.i,hash:'SHA-256'},k,{name:'AES-GCM',length:256},false,['decrypt'])})
-    .then(function(k){return crypto.subtle.decrypt({name:'AES-GCM',iv:u(E.v)},k,u(E.d))})
+    .then(function(k){return tryEach(k,0)})
     .then(function(p){var to=new TextDecoder().decode(p);s.className='ok';s.textContent='ACCESS GRANTED';setTimeout(function(){location.href=new URL(to,location.href).href},450)},
           function(){bad()})
     .then(function(){busy=false});
