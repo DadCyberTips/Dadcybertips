@@ -278,110 +278,111 @@ function scrollToServiceContact(category) {
 
 const quizData = [
     {
-        question: "How many passwords do you reuse across multiple accounts?",
-        options: ["None — every password is unique", "1-2 passwords reused occasionally", "Several accounts share the same password", "Most of my passwords are identical"],
+        question: "How many of your passwords do you use on more than one website or app?",
+        options: ["None — every account has its own password", "1 or 2 of them", "Several of them", "Almost all of them"],
         correct: 0,
         weight: 3,
-        tip: "Use a password manager to generate unique passwords for each account."
+        tip: "A password manager app can remember a different password for every account, so you only have to remember one."
     },
     {
-        question: "Which method do you primarily use to protect your online accounts?",
-        options: ["Two-Factor Authentication (2FA) on all important accounts", "2FA on some accounts, mostly email and banking", "Only SMS verification or security questions", "No additional protection beyond passwords"],
+        question: "When a website offers a second step to log in (like a code sent to your phone), do you turn it on?",
+        options: ["Yes — on all my important accounts", "Yes — but only on a few, like email or banking", "No — I only use security questions, like \"your first pet's name\"", "No — my password is my only protection"],
         correct: 0,
         weight: 3,
-        tip: "Enable authenticator apps (Google Authenticator, Authy) over SMS for 2FA."
+        tip: "This is called 2-step login. After your password, the site asks for a code from your phone. Turn it on for your email and bank first."
     },
     {
-        question: "How frequently do you update your operating systems and software?",
-        options: ["Within 24 hours of security updates being released", "Within a week of release", "Every few months or when it's convenient", "Rarely or never — I ignore update notifications"],
+        question: "How often do you update your computer, your phone, and the apps on them?",
+        options: ["As soon as an update is ready (or I have automatic updates turned on)", "Within a week or so", "Every few months, when it's convenient", "Rarely or never — I ignore the update messages"],
         correct: 0,
         weight: 3,
-        tip: "Enable automatic updates on all devices. Updates patch critical security vulnerabilities."
+        tip: "Turn on automatic updates. Updates fix the weak spots that criminals look for."
     },
     {
-        question: "How secure is your home WiFi network?",
-        options: ["WPA2/WPA3 encryption with a strong, unique password", "WPA encryption with a decent password", "WEP or shared with neighbors unsecured", "No password set — open network"],
+        question: "How is the password on your home WiFi set up?",
+        options: ["I made my own password that is long and hard to guess", "I still use the password that came with my WiFi box (the router)", "My password is simple, and I give it to lots of people", "My WiFi has no password at all"],
         correct: 0,
         weight: 3,
-        tip: "Change your WiFi password from default and use WPA3 if available."
+        tip: "Change the password that came with your router to your own long one. The old one is usually printed on a sticker on the router."
     },
     {
-        question: "How do you handle backups of your important data?",
-        options: ["Automated daily backups to cloud storage and external device", "Weekly backups to external storage", "Occasional backups when I remember", "No regular backups — I rely on cloud services"],
+        question: "Do you keep a second copy of everything important (tax papers, insurance cards, family photos)?",
+        options: ["Yes — copies are saved automatically to the cloud and to a drive at home", "Yes — I copy them to a drive or the cloud about once a week", "Only once in a while, when I remember", "No — I don't keep any extra copies"],
         correct: 0,
         weight: 2,
-        tip: "Implement 3-2-1 backup rule: 3 copies, 2 different media, 1 offsite."
+        tip: "Keep at least two copies, and keep one in a different place, like online storage. Then a broken or locked device won't wipe out everything."
     },
     {
-        question: "How cautious are you about phishing emails and suspicious links?",
-        options: ["Very cautious — I verify sender and never click suspicious links", "Somewhat cautious — check if it seems legitimate", "Rarely check the sender — mostly click if needed", "No — I click on anything that looks interesting"],
+        question: "How careful are you with emails and texts that have links or ask for your information?",
+        options: ["Very careful — I check who sent it and never click links I don't trust", "Somewhat careful — I click if it looks real", "Not very careful — I usually click if it seems important", "Not careful — I click on whatever looks interesting"],
         correct: 0,
         weight: 2,
-        tip: "Hover over links before clicking. Legitimate companies never ask for passwords via email."
+        tip: "Scam messages pretend to be your bank, a store, or a friend. If a message feels rushed or odd, don't click. Go to the company's real website or call them instead."
     },
     {
-        question: "Where do you download software from?",
-        options: ["Official app stores and verified developer websites", "Official stores with occasional third-party downloads", "Random websites and sources I find online", "Torrent sites and file-sharing platforms"],
+        question: "Where do you get new apps and programs?",
+        options: ["Only from official app stores or the company's own website", "Mostly from official stores, but sometimes from other websites", "From whatever website I find online", "From free-movie, free-game, or file-sharing sites"],
         correct: 0,
         weight: 2,
-        tip: "Stick to official app stores and developer websites; verify download integrity."
+        tip: "Stick to the Apple App Store, Google Play, or the company's own website. Free copies of paid games and movies often hide viruses."
     },
     {
-        question: "How many connected smart devices do you have, and how are they configured?",
-        options: ["Minimal devices, all updated with unique passwords and network segmentation", "Moderate number, most have changed passwords and regular updates", "Several with default settings and shared networks", "Many IoT devices with factory settings"],
+        question: "Do you have smart gadgets at home (cameras, TVs, doorbells, speakers)? If so, did you change their passwords and keep them updated?",
+        options: ["Yes — I changed every password and keep them updated", "I changed most of the passwords and update them sometimes", "I use the passwords they came with", "I have several and never changed any settings"],
         correct: 0,
         weight: 2,
-        tip: "Isolate IoT devices on a separate VLAN/guest network with unique credentials."
+        tip: "Smart gadgets often come with an easy password that everyone knows. Change it when you set one up. Many routers also have a \"guest WiFi\" that keeps gadgets away from your computers."
     },
     {
-        question: "How often do you review your privacy settings on social media and online accounts?",
-        options: ["Quarterly or whenever major updates occur", "Annually or when prompted", "Occasionally — maybe once a year", "Never — I don't check privacy settings"],
+        question: "How often do you check who can see your posts and personal info on social media?",
+        options: ["Every few months", "About once a year", "Only when the app reminds me", "Never — I've never looked"],
         correct: 0,
         weight: 1,
-        tip: "Audit privacy settings annually and after platform updates."
+        tip: "Look at the privacy settings in each app once or twice a year. Share posts with friends only, and turn off location sharing."
     },
     {
-        question: "Do you use any browser extensions or ad blockers?",
-        options: ["Yes, essential privacy extensions + uBlock Origin or similar", "Some basic ad blocking and privacy tools", "A few random extensions installed years ago", "None — I browse with default browser settings"],
+        question: "Do you use anything to block ads and trackers when you browse the internet?",
+        options: ["Yes — an ad blocker plus a privacy add-on I trust", "Yes — a basic ad blocker", "I added some add-ons years ago and forgot about them", "No — I use my browser just as it came"],
         correct: 0,
         weight: 1,
-        tip: "Install reputable privacy extensions: uBlock Origin, Privacy Badger, ClearURLs."
+        tip: "A trusted ad blocker (like uBlock Origin) stops many scam ads and trackers. Remove any add-ons you don't use or don't remember adding."
     },
     {
-        question: "Have you checked if your email has been compromised in known data breaches?",
-        options: ["Yes, regularly using breach monitoring services", "Yes, once or twice using HaveIBeenPwned or similar", "I've heard about it but haven't checked", "No, I'm not aware of this service"],
+        question: "Have you ever checked if your email address was part of a data leak (when a company gets hacked)?",
+        options: ["Yes — and I get an alert if it happens again", "Yes — I checked once or twice", "I've heard of this but never checked", "No — I didn't know I could check"],
         correct: 0,
         weight: 1,
-        tip: "Check haveibeenpwned.com and set up breach alerts for your email addresses."
+        tip: "Go to haveibeenpwned.com, type in your email, and see if it was leaked. If it was, change that password right away."
     },
     {
-        question: "How do you handle public WiFi networks?",
-        options: ["Never use public WiFi for sensitive activities; use VPN if necessary", "Avoid sensitive tasks on public WiFi", "Use public WiFi for anything, minimal concerns", "Freely bank and shop on any public WiFi"],
+        question: "What do you do on free public WiFi (like at a coffee shop or airport)?",
+        options: ["I never do banking or shopping on it — I use my phone's data instead", "I try to avoid banking and shopping on it", "I use it for most things and don't worry about it", "I bank and shop on any WiFi I can find"],
         correct: 0,
         weight: 1,
-        tip: "Always use a VPN on public WiFi. Avoid logging into sensitive accounts without protection."
+        tip: "Other people can snoop on public WiFi. For banking and shopping, switch to your phone's data. A VPN app (a tool that hides what you're doing) also helps."
     }
 ];
 
 const levels = [
-    { min: 22, max: 25, scoreMin: 9, scoreMax: 10, name: "Cyber Fortress", emoji: "🏰", 
-      desc: "Elite security posture. Your digital defenses are excellent!",
-      recs: ["Maintain current practices", "Stay updated on emerging threats", "Share best practices with family/friends"] },
-    { min: 18, max: 21, scoreMin: 7, scoreMax: 8, name: "Fortified Home", emoji: "🔒", 
-      desc: "Strong protections with minor gaps to seal.",
-      recs: ["Review weak areas identified above", "Consider upgrading 2FA to authenticator apps", "Set automated backup schedules"] },
-    { min: 13, max: 17, scoreMin: 5, scoreMax: 6, name: "Basic Lock", emoji: "🚪", 
-      desc: "Moderate security. Several improvements needed urgently.",
-      recs: ["Enable 2FA on all critical accounts immediately", "Update all device firmware and software", "Change default router credentials", "Set up regular backups"] },
-    { min: 8, max: 12, scoreMin: 3, scoreMax: 4, name: "Vulnerable House", emoji: "⚠️", 
-      desc: "Gaps exposed. Your digital home needs immediate attention.",
-      recs: ["Start with password manager setup", "Enable WPA2/WPA3 on your router", "Install firewall software", "Begin backing up important data"] },
-    { min: 0, max: 7, scoreMin: 1, scoreMax: 2, name: "Digital Door Open Wide", emoji: "🏚️", 
-      desc: "Critical risk. Multiple vulnerabilities require urgent action.",
-      recs: ["Change ALL passwords immediately", "Enable 2FA everywhere possible", "Run full antivirus/malware scans", "Reset router to factory and reconfigure securely"] }
+    { scoreMin: 9, scoreMax: 10, name: "Cyber Fortress", emoji: "🏰",
+      desc: "Great job! Your family's digital defenses are excellent.",
+      recs: ["Keep up your good habits", "Stay alert for new scams", "Teach a friend or family member what you know"] },
+    { scoreMin: 7, scoreMax: 8, name: "Fortified Home", emoji: "🔒",
+      desc: "Strong protection with just a few small gaps to fix.",
+      recs: ["Look back at the questions where you could improve", "Turn on 2-step login (a code sent to your phone) for your important accounts", "Set your backups to save automatically"] },
+    { scoreMin: 5, scoreMax: 6, name: "Basic Lock", emoji: "🚪",
+      desc: "You have some protection, but a few things need attention soon.",
+      recs: ["Turn on 2-step login (a code sent to your phone) for your email and bank", "Turn on automatic updates on your phones and computers", "Change the password that came with your WiFi box (the router)", "Start saving copies of your important files"] },
+    { scoreMin: 3, scoreMax: 4, name: "Vulnerable House", emoji: "⚠️",
+      desc: "There are gaps that criminals could use. Your digital home needs attention now.",
+      recs: ["Start with a password manager app so every account has its own password", "Make sure your WiFi has a strong password that you created", "Turn on your computer's built-in firewall (a guard for your internet connection)", "Start saving copies of your important files"] },
+    { scoreMin: 1, scoreMax: 2, name: "Digital Door Open Wide", emoji: "🏚️",
+      desc: "Your digital home has a lot of open doors. The good news: you can close them one step at a time.",
+      recs: ["Change the passwords on your most important accounts first (email and bank)", "Turn on 2-step login (a code sent to your phone) wherever it's offered", "Run a virus scan with the protection already built into your device", "Set a strong WiFi password that you made yourself"] }
 ];
 
 let currentQuestionIndex = 0;
+let lastQuizSubmission = null; // stops double-clicks from saving the same result twice
 let userAnswers = null; // Will be initialized when quiz starts
 
 // Initialize userAnswers when quizData is ready
@@ -523,8 +524,8 @@ function goBackToQuiz() {
  */
 function calculateAndShowResults() {
     // Get and validate email
-    const email = document.getElementById('email-input').value;
-    if (!email || !email.includes('@')) {
+    const email = document.getElementById('email-input').value.trim();
+    if (!isValidEmail(email)) {
         alert('Please enter a valid email address.');
         return;
     }
@@ -545,8 +546,12 @@ function calculateAndShowResults() {
     // Find corresponding security level
     const level = levels.find(l => clampedScore >= l.scoreMin && clampedScore <= l.scoreMax) || levels[4];
     
-    // Send quiz submission to Notion via Make.com webhook
-    submitQuizToMake(email, clampedScore, level.name);
+    // Send quiz submission to Notion via Make.com webhook (only once per email + score)
+    const submissionKey = email.toLowerCase() + '|' + clampedScore;
+    if (submissionKey !== lastQuizSubmission) {
+        lastQuizSubmission = submissionKey;
+        submitQuizToMake(email, clampedScore, level.name);
+    }
     
     // Display results section
     document.getElementById('email-section').style.display = 'none';
@@ -583,17 +588,24 @@ function submitQuizToMake(email, score, level) {
         timestamp: new Date().toISOString()
     };
     
-    // Send to webhook (non-blocking - UI updates regardless)
-    fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-    }).catch(err => {
-        // Silently fail - results already displayed locally
-        console.log('Quiz submission sent to Notion');
-    });
+    // Send to webhook (non-blocking - the results screen shows regardless).
+    // If the first try fails, wait 2 seconds and try once more.
+    function send(attempt) {
+        return fetch(webhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+            keepalive: true
+        }).then(response => {
+            if (!response.ok) throw new Error('Webhook responded with status ' + response.status);
+        }).catch(err => {
+            if (attempt < 2) {
+                return new Promise(resolve => setTimeout(resolve, 2000)).then(() => send(attempt + 1));
+            }
+            console.error('Quiz submission failed after 2 attempts:', err);
+        });
+    }
+    send(1);
 }
 
 // ===== MOBILE MENU TOGGLE =====

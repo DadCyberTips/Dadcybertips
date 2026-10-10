@@ -424,11 +424,6 @@ body::before {
     opacity: 1;
 }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-}
-
 .badge {
     display: inline-block;
     background: linear-gradient(135deg, var(--neon-lime), var(--neon-cyan));
