@@ -253,10 +253,19 @@
                 alert('Please fill in name, email, and category');
                 return;
             }
+            if (!isValidEmail(email)) {
+                alert('Please enter a valid email address');
+                return;
+            }
 
-            // Prepare payload for Notion via new Contact Submissions webhook
-            const webhookUrl = 'https://hook.us2.make.com/ojmt2rjmx8lhejmt1o9n8nfiwjz4vsml';
-            const payload = {
+            // Block double-clicks while the message is on its way
+            const button = event.target.querySelector('[type="submit"]');
+            if (button) {
+                if (button.disabled) return;
+                button.disabled = true;
+            }
+
+            sendContactToMake({
                 name: name,
                 email: email,
                 phone: phone,
@@ -265,25 +274,14 @@
                 source: 'Services Contact Form',
                 comments: notes,
                 timestamp: new Date().toISOString()
-            };
-
-            // Send to Notion via webhook
-            fetch(webhookUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            }).then(response => {
-                if (response.ok) {
+            }).then(sent => {
+                if (button) button.disabled = false;
+                if (sent) {
                     document.getElementById('services-form').reset();
-                    alert(`${name} message sent! I'll be in touch soon.`);
+                    alert(`Thanks, ${name.split(' ')[0]}! Your message was sent. I'll be in touch soon.`);
                 } else {
-                    throw new Error('Webhook failed');
+                    alert('Sorry, your message could not be sent. Please try again in a minute.');
                 }
-            }).catch(err => {
-                alert(`Failed to send message. Please try again.`);
-                console.log('Service contact error:', err);
             });
         }
 

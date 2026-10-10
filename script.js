@@ -177,6 +177,36 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+const CONTACT_WEBHOOK_URL = 'https://hook.us2.make.com/ojmt2rjmx8lhejmt1o9n8nfiwjz4vsml';
+
+/**
+ * Send a contact message to Notion (through the Make.com webhook).
+ * Used by both the home page form and the services page form.
+ * Tries twice (2 seconds apart) before giving up.
+ * @param {Object} payload - name, email, phone, organization, category, source, comments, timestamp
+ * @returns {Promise<boolean>} true if the message was sent, false if it could not be
+ */
+function sendContactToMake(payload) {
+    function attempt(n) {
+        return fetch(CONTACT_WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+            keepalive: true
+        }).then(response => {
+            if (!response.ok) throw new Error('Webhook responded with status ' + response.status);
+            return true;
+        }).catch(err => {
+            if (n < 2) {
+                return new Promise(resolve => setTimeout(resolve, 2000)).then(() => attempt(n + 1));
+            }
+            console.error('Contact submission failed after 2 attempts:', err);
+            return false;
+        });
+    }
+    return attempt(1);
+}
+
 /**
  * Handle contact form submission
  * Captures all form fields, validates them, and sends to the Notion database
@@ -206,8 +236,6 @@ function addMarketingContact(event) {
     }
 
     // Prepare payload for Notion via Make.com webhook
-    // Contact forms go to Contact Submissions database
-    const webhookUrl = 'https://hook.us2.make.com/ojmt2rjmx8lhejmt1o9n8nfiwjz4vsml';
     const notionPayload = {
         name: name,
         email: email,
@@ -219,26 +247,22 @@ function addMarketingContact(event) {
         timestamp: new Date().toISOString()
     };
 
-    // Send contact to Notion database via webhook
-    fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(notionPayload)
-    }).then(response => {
-        if (response.ok) {
-            // Success: reset form and show confirmation
+    // Block double-clicks while the message is on its way
+    const button = event.target.querySelector('[type="submit"]');
+    if (button) {
+        if (button.disabled) return;
+        button.disabled = true;
+    }
+
+    sendContactToMake(notionPayload).then(sent => {
+        if (button) button.disabled = false;
+        if (sent) {
             document.getElementById('marketing-form').reset();
-            showNotification(`${name} message sent`, 'success');
+            showNotification(`Thanks, ${name.split(' ')[0]}! Your message was sent.`, 'success');
             trackEvent('contact_form_submitted', { category: category });
         } else {
-            throw new Error('Webhook failed');
+            showNotification('Sorry, your message could not be sent. Please try again in a minute.', 'error');
         }
-    }).catch(err => {
-        // Error: show failure message
-        showNotification(`Failed to send ${name} message. Please try again.`, 'error');
-        console.log('Contact submission error:', err);
     });
 }
 
@@ -280,88 +304,79 @@ const quizData = [
     {
         question: "How many of your passwords do you use on more than one website or app?",
         options: ["None — every account has its own password", "1 or 2 of them", "Several of them", "Almost all of them"],
-        correct: 0,
         weight: 3,
         tip: "A password manager app can remember a different password for every account, so you only have to remember one."
     },
     {
         question: "When a website offers a second step to log in (like a code sent to your phone), do you turn it on?",
         options: ["Yes — on all my important accounts", "Yes — but only on a few, like email or banking", "No — I only use security questions, like \"your first pet's name\"", "No — my password is my only protection"],
-        correct: 0,
         weight: 3,
         tip: "This is called 2-step login. After your password, the site asks for a code from your phone. Turn it on for your email and bank first."
     },
     {
         question: "How often do you update your computer, your phone, and the apps on them?",
         options: ["As soon as an update is ready (or I have automatic updates turned on)", "Within a week or so", "Every few months, when it's convenient", "Rarely or never — I ignore the update messages"],
-        correct: 0,
         weight: 3,
         tip: "Turn on automatic updates. Updates fix the weak spots that criminals look for."
     },
     {
         question: "How is the password on your home WiFi set up?",
         options: ["I made my own password that is long and hard to guess", "I still use the password that came with my WiFi box (the router)", "My password is simple, and I give it to lots of people", "My WiFi has no password at all"],
-        correct: 0,
         weight: 3,
         tip: "Change the password that came with your router to your own long one. The old one is usually printed on a sticker on the router."
     },
     {
         question: "Do you keep a second copy of everything important (tax papers, insurance cards, family photos)?",
         options: ["Yes — copies are saved automatically to the cloud and to a drive at home", "Yes — I copy them to a drive or the cloud about once a week", "Only once in a while, when I remember", "No — I don't keep any extra copies"],
-        correct: 0,
         weight: 2,
         tip: "Keep at least two copies, and keep one in a different place, like online storage. Then a broken or locked device won't wipe out everything."
     },
     {
         question: "How careful are you with emails and texts that have links or ask for your information?",
         options: ["Very careful — I check who sent it and never click links I don't trust", "Somewhat careful — I click if it looks real", "Not very careful — I usually click if it seems important", "Not careful — I click on whatever looks interesting"],
-        correct: 0,
         weight: 2,
         tip: "Scam messages pretend to be your bank, a store, or a friend. If a message feels rushed or odd, don't click. Go to the company's real website or call them instead."
     },
     {
         question: "Where do you get new apps and programs?",
         options: ["Only from official app stores or the company's own website", "Mostly from official stores, but sometimes from other websites", "From whatever website I find online", "From free-movie, free-game, or file-sharing sites"],
-        correct: 0,
         weight: 2,
         tip: "Stick to the Apple App Store, Google Play, or the company's own website. Free copies of paid games and movies often hide viruses."
     },
     {
         question: "Do you have smart gadgets at home (cameras, TVs, doorbells, speakers)? If so, did you change their passwords and keep them updated?",
         options: ["Yes — I changed every password and keep them updated", "I changed most of the passwords and update them sometimes", "I use the passwords they came with", "I have several and never changed any settings"],
-        correct: 0,
         weight: 2,
         tip: "Smart gadgets often come with an easy password that everyone knows. Change it when you set one up. Many routers also have a \"guest WiFi\" that keeps gadgets away from your computers."
     },
     {
         question: "How often do you check who can see your posts and personal info on social media?",
         options: ["Every few months", "About once a year", "Only when the app reminds me", "Never — I've never looked"],
-        correct: 0,
         weight: 1,
         tip: "Look at the privacy settings in each app once or twice a year. Share posts with friends only, and turn off location sharing."
     },
     {
         question: "Do you use anything to block ads and trackers when you browse the internet?",
         options: ["Yes — an ad blocker plus a privacy add-on I trust", "Yes — a basic ad blocker", "I added some add-ons years ago and forgot about them", "No — I use my browser just as it came"],
-        correct: 0,
         weight: 1,
         tip: "A trusted ad blocker (like uBlock Origin) stops many scam ads and trackers. Remove any add-ons you don't use or don't remember adding."
     },
     {
         question: "Have you ever checked if your email address was part of a data leak (when a company gets hacked)?",
         options: ["Yes — and I get an alert if it happens again", "Yes — I checked once or twice", "I've heard of this but never checked", "No — I didn't know I could check"],
-        correct: 0,
         weight: 1,
         tip: "Go to haveibeenpwned.com, type in your email, and see if it was leaked. If it was, change that password right away."
     },
     {
         question: "What do you do on free public WiFi (like at a coffee shop or airport)?",
         options: ["I never do banking or shopping on it — I use my phone's data instead", "I try to avoid banking and shopping on it", "I use it for most things and don't worry about it", "I bank and shop on any WiFi I can find"],
-        correct: 0,
         weight: 1,
         tip: "Other people can snoop on public WiFi. For banking and shopping, switch to your phone's data. A VPN app (a tool that hides what you're doing) also helps."
     }
 ];
+
+// Share of a question's points earned by each answer position (best answer first)
+const ANSWER_CREDIT = [1, 2 / 3, 1 / 3, 0];
 
 const levels = [
     { scoreMin: 9, scoreMax: 10, name: "Cyber Fortress", emoji: "🏰",
@@ -530,11 +545,14 @@ function calculateAndShowResults() {
         return;
     }
     
-    // Calculate raw score based on weighted answers
+    // Calculate raw score based on weighted answers, with partial credit.
+    // Answers are listed from best to worst: the best answer earns the full
+    // points for that question, the next two earn two-thirds and one-third, the last earns none.
     let rawScore = 0;
     quizData.forEach((q, i) => {
-        if (userAnswers[i] === q.correct) {
-            rawScore += q.weight;
+        const picked = userAnswers[i];
+        if (picked !== null && picked !== undefined) {
+            rawScore += q.weight * ANSWER_CREDIT[picked];
         }
     });
     
