@@ -841,3 +841,38 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('Created ' + zoneCount + ' joke hover zones');
 });
+
+/**
+ * Hero headline attention effect
+ * Every few seconds the "Protect your family online" banner flashes out and comes back in
+ * with a different animation (never the same one twice in a row).
+ * Change the delay with data-interval (seconds) on #hero-alert in index.html.
+ * Skipped for visitors who have turned on "reduce motion".
+ */
+function initHeroAlert() {
+    const el = document.getElementById('hero-alert');
+    if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const effects = ['fx-flicker', 'fx-zoom', 'fx-slide-left', 'fx-slide-right', 'fx-drop', 'fx-glitch', 'fx-flip'];
+    const seconds = Math.max(4, parseFloat(el.dataset.interval) || 9);
+    let last = -1;
+
+    function play() {
+        if (document.hidden) return;
+        let pick;
+        do { pick = Math.floor(Math.random() * effects.length); } while (pick === last);
+        last = pick;
+        el.classList.remove(...effects);
+        void el.offsetWidth; // restart the animation
+        el.classList.add(effects[pick]);
+    }
+
+    el.addEventListener('animationend', function (e) {
+        if (e.target === el && e.animationName.indexOf('heroFx') === 0) el.classList.remove(...effects);
+    });
+
+    setTimeout(play, 1200);
+    setInterval(play, seconds * 1000);
+}
+
+document.addEventListener('DOMContentLoaded', initHeroAlert);

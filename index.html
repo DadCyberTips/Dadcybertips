@@ -46,7 +46,9 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <h1>🛡️ PROTECT YOUR FAMILY ONLINE 🛡️</h1>
+        <div class="hero-alert" id="hero-alert" data-interval="9">
+            <h1>🛡️ PROTECT YOUR FAMILY ONLINE 🛡️</h1>
+        </div>
         <p>> Learn practical cybersecurity & privacy strategies from Gavin Marlowe<br/>
            > Guides, digital books, and community support<br/>
            > Keep your loved ones safe in the digital age</p>
@@ -58,9 +60,10 @@
 
     <!-- Quiz Section -->
     <section class="section" id="quiz">
-        <h2 class="section-title">[ SECURITY ASSESSMENT QUIZ ]</h2>
         <!-- Access code: MPKFA -->
-        <div class="featured">
+        <div class="quiz-spot">
+        <h2 class="section-title spotlight-title">[ SECURITY ASSESSMENT QUIZ ]</h2>
+        <div class="featured quiz-spotlight">
             <div id="quiz-container">
                 <div id="quiz-intro" style="text-align: center;">
                     <h3 style="color: var(--neon-cyan); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">>>> WHAT'S YOUR SECURITY LEVEL? <<<</h3>
@@ -68,6 +71,7 @@
                     <button class="btn btn-primary" onclick="openQuizModal()">[ START QUIZ ]</button>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 

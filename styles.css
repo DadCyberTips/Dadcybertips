@@ -1081,3 +1081,204 @@ select option:checked {
         font-size: 12px;
     }
 }
+
+/* ===== ATTENTION EFFECTS: hero alert + quiz spotlight ===== */
+.hero { overflow-x: clip; }
+
+/* Hero headline framed as an alert banner */
+.hero-alert {
+    position: relative;
+    max-width: 860px;
+    margin: 0 auto 2rem;
+    padding: 1.5rem 1.5rem 1.4rem;
+    border: 3px solid var(--neon-pink);
+    border-radius: var(--radius-lg);
+    background: rgba(5, 8, 18, 0.6);
+    box-shadow:
+        0 0 18px rgba(255, 0, 110, 0.55),
+        0 0 42px rgba(0, 240, 255, 0.3),
+        inset 0 0 24px rgba(255, 0, 110, 0.15);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.hero-alert::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow: 0 0 34px 4px var(--neon-cyan), 0 0 70px 8px rgba(255, 0, 110, 0.6);
+    opacity: 0.15;
+    animation: alertBreathe 3s ease-in-out infinite;
+}
+
+.hero-alert:hover {
+    border-color: var(--neon-cyan);
+    transform: scale(1.02);
+    box-shadow:
+        0 0 24px var(--neon-cyan),
+        0 0 54px var(--neon-pink),
+        inset 0 0 28px rgba(0, 240, 255, 0.2);
+}
+
+.hero-alert h1 {
+    margin: 0 auto;
+    filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.55));
+}
+
+@keyframes alertBreathe {
+    0%, 100% { opacity: 0.15; }
+    50% { opacity: 0.65; }
+}
+
+/* Flash out, then come back in a different way each time (see initHeroAlert in script.js) */
+.hero-alert.fx-flicker     { animation: heroFxFlicker 1.6s linear 1; }
+.hero-alert.fx-zoom        { animation: heroFxZoom 1.8s ease-out 1; }
+.hero-alert.fx-slide-left  { animation: heroFxSlideLeft 1.8s ease-out 1; }
+.hero-alert.fx-slide-right { animation: heroFxSlideRight 1.8s ease-out 1; }
+.hero-alert.fx-drop        { animation: heroFxDrop 1.8s ease-out 1; }
+.hero-alert.fx-glitch      { animation: heroFxGlitch 1.6s linear 1; }
+.hero-alert.fx-flip        { animation: heroFxFlip 1.8s ease-out 1; }
+
+@keyframes heroFxFlicker {
+    0%   { opacity: 1; }
+    8%   { opacity: 0; }
+    14%  { opacity: 1; }
+    20%  { opacity: 0; }
+    26%  { opacity: 0.4; }
+    32%  { opacity: 0; }
+    40%  { opacity: 1; filter: brightness(1.8); }
+    46%  { opacity: 0.2; }
+    52%  { opacity: 1; filter: brightness(1.5); }
+    100% { opacity: 1; filter: none; }
+}
+
+@keyframes heroFxZoom {
+    0%   { opacity: 1; transform: scale(1); }
+    10%  { opacity: 0; transform: scale(0.9); }
+    12%  { opacity: 0; transform: scale(0.2); }
+    55%  { opacity: 1; transform: scale(1.12); filter: brightness(1.6); }
+    75%  { transform: scale(0.97); filter: brightness(1.2); }
+    100% { opacity: 1; transform: scale(1); filter: none; }
+}
+
+@keyframes heroFxSlideLeft {
+    0%   { opacity: 1; transform: none; }
+    10%  { opacity: 0; transform: none; }
+    11%  { opacity: 0; transform: translateX(-110vw); }
+    60%  { opacity: 1; transform: translateX(3%); filter: brightness(1.5); }
+    80%  { transform: translateX(-1%); }
+    100% { opacity: 1; transform: none; filter: none; }
+}
+
+@keyframes heroFxSlideRight {
+    0%   { opacity: 1; transform: none; }
+    10%  { opacity: 0; transform: none; }
+    11%  { opacity: 0; transform: translateX(110vw); }
+    60%  { opacity: 1; transform: translateX(-3%); filter: brightness(1.5); }
+    80%  { transform: translateX(1%); }
+    100% { opacity: 1; transform: none; filter: none; }
+}
+
+@keyframes heroFxDrop {
+    0%   { opacity: 1; transform: none; }
+    10%  { opacity: 0; transform: none; }
+    11%  { opacity: 0; transform: translateY(-90px); }
+    55%  { opacity: 1; transform: translateY(8%); filter: brightness(1.5); }
+    70%  { transform: translateY(-4%); }
+    85%  { transform: translateY(2%); }
+    100% { opacity: 1; transform: none; filter: none; }
+}
+
+@keyframes heroFxGlitch {
+    0%   { opacity: 1; transform: none; filter: none; }
+    10%  { opacity: 0; }
+    12%  { opacity: 1; transform: translateX(-10px) skewX(10deg); filter: hue-rotate(90deg) saturate(2); }
+    18%  { transform: translateX(12px) skewX(-8deg); filter: hue-rotate(-60deg); }
+    24%  { opacity: 0.2; transform: translateX(-6px); }
+    30%  { opacity: 1; transform: translateX(8px) skewX(6deg); filter: hue-rotate(160deg) saturate(3); }
+    40%  { transform: translateX(-3px); filter: hue-rotate(20deg); }
+    50%  { transform: none; filter: none; }
+    100% { opacity: 1; transform: none; filter: none; }
+}
+
+@keyframes heroFxFlip {
+    0%   { opacity: 1; transform: perspective(900px) rotateX(0deg); }
+    12%  { opacity: 0; transform: perspective(900px) rotateX(-90deg); }
+    55%  { opacity: 1; transform: perspective(900px) rotateX(12deg); filter: brightness(1.5); }
+    75%  { transform: perspective(900px) rotateX(-5deg); }
+    100% { opacity: 1; transform: perspective(900px) rotateX(0deg); filter: none; }
+}
+
+/* Quiz section: title and box light up together */
+.quiz-spot { position: relative; }
+
+.spotlight-title {
+    font-size: 40px;
+    filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.45));
+    animation: titleGlow 3.2s ease-in-out infinite;
+    transition: transform 0.3s ease;
+}
+
+.quiz-spot:hover .spotlight-title {
+    animation: none;
+    transform: scale(1.04);
+    filter: drop-shadow(0 0 14px var(--neon-cyan)) drop-shadow(0 0 30px var(--neon-pink)) brightness(1.35);
+}
+
+@keyframes titleGlow {
+    0%, 100% { filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.45)); }
+    50% { filter: drop-shadow(0 0 18px rgba(255, 0, 110, 0.75)) drop-shadow(0 0 6px rgba(0, 240, 255, 0.6)); }
+}
+
+.quiz-spotlight {
+    border-color: var(--neon-cyan);
+    animation: quizBorder 3s ease-in-out infinite;
+    transition: transform 0.3s ease;
+}
+
+.quiz-spot:hover .quiz-spotlight {
+    animation: quizFlash 0.6s ease-out 1;
+    border-color: var(--neon-pink);
+    box-shadow:
+        0 0 30px var(--neon-cyan),
+        0 0 60px var(--neon-pink),
+        inset 0 0 30px rgba(255, 0, 110, 0.2);
+    transform: translateY(-4px) scale(1.01);
+}
+
+@keyframes quizBorder {
+    0%, 100% {
+        border-color: var(--neon-cyan);
+        box-shadow: 0 0 22px rgba(0, 240, 255, 0.55), 0 0 44px rgba(189, 0, 255, 0.35), inset 0 0 30px rgba(189, 0, 255, 0.12);
+    }
+    50% {
+        border-color: var(--neon-pink);
+        box-shadow: 0 0 28px rgba(255, 0, 110, 0.65), 0 0 56px rgba(0, 240, 255, 0.35), inset 0 0 30px rgba(255, 0, 110, 0.15);
+    }
+}
+
+@keyframes quizFlash {
+    0%   { filter: brightness(1.9); }
+    100% { filter: brightness(1); }
+}
+
+.quiz-spotlight .btn-primary { animation: ctaPulse 2.2s ease-in-out infinite; }
+
+@keyframes ctaPulse {
+    0%, 100% { box-shadow: 0 0 8px rgba(255, 0, 110, 0.5); }
+    50% { box-shadow: 0 0 22px rgba(255, 0, 110, 0.9), 0 0 36px rgba(0, 240, 255, 0.5); }
+}
+
+@media (max-width: 768px) {
+    .hero-alert { padding: 1rem; }
+    .spotlight-title { font-size: 26px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-alert::before,
+    .hero-alert[class*="fx-"],
+    .spotlight-title,
+    .quiz-spotlight,
+    .quiz-spotlight .btn-primary { animation: none; }
+}
