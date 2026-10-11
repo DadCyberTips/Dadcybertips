@@ -1132,7 +1132,7 @@ select option:checked {
 }
 
 /* Flash out, then come back in a different way each time (see initHeroAlert in script.js) */
-.hero-alert.fx-flicker     { animation: heroFxFlicker 1.6s linear 1; }
+.hero-alert.fx-flicker     { animation: heroFxFlicker 2s linear 1; }
 .hero-alert.fx-zoom        { animation: heroFxZoom 1.8s ease-out 1; }
 .hero-alert.fx-slide-left  { animation: heroFxSlideLeft 1.8s ease-out 1; }
 .hero-alert.fx-slide-right { animation: heroFxSlideRight 1.8s ease-out 1; }
@@ -1142,14 +1142,10 @@ select option:checked {
 
 @keyframes heroFxFlicker {
     0%   { opacity: 1; }
-    8%   { opacity: 0; }
-    14%  { opacity: 1; }
-    20%  { opacity: 0; }
-    26%  { opacity: 0.4; }
-    32%  { opacity: 0; }
-    40%  { opacity: 1; filter: brightness(1.8); }
-    46%  { opacity: 0.2; }
-    52%  { opacity: 1; filter: brightness(1.5); }
+    6%   { opacity: 0; }
+    22%  { opacity: 1; }
+    38%  { opacity: 0; }
+    56%  { opacity: 1; filter: brightness(1.8); }
     100% { opacity: 1; filter: none; }
 }
 
@@ -1193,9 +1189,9 @@ select option:checked {
 @keyframes heroFxGlitch {
     0%   { opacity: 1; transform: none; filter: none; }
     10%  { opacity: 0; }
-    12%  { opacity: 1; transform: translateX(-10px) skewX(10deg); filter: hue-rotate(90deg) saturate(2); }
+    14%  { opacity: 1; transform: translateX(-10px) skewX(10deg); filter: hue-rotate(90deg) saturate(2); }
     18%  { transform: translateX(12px) skewX(-8deg); filter: hue-rotate(-60deg); }
-    24%  { opacity: 0.2; transform: translateX(-6px); }
+    24%  { transform: translateX(-6px); }
     30%  { opacity: 1; transform: translateX(8px) skewX(6deg); filter: hue-rotate(160deg) saturate(3); }
     40%  { transform: translateX(-3px); filter: hue-rotate(20deg); }
     50%  { transform: none; filter: none; }
