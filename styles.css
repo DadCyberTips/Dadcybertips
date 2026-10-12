@@ -1278,3 +1278,21 @@ select option:checked {
     .quiz-spotlight,
     .quiz-spotlight .btn-primary { animation: none; }
 }
+
+/* "Also on Amazon" link under each book's Buy Now button */
+.amazon-link {
+    display: block;
+    margin-top: 0.9rem;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--neon-cyan);
+    text-decoration: underline dotted;
+    text-underline-offset: 4px;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.amazon-link:hover,
+.amazon-link:focus-visible {
+    color: var(--neon-lime);
+    text-shadow: 0 0 8px var(--neon-lime);
+}
