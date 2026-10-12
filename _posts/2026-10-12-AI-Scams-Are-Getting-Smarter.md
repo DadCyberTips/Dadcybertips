@@ -1,14 +1,11 @@
 ---
-title: "POST TEMPLATE"
-created: 2026-10-12T15:00:06.725Z
-updated: 2026-10-12T15:00:06.725Z
----
-
----
 layout: post
 title: "AI Scams Are Getting Smarter. Your Family Can Get Smarter, Too"
 category: Tips
-intro: 
+intro: "*You don't have to be bad with technology to fall for a scam. You just have to be human.*"
+---
+
+
 # AI Scams Are Getting Smarter. Your Family Can Get Smarter, Too.
 
 *You don't have to be bad with technology to fall for a scam. You just have to be human.*

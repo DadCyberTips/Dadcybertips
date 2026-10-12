@@ -3,7 +3,9 @@ layout: default
 title: Blog
 description: Practical, no-jargon family cybersecurity tips from Gavin Marlowe.
 ---
-{% assign cats = site.posts | map: "category" | uniq | sort %}
+{% comment %}Posts without a category show under "Other" instead of breaking the page{% endcomment %}
+{% assign cats = site.posts | where_exp: "p", "p.category" | map: "category" | uniq | sort %}
+{% assign uncategorized = 0 %}{% for p in site.posts %}{% unless p.category %}{% assign uncategorized = uncategorized | plus: 1 %}{% endunless %}{% endfor %}
 <section class="section blog-wrap">
     <h2 class="section-title">[ THE DAD BLOG ]</h2>
     <p class="blog-intro">> Practical family cybersecurity, no jargon. Pick a tile and dig in.</p>
@@ -12,7 +14,7 @@ description: Practical, no-jargon family cybersecurity tips from Gavin Marlowe.
         <div class="blog-chips" id="blog-chips" role="group" aria-label="Filter by category">
             <button type="button" class="blog-chip" data-cat="" aria-pressed="true">All</button>
             {% for c in cats %}<button type="button" class="blog-chip" data-cat="{{ c | escape }}" aria-pressed="false">{{ c }}</button>
-            {% endfor %}
+            {% endfor %}{% if uncategorized > 0 %}<button type="button" class="blog-chip" data-cat="Other" aria-pressed="false">Other</button>{% endif %}
         </div>
         <div class="blog-selects">
             <select class="blog-select" id="blog-year" aria-label="Filter by year"><option value="">All years</option></select>
@@ -26,11 +28,12 @@ description: Practical, no-jargon family cybersecurity tips from Gavin Marlowe.
 <!-- Access code: IDDQD -->
     <div class="products-grid" id="blog-grid">
     {% for post in site.posts %}
+        {% assign pcat = post.category | default: "Other" %}
         {% assign intro = post.intro | default: post.content | strip_html | strip_newlines | truncatewords: 45 %}
         <article class="product-card blog-tile"
-                 data-slug="{{ post.slug }}" data-cat="{{ post.category | escape }}"
+                 data-slug="{{ post.slug }}" data-cat="{{ pcat | escape }}"
                  data-date="{{ post.date | date: '%Y-%m-%d' }}" data-year="{{ post.date | date: '%Y' }}">
-            <div class="badge">{{ post.category }}</div>
+            <div class="badge">{{ pcat }}</div>
             <h3 class="product-name">{{ post.title }}</h3>
             <p class="product-desc">{{ intro }}</p>
             <div class="product-price">{{ post.date | date: "%b %-d, %Y" }}</div>
@@ -43,7 +46,8 @@ description: Practical, no-jargon family cybersecurity tips from Gavin Marlowe.
 
 <!-- Post bodies (hidden until opened in the popup) -->
 {% for post in site.posts %}
-<template id="post-{{ post.slug }}" data-title="{{ post.title | escape }}" data-cat="{{ post.category | escape }}" data-date="{{ post.date | date: '%b %-d, %Y' }}" data-url="{{ post.url | relative_url }}">{{ post.content }}</template>
+{% assign pcat = post.category | default: "Other" %}
+<template id="post-{{ post.slug }}" data-title="{{ post.title | escape }}" data-cat="{{ pcat | escape }}" data-date="{{ post.date | date: '%b %-d, %Y' }}" data-url="{{ post.url | relative_url }}">{{ post.content }}</template>
 {% endfor %}
 
 <div class="blog-modal" id="blog-modal" role="dialog" aria-modal="true" aria-labelledby="blog-modal-title">
