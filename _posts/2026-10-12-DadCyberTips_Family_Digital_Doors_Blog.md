@@ -2,12 +2,8 @@
 title: "Your Kid Doesn't Have to Be Hacked for Your Family to Be at Risk"
 description: "A family's connected devices can be only as secure as the accounts protecting them. Here's a calm, practical digital checkup for parents and grandparents."
 author: "Gavin Marlowe | DadCyberTips"
-tags:
-  - Family Cybersecurity
-  - Online Safety
-  - Password Security
-  - Smart Home Security
-  - Digital Parenting
+Intro: Your Kid Doesn't Have to Be Hacked for Your Family to Be at Risk
+
 ---
 
 # Your Kid Doesn't Have to Be Hacked for Your Family to Be at Risk
